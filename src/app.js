@@ -163,7 +163,8 @@ function handleData() {
 
     getAverageRatingPerMonth(movies["ratingPerMonth"], movies["perMonth"], movies)
     console.log(movies);
-    displayMoviesObject();
+
+    displayData();
 
 }
 
@@ -270,13 +271,18 @@ function getGenre(allGenres, type) {
     });
 }
 
-function displayMoviesObject() {
-    var outputDiv = document.getElementById('output');
+function displayData() {
+    var movie = document.getElementById("movies");
+    var director = document.getElementById("directors")
+    var watchtimeMinutes = document.getElementById("watchtimeMinutes")
+    var watchtimmeHours = document.getElementById("watchtimeHours")
+    var averageRating = document.getElementById("averageRating")
+    var averageRatingIMDB = document.getElementById("averageRatingIMDB")
 
-    if (!outputDiv) {
-        console.error('Output div not found.');
-        return;
-    }
-
-    outputDiv.innerHTML = '<pre>' + JSON.stringify(movies, null, 2) + '</pre>';
+    director.textContent = movies["totalDirectors"];
+    movie.textContent = movies["totalMovies"];
+    watchtimeMinutes.textContent = movies["totalWatchtimeMinutes"];
+    watchtimeHours.textContent = movies["totalWatchtimeHours"];
+    averageRating.textContent = movies["averageRating"].toFixed(1);
+    averageRatingIMDB.textContent = movies["averageRatingIMDB"].toFixed(1);
 }

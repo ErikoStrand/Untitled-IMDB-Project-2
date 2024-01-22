@@ -4,15 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="./output.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-white">
     <input type="file" id="file">
 
+    <div class="m-8 grid grid-cols-1 md:grid-cols-4 gap-4 grid-flow-dense *:border-2">
+        <div class="min-h-28">  <!-- 1 -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Movies Watched
+                <div id="movies" class="text-4xl font-bold text-black"></div>
+            </h2>
+            <h3 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Directors Watched
+                <div id="directors" class="text-4xl font-bold text-black"></div>
+            </h3>
+        </div>
+        <div class="min-h-28"> <!-- 2 -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Minutes Watched
+                <div id="watchtimeMinutes" class="text-4xl font-bold text-black"></div>
+            </h2>
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Hours Watched
+                <div id="watchtimeHours" class="text-4xl font-bold text-black"></div>
+            </h2>
+        </div>
+        <div class="min-h-28 "> <!--3  -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Average Rating By You
+                <div>
+                    <div id="averageRating" class="inline-block text-4xl font-bold text-black"></div>
+                    <div class="inline-block text-gray-400">/10</div>
+                </div>
+            </h2>
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Average Rating By IMDB
+                <div class="">
+                    <div id="averageRatingIMDB" class="inline-block text-4xl font-bold text-black"></div>
+                    <div class="inline-block text-gray-400">/10</div>
+                </div>
+            </h2>
+
+
+        </div>
+        <div class="min-h-28"><!--4 -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Movies Per Year
+            </h2>
+        </div>
+        <div class="min-h-28 md:row-span-2"><!-- 5-->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Top Directors
+            </h2>
+        </div>
+        <div class="min-h-28 md:row-span-3"><!--6 -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Top 20 Genres
+            </h2>
+        </div>
+        <div class="min-h-28 md:col-span-2"><!-- 7 -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Average Rating Per Month
+            </h2>
+        </div>
+        <div class="min-h-28 md:col-span-2"><!-- 8 -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Movies Per Month
+            </h2>
+        </div>
+        <div class="min-h-28"><!--9  -->
+            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                Ratings Per Score 
+            </h2>
+        </div>
+    </div>
 
 
 
-    
     <div id="output"></div>
     <script src="app.js"></script>
 </body>
