@@ -768,6 +768,12 @@ video {
   width: 2.5rem;
 }
 
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 .grid-flow-row {
   grid-auto-flow: row;
 }
