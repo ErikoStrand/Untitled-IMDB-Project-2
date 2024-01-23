@@ -4,3 +4,4 @@
 /tailwind.config.js
 /node_modules
 /src/input.css
+/.prettierrc
