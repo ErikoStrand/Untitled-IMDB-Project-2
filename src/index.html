@@ -9,80 +9,94 @@
 <body class="bg-white">
     <input type="file" id="file">
 
-    <div class="m-8 grid grid-cols-1 md:grid-cols-4 gap-4 grid-flow-dense *:border-2 select-none">
-        <div class="min-h-28">  <!-- 1 -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Movies Watched
-                <div id="movies" class="text-4xl font-bold text-black"></div>
-            </h2>
-            <h3 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Directors Watched
-                <div id="directors" class="text-4xl font-bold text-black"></div>
-            </h3>
-        </div>
-        <div class="min-h-28"> <!-- 2 -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Minutes Watched
-                <div id="watchtimeMinutes" class="text-4xl font-bold text-black"></div>
-            </h2>
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Hours Watched
-                <div id="watchtimeHours" class="text-4xl font-bold text-black"></div>
-            </h2>
-        </div>
-        <div class="min-h-28 "> <!--3  -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Average Rating By You
-                <div>
-                    <div id="averageRating" class="inline-block text-4xl font-bold text-black"></div>
-                    <div class="inline-block text-gray-400">/10</div>
-                </div>
-            </h2>
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Average Rating By IMDB
-                <div class="">
-                    <div id="averageRatingIMDB" class="inline-block text-4xl font-bold text-black"></div>
-                    <div class="inline-block text-gray-400">/10</div>
-                </div>
-            </h2>
-
-
-        </div>
-        <div class="min-h-28"><!--4 -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Movies Per Year
-            </h2>
-        </div>
-        <div class="min-h-28 md:row-span-2"><!-- 5-->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Top Directors
-            </h2>
-        </div>
-        <div class="min-h-28 md:row-span-3"><!--6 -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Top 20 Genres
-            </h2>
-        </div>
-        <div class="min-h-28 md:col-span-2"><!-- 7 -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Average Rating Per Month
-            </h2>
-        </div>
-        <div class="min-h-28 md:col-span-2"><!-- 8 -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Movies Per Month
-            </h2>
-        </div>
-        <div class="min-h-28"><!--9  -->
-            <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
-                Ratings Per Score 
-            </h2>
+    <div class="mx-auto max-w-screen-lg container pl-4">
+        <h1 class="text-4xl font-bold font-sans inline-block">Your <div class="inline-block text-accent">IMDB</div> Stats</h1>
+        <h2 class="text-2xl font-semibold font-sans mb-8 text-gray-700 opacity-80">View how you spent your time</h2>
+        <div class="m-0 grid grid-cols-1 md:grid-cols-4 gap-4 grid-flow-dense *:border-2 select-none drop-shadow-lg">
+            <div class="min-h-28 rounded-xl hover:scale-[102%] duration-700 ease-in-out">  <!-- 1 -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Movies Watched
+                    <div id="movies" class="text-4xl font-bold text-black"></div>
+                </h2>
+                <h3 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Directors Watched
+                    <div id="directors" class="text-4xl font-bold text-black"></div>
+                </h3>
+            </div>
+            <div class="min-h-28 rounded-xl  hover:scale-[102%] duration-700 ease-in-out"> <!-- 2 -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Minutes Watched
+                    <div id="watchtimeMinutes" class="text-4xl font-bold text-black"></div>
+                </h2>
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Hours Watched
+                    <div id="watchtimeHours" class="text-4xl font-bold text-black"></div>
+                </h2>
+            </div>
+            <div class="min-h-28 rounded-xl  hover:scale-[102%] duration-700 ease-in-out"> <!--3  -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Average Rating By You
+                    <div>
+                        <div id="averageRating" class="inline-block text-4xl font-bold text-black"></div>
+                        <div class="inline-block text-gray-400">/10</div>
+                    </div>
+                </h2>
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Average Rating By IMDB
+                    <div class="">
+                        <div id="averageRatingIMDB" class="inline-block text-4xl font-bold text-black"></div>
+                        <div class="inline-block text-gray-400">/10</div>
+                    </div>
+                </h2>
+            </div>
+            <div class="min-h-28 rounded-xl hover:scale-[102%] duration-700 ease-in-out"><!--4 -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Movies Per Year
+                </h2>
+                <canvas id="moviesPerYear" class="p-1 "></canvas>
+            </div>
+            <div class="min-h-28 md:row-span-1 rounded-xl hover:scale-[102%] duration-700 ease-in-out"><!-- 5-->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Top Directors
+                </h2>
+                <canvas id="topDirectors"class="p-1"></canvas>
+            </div>
+            <div class="min-h-28 md:row-span-3 rounded-xl hover:scale-[102%] duration-700 ease-in-out"><!--6 -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Top 20 Genres
+                </h2>
+                <canvas id="top20Genres" class="p-1"></canvas>
+            </div>
+            <div class="min-h-28 md:col-span-2 rounded-xl hover:scale-[102%] duration-700 ease-in-out"><!-- 7 -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Average Rating Per Month
+                </h2>
+                <canvas id="averageRatingPerMonth" class="p-1"></canvas>
+            </div>
+            <div class="min-h-28 md:col-span-2 rounded-xl hover:scale-[102%] duration-700 ease-in-out"><!-- 8 -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Movies Per Month
+                </h2>
+                <canvas id="moviesPerMonth" class="p-1"></canvas>
+            </div>
+            <div class="min-h-28 rounded-xl hover:scale-[102%] duration-700 ease-in-out"><!--9  -->
+                <h2 class="px-2 text-gray-600 text-opacity-90 font-mono text-lg font-semibold">
+                    Ratings Per Score
+                </h2>
+                <canvas id="ratingsPerScore" class="p-1"></canvas>
+            </div>
         </div>
     </div>
 
 
 
     <div id="output"></div>
+
+    <div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

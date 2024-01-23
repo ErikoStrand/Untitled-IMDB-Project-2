@@ -275,7 +275,7 @@ function displayData() {
     var movie = document.getElementById("movies");
     var director = document.getElementById("directors")
     var watchtimeMinutes = document.getElementById("watchtimeMinutes")
-    var watchtimmeHours = document.getElementById("watchtimeHours")
+    var watchtimeHours = document.getElementById("watchtimeHours")
     var averageRating = document.getElementById("averageRating")
     var averageRatingIMDB = document.getElementById("averageRatingIMDB")
 
@@ -285,4 +285,144 @@ function displayData() {
     watchtimeHours.textContent = movies["totalWatchtimeHours"];
     averageRating.textContent = movies["averageRating"].toFixed(1);
     averageRatingIMDB.textContent = movies["averageRatingIMDB"].toFixed(1);
+    loadCharts();
+}
+
+
+
+
+
+function loadCharts() {
+    var moviesPerYear = document.getElementById('moviesPerYear');
+    var averageRatingPerMonth = document.getElementById('averageRatingPerMonth');
+    var moviesPerMonth = document.getElementById('moviesPerMonth');
+    var top20Genres = document.getElementById('top20Genres');
+    top20Genres.height = "100%";
+    var topDirectors = document.getElementById('topDirectors');
+    topDirectors.height = "100%";
+    var ratingsPerScore = document.getElementById('ratingsPerScore');
+    ratingsPerScore.height = "100%";
+
+
+    new Chart(moviesPerYear, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(movies["perYear"]),
+          datasets: [{
+            label: '# of Movies',
+            data: Object.values(movies["perYear"]),
+            borderWidth: 1,
+            backgroundColor: "#F6C615",
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+      
+      
+      new Chart(averageRatingPerMonth, {
+          type: 'line',
+          data: {
+            labels: Object.keys(movies["averageRatingPerMonth"]),
+            datasets: [{
+              label: 'x/10 per Month',
+              data: Object.values(movies["averageRatingPerMonth"]),
+              borderWidth: 1,
+              backgroundColor: "#F6C615",
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+    new Chart(moviesPerMonth, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(movies["perMonth"]),
+          datasets: [{
+            label: '# of Movies',
+            data: Object.values(movies["perMonth"]),
+            borderWidth: 1,
+            backgroundColor: "#F6C615",
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+      new Chart(top20Genres, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(movies["genres"]).slice(0, 16),
+          datasets: [{
+            label: '# of Movies',
+            data: Object.values(movies["genres"]).slice(0, 16),
+            borderWidth: 1,
+            backgroundColor: "#F6C615",
+            
+          }]
+        },
+        options: {
+            indexAxis: "y",
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+      new Chart(topDirectors, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(movies["directors"]).slice(0, 10),
+          datasets: [{
+            label: '# of Directors',
+            data: Object.values(movies["directors"]).slice(0, 10),
+            borderWidth: 1,
+            backgroundColor: "#F6C615",
+          }]
+        },
+        options: {
+            indexAxis: "y",
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+      new Chart(ratingsPerScore, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(movies["ratingsPerScore"]),
+          datasets: [{
+            label: '# of Movies',
+            data: Object.values(movies["ratingsPerScore"]),
+            borderWidth: 1,
+            backgroundColor: "#F6C615",
+          }]
+        },
+        options: {
+        indexAxis: "y",
+        scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
 }
