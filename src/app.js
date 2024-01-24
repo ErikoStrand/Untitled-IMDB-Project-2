@@ -149,6 +149,7 @@ function handleData() {
     if (col[0] != "Const") {
       generalData["totalRating"] += parseInt(col[1]);
     }
+    getMediaPerReleaseYear(col[11]);
     allDates[col[2]] = 1;
     //other stuff
     if (col[5] == "movie") {
@@ -272,6 +273,15 @@ function getMediaPerMonth(date, type) {
     type["perMonth"][date[0] + "-" + date[1]]++;
   } else {
     type["perMonth"][date[0] + "-" + date[1]] = 1;
+  }
+}
+
+function getMediaPerReleaseYear(date) {
+  var date = date.split("-");
+  if (generalData["mediaPerReleaseYear"][date[0]] !== undefined) {
+    generalData["mediaPerReleaseYear"][date[0]]++;
+  } else {
+    generalData["mediaPerReleaseYear"][date[0]] = 1;
   }
 }
 
