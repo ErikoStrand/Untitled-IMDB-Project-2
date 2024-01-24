@@ -152,7 +152,7 @@ function handleData() {
     getMediaPerReleaseYear(col[11]);
     allDates[col[2]] = 1;
     //other stuff
-    if (col[5] == "movie") {
+    if (col[5] == "movie" || col[5] == "tvMovie") {
       movies["totalMedia"] += 1;
       movies["totalWatchtimeMinutes"] += parseInt(col[7]);
       movies["totalWatchtimeHours"] = parseInt(
