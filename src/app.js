@@ -16,6 +16,22 @@ const movies = {
   ratingsPerScore: {}, //10: int, 9: int, 8: int etc
 };
 
+const generalData = {
+  streak: { highestStreak: 0, currentStreak: 0, startDate: "", endDate: "" },
+  numVotes: {
+    highest: { title: "", votes: 1000 },
+    lowest: { title: "", votes: 100000 },
+  },
+  titleData: {
+    longest: { title: "r", char: 0 },
+    shortest: { title: "e123ddffawd", char: 0 },
+  },
+  mediaPerReleaseYear: {},
+  totalMedia: 0,
+  totalRating: 0,
+  totalAverageRating: 0,
+};
+
 const shows = {
   totalMedia: 0,
   totalRating: 0,
@@ -123,10 +139,18 @@ const data = []; //array with all movies
 })();
 
 function handleData() {
-  console.log(data);
-
   //handle data
+  var allDates = {};
+  generalData["totalMedia"] = data.length - 1;
   data.forEach(function (col) {
+    //general
+    getTitleData(col[3]);
+    getNumVotes(col[10], col[3]);
+    if (col[0] != "Const") {
+      generalData["totalRating"] += parseInt(col[1]);
+    }
+    allDates[col[2]] = 1;
+    //other stuff
     if (col[5] == "movie") {
       movies["totalMedia"] += 1;
       movies["totalWatchtimeMinutes"] += parseInt(col[7]);
@@ -143,7 +167,7 @@ function handleData() {
       getRatingPerMonth(col[2], parseInt(col[1]), movies);
     }
 
-    if (col[5] == "tvSeries") {
+    if (col[5] == "tvSeries" || col[5] == "tvMiniSeries") {
       shows["totalMedia"] += 1;
       shows["totalRating"] += parseInt(col[1]);
       shows["totalRatingIMDB"] += parseFloat(col[6]);
@@ -153,6 +177,12 @@ function handleData() {
     }
   });
   //handle data that needs other data or that need to be a bit more advanced
+  //general
+  generalData["totalAverageRating"] =
+    generalData["totalRating"] / generalData["totalMedia"];
+  //streak
+  allDates = sortObjectByKeys(allDates);
+  getIMDBStreak(allDates);
   //movies
   getAverageRatings(movies);
   movies["directors"] = sortObjectByValues(movies["directors"]);
@@ -173,9 +203,51 @@ function handleData() {
     movies["perMonth"],
     movies,
   );
-  console.log(shows);
-
   displayData();
+}
+function getTitleData(title) {
+  if (title.length > generalData["titleData"]["longest"]["title"].length) {
+    generalData["titleData"]["longest"]["title"] = title;
+    generalData["titleData"]["longest"]["char"] = title.length;
+  }
+  if (title.length < generalData["titleData"]["shortest"]["title"].length) {
+    generalData["titleData"]["shortest"]["title"] = title;
+    generalData["titleData"]["shortest"]["char"] = title.length;
+  }
+}
+function getNumVotes(votes, title) {
+  votes = parseInt(votes);
+  if (votes > generalData["numVotes"]["highest"]["votes"]) {
+    generalData["numVotes"]["highest"]["title"] = title;
+    generalData["numVotes"]["highest"]["votes"] = votes;
+  } else if (votes < generalData["numVotes"]["lowest"]["votes"]) {
+    generalData["numVotes"]["lowest"]["title"] = title;
+    generalData["numVotes"]["lowest"]["votes"] = votes;
+  }
+}
+function getIMDBStreak(dates) {
+  dates = Object.keys(dates);
+  dates = dates.slice(0, -1);
+  let currentStreak = [dates[0]];
+  let longestStreak = [dates[0]];
+  for (let i = 1; i < dates.length; i++) {
+    const currentDate = new Date(dates[i]);
+    const previousDate = new Date(dates[i - 1]);
+    if (currentDate.getTime() === previousDate.getTime() + 86400000) {
+      // 86400000 milliseconds in a day
+      currentStreak.push(dates[i]);
+    } else {
+      currentStreak = [dates[i]];
+    }
+    if (currentStreak.length > longestStreak.length) {
+      longestStreak = [...currentStreak];
+    }
+  }
+  generalData["streak"]["highestStreak"] = longestStreak.length;
+  generalData["streak"]["startDate"] = longestStreak[0];
+  generalData["streak"]["endDate"] = longestStreak[longestStreak.length - 1];
+  generalData["streak"]["currentStreak"] = currentStreak.length;
+  console.log(generalData);
 }
 
 function getRatingPerMonth(date, rating, type) {
@@ -303,227 +375,4 @@ function displayData() {
   showAverageRatingIMDB.textContent = shows["averageRatingIMDB"].toFixed(1);
 
   loadCharts();
-}
-
-function loadCharts() {
-  //movies
-  var moviesPerYear = document.getElementById("moviesPerYear");
-  var averageRatingPerMonth = document.getElementById(
-    "movieAverageRatingPerMonth",
-  );
-  var moviesPerMonth = document.getElementById("moviesPerMonth");
-  var top20Genres = document.getElementById("movieTopGenres");
-  var topDirectors = document.getElementById("topDirectors");
-  var ratingsPerScore = document.getElementById("movieRatingsPerScore");
-
-  //shows
-  var showsPerRating = document.getElementById("showsPerRating");
-  var showsPerYear = document.getElementById("showsPerYear");
-  var showTopGenres = document.getElementById("showTopGenres");
-
-  new Chart(moviesPerYear, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["perYear"]),
-      datasets: [
-        {
-          label: "# of Movies",
-          data: Object.values(movies["perYear"]),
-          borderWidth: 1,
-          backgroundColor: "#F6C615",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
-  new Chart(averageRatingPerMonth, {
-    type: "line",
-    data: {
-      labels: Object.keys(movies["averageRatingPerMonth"]),
-      datasets: [
-        {
-          label: "x/10 per Month",
-          data: Object.values(movies["averageRatingPerMonth"]),
-          borderWidth: 1,
-          backgroundColor: "#F6C615",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
-  new Chart(moviesPerMonth, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["perMonth"]),
-      datasets: [
-        {
-          label: "# of Movies",
-          data: Object.values(movies["perMonth"]),
-          borderWidth: 1,
-          backgroundColor: "#F6C615",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-  new Chart(top20Genres, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["genres"]).slice(0, 16),
-      datasets: [
-        {
-          label: "# of Movies",
-          data: Object.values(movies["genres"]).slice(0, 16),
-          borderWidth: 1,
-          backgroundColor: "#F6C615",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      indexAxis: "y",
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-  new Chart(topDirectors, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["directors"]).slice(0, 10),
-      datasets: [
-        {
-          label: "# of Directors",
-          data: Object.values(movies["directors"]).slice(0, 10),
-          borderWidth: 1,
-          backgroundColor: "#F6C615",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      indexAxis: "y",
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-  new Chart(ratingsPerScore, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["ratingsPerScore"]),
-      datasets: [
-        {
-          label: "# of Movies",
-          data: Object.values(movies["ratingsPerScore"]),
-          borderWidth: 1,
-          backgroundColor: "#F6C615",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      indexAxis: "y",
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
-  new Chart(showsPerRating, {
-    type: "bar",
-    data: {
-      labels: Object.keys(shows["ratingsPerScore"]),
-      datasets: [
-        {
-          label: "# of Shows",
-          data: Object.values(shows["ratingsPerScore"]),
-          borderWidth: 1,
-          backgroundColor: "#598ae4",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-  new Chart(showTopGenres, {
-    type: "bar",
-    data: {
-      labels: Object.keys(shows["genres"]).slice(0, 13),
-      datasets: [
-        {
-          label: "# of Shows",
-          data: Object.values(shows["genres"]).slice(0, 13),
-          borderWidth: 1,
-          backgroundColor: "#598ae4",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
-  new Chart(showsPerYear, {
-    type: "bar",
-    data: {
-      labels: Object.keys(shows["perYear"]),
-      datasets: [
-        {
-          label: "# of Shows",
-          data: Object.values(shows["perYear"]),
-          borderWidth: 1,
-          backgroundColor: "#598ae4",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
 }
