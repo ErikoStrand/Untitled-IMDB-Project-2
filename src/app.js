@@ -140,8 +140,9 @@ const data = []; //array with all movies
 
 function handleData() {
   //handle data
+  data.splice(0, 1);
   var allDates = {};
-  generalData["totalMedia"] = data.length - 1;
+  generalData["totalMedia"] = data.length;
   data.forEach(function (col) {
     //general
     getTitleData(col[3]);
@@ -383,6 +384,25 @@ function displayData() {
   show.textContent = shows["totalMedia"];
   showAverageRating.textContent = shows["averageRating"].toFixed(1);
   showAverageRatingIMDB.textContent = shows["averageRatingIMDB"].toFixed(1);
+
+  //general
+  var highestStreak = document.getElementById("highestStreak");
+  var currentStreak = document.getElementById("currentStreak");
+  var totalMedia = document.getElementById("totalMedia");
+  var totalAverageRating = document.getElementById("totalAverageRating");
+  var longestTitle = document.getElementById("longestTitle");
+  var shortestTitle = document.getElementById("shortestTitle");
+  var mostVotes = document.getElementById("mostVotes");
+  var leastVotes = document.getElementById("leastVotes");
+
+  highestStreak.textContent = generalData["streak"]["highestStreak"];
+  currentStreak.textContent = generalData["streak"]["currentStreak"];
+  totalMedia.textContent = generalData["totalMedia"];
+  totalAverageRating.textContent = generalData["totalAverageRating"].toFixed(1);
+  longestTitle.textContent = generalData["titleData"]["longest"]["title"];
+  shortestTitle.textContent = generalData["titleData"]["shortest"]["title"];
+  mostVotes.textContent = generalData["numVotes"]["highest"]["votes"];
+  leastVotes.textContent = generalData["numVotes"]["lowest"]["votes"];
 
   loadCharts();
 }

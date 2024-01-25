@@ -14,6 +14,32 @@ function loadCharts() {
   var showsPerYear = document.getElementById("showsPerYear");
   var showTopGenres = document.getElementById("showTopGenres");
 
+  //general
+  var mediaPerReleaseYear = document.getElementById("mediaPerReleaseYear");
+
+  new Chart(mediaPerReleaseYear, {
+    type: "bar",
+    data: {
+      labels: Object.keys(generalData["mediaPerReleaseYear"]),
+      datasets: [
+        {
+          label: "# of media",
+          data: Object.values(generalData["mediaPerReleaseYear"]),
+          borderWidth: 1,
+          backgroundColor: "#5ac43b",
+        },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
   new Chart(moviesPerYear, {
     type: "bar",
     data: {
