@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV</title>
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white">
+    <input type="file" id="file" />
+
+    <div class="container mx-auto max-w-screen-lg pl-4">
+      <header class="flex flex-row items-end">
+        <div id="slogan" class="relative flex flex-col">
+          <h1 class="inline-block font-sans text-4xl font-bold">
+            Your
+            <div class="inline-block text-accent">IMDB</div>
+            Statistics
+          </h1>
+          <h2
+            class="mb-8 inline-block font-sans text-2xl font-semibold text-gray-700 opacity-80"
+          >
+            View how you spent your time
+          </h2>
+        </div>
+        <h2
+          class="ml-auto inline-block py-2 font-sans text-3xl font-bold text-neutral-950"
+        >
+          General
+        </h2>
+      </header>
+
+      <div
+        class="m-0 grid select-none grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg *:border-2 md:grid-cols-4"
+      >
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!-- 1 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Highest Streak
+            <div id="highestStreak" class="text-4xl font-bold text-black"></div>
+          </h2>
+          <h3
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Current Streak
+            <div id="currentStreak" class="text-4xl font-bold text-black"></div>
+          </h3>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
+        >
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Media Per Release Year
+          </h2>
+          <div>
+            <canvas id="mediaPerReleaseYear" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!-- 1 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Media Watched
+            <div id="totalMedia" class="text-4xl font-bold text-black"></div>
+          </h2>
+          <h3
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Tot. Average Rating
+            <div>
+              <div
+                id="totalAverageRating"
+                class="inline-block text-4xl font-bold text-black"
+              ></div>
+              <div class="inline-block text-gray-400">/10</div>
+            </div>
+          </h3>
+        </div>
+
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <!-- 1 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Longest Title
+            <div
+              id="longestTitle"
+              class="line-clamp-2 text-lg font-bold text-black"
+            ></div>
+          </h2>
+          <h3
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Shortest Title
+            <div id="shortestTitle" class="text-2xl font-bold text-black"></div>
+          </h3>
+        </div>
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <!-- 1 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Most Votes
+            <div id="mostVotes" class="text-4xl font-bold text-black"></div>
+          </h2>
+          <h3
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Least Votes
+            <div id="leastVotes" class="text-4xl font-bold text-black"></div>
+          </h3>
+        </div>
+      </div>
+
+      <header class="flex flex-row">
+        <h2
+          class="ml-auto inline-block py-2 font-sans text-3xl font-bold text-neutral-950"
+        >
+          Movies
+        </h2>
+      </header>
+      <div
+        class="m-0 grid select-none grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg *:border-2 md:grid-cols-4"
+      >
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!-- 1 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Movies Watched
+            <div id="movies" class="text-4xl font-bold text-black"></div>
+          </h2>
+          <h3
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Directors Watched
+            <div id="directors" class="text-4xl font-bold text-black"></div>
+          </h3>
+        </div>
+
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!-- 2 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Minutes Watched
+            <div
+              id="movieWatchtimeMinutes"
+              class="text-4xl font-bold text-black"
+            ></div>
+          </h2>
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Hours Watched
+            <div
+              id="movieWatchtimeHours"
+              class="text-4xl font-bold text-black"
+            ></div>
+          </h2>
+        </div>
+
+        <div
+          class="> flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!--3  -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Average Rating By You
+            <div>
+              <div
+                id="movieAverageRating"
+                class="inline-block text-4xl font-bold text-black"
+              ></div>
+              <div class="inline-block text-gray-400">/10</div>
+            </div>
+          </h2>
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Average Rating By IMDB
+            <div class="">
+              <div
+                id="movieAverageRatingIMDB"
+                class="inline-block text-4xl font-bold text-black"
+              ></div>
+              <div class="inline-block text-gray-400">/10</div>
+            </div>
+          </h2>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!--4 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Movies Per Year
+          </h2>
+          <div>
+            <canvas id="moviesPerYear" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:row-span-1"
+        >
+          <!-- 5-->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Top Directors
+          </h2>
+          <div>
+            <canvas id="topDirectors" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:row-span-3"
+        >
+          <!--6 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Top Genres
+          </h2>
+          <div>
+            <canvas id="movieTopGenres" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <!-- 7 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Average Rating Per Month
+          </h2>
+          <div>
+            <canvas id="movieAverageRatingPerMonth" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <!-- 8 -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Movies Per Month
+          </h2>
+          <div>
+            <canvas id="moviesPerMonth" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!--9  -->
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Movies Per Rating
+          </h2>
+          <div>
+            <canvas id="movieRatingsPerScore" class="p-1"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <header class="flex flex-row">
+        <h2
+          class="ml-auto inline-block py-2 font-sans text-3xl font-bold text-neutral-950"
+        >
+          Shows
+        </h2>
+      </header>
+
+      <div
+        class="m-0 grid select-none grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg *:border-2 md:grid-cols-4"
+      >
+        <div
+          class="flex min-h-28 items-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <h2
+            class="px-3 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Shows Watched
+            <div id="shows" class="text-7xl font-bold text-black"></div>
+          </h2>
+        </div>
+
+        <div
+          class="flex min-h-28 flex-col justify-center rounded-xl duration-700 ease-in-out hover:scale-[102%]"
+        >
+          <!--3  -->
+          <h2
+            class="px-2 pt-1 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Average Rating By You
+            <div>
+              <div
+                id="showAverageRating"
+                class="inline-block text-4xl font-bold text-black"
+              ></div>
+              <div class="inline-block text-gray-400">/10</div>
+            </div>
+          </h2>
+          <h2
+            class="px-2 pb-1 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Average Rating By IMDB
+            <div class="">
+              <div
+                id="showAverageRatingIMDB"
+                class="inline-block text-4xl font-bold text-black"
+              ></div>
+              <div class="inline-block text-gray-400">/10</div>
+            </div>
+          </h2>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Shows Per Year
+          </h2>
+          <div>
+            <canvas id="showsPerYear" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Shows Per Rating
+          </h2>
+          <div>
+            <canvas id="showsPerRating" class="p-1"></canvas>
+          </div>
+        </div>
+
+        <div
+          class="min-h-28 rounded-xl duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+        >
+          <h2
+            class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
+          >
+            Top Genres
+          </h2>
+          <div>
+            <canvas id="showTopGenres" class="p-1"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="charts.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
