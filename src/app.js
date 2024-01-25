@@ -393,7 +393,9 @@ function displayData() {
   var longestTitle = document.getElementById("longestTitle");
   var shortestTitle = document.getElementById("shortestTitle");
   var mostVotes = document.getElementById("mostVotes");
+  var mostVotesTitle = document.getElementById("mostVotesTitle");
   var leastVotes = document.getElementById("leastVotes");
+  var leastVotesTitle = document.getElementById("leastVotesTitle");
 
   highestStreak.textContent = generalData["streak"]["highestStreak"];
   currentStreak.textContent = generalData["streak"]["currentStreak"];
@@ -403,6 +405,8 @@ function displayData() {
   shortestTitle.textContent = generalData["titleData"]["shortest"]["title"];
   mostVotes.textContent = generalData["numVotes"]["highest"]["votes"];
   leastVotes.textContent = generalData["numVotes"]["lowest"]["votes"];
+  mostVotesTitle.textContent = generalData["numVotes"]["highest"]["title"];
+  leastVotesTitle.textContent = generalData["numVotes"]["lowest"]["title"];
 
   loadCharts();
 }
