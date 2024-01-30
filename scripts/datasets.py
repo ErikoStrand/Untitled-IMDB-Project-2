@@ -1,8 +1,27 @@
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
+import json
 import os
 import csv
+import gzip
+import shutil
+import requests
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 from collections import defaultdict
+
+# Function to download and extract the file
+def download_and_extract(url, destination_folder):
+    # Download the file
+    file_path = os.path.join(destination_folder, "title.episode.tsv.gz")
+    with open(file_path, "wb") as f:
+        response = requests.get(url)
+        f.write(response.content)
+
+    # Extract the file
+    with gzip.open(file_path, 'rb') as f_in, open(os.path.join(destination_folder, "data.tsv"), 'wb') as f_out:
+        shutil.copyfileobj(f_in, f_out)
+
+    # Delete the compressed file
+    os.remove(file_path)
 
 # Replace placeholders with your actual password and database name
 password = "TtL3EaYzGSgaTT6q"
@@ -21,16 +40,21 @@ except Exception as e:
     print("Error:", e)
 
 try:
-    script_dir = os.path.dirname(os.path.realpath(__file__))
+    # Root directory
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    data_folder = os.path.join(root_dir, "../data")
+
+    # Download and extract the file
+    download_and_extract("https://datasets.imdbws.com/title.episode.tsv.gz", data_folder)
 
     # Path to the TSV file
-    tsv_file = "data/episodeData.tsv"
+    tsv_file = os.path.join(data_folder, "data.tsv")
 
     # Dictionary to store counts of unique IDs
     id_counts = defaultdict(int)
 
     # Read the TSV file
-    with open(tsv_file, mode='r') as file:
+    with open(tsv_file, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file, delimiter='\t')
         # Skip header if exists
         next(reader, None)
@@ -41,7 +65,7 @@ try:
 
     # Convert defaultdict to a regular dictionary and sort by values
     sorted_id_counts = dict(sorted(id_counts.items(), key=lambda item: item[1], reverse=True))
-
+    json_data = json.dumps(sorted_id_counts)
     # MongoDB connection parameters
     db_name = "Untitled_Project"
     collection_name = "episode_count"
@@ -55,14 +79,22 @@ try:
 
     if existing_document:
         # Update the existing document with the new data
-        collection.replace_one({}, sorted_id_counts)
+        collection.replace_one({}, {"data": json_data})
         print("Existing document updated in MongoDB.")
     else:
         # Insert the new document
-        collection.insert_one(sorted_id_counts)
+        collection.insert_one({"data": json_data})
         print("New document inserted into MongoDB.")
 
 finally:
     # Close the MongoDB connection
     client.close()
     print("MongoDB connection closed.")
+
+    # Delete the extracted files
+    extracted_files = os.listdir(data_folder)
+    for file_name in extracted_files:
+        if file_name.endswith(".tsv"):
+            file_path = os.path.join(data_folder, file_name)
+            os.remove(file_path)
+    print("Extracted files deleted.")
