@@ -66,6 +66,12 @@ try:
     # Convert defaultdict to a regular dictionary and sort by values
     sorted_id_counts = dict(sorted(id_counts.items(), key=lambda item: item[1], reverse=True))
     json_data = json.dumps(sorted_id_counts)
+    
+    # Save json_data to a JSON file named 'episodes_data.json' in the data folder
+    json_file_path = os.path.join(data_folder, "episodes_data.json")
+    with open(json_file_path, 'w') as json_file:
+        json_file.write(json_data)
+
     # MongoDB connection parameters
     db_name = "Untitled_Project"
     collection_name = "episode_count"

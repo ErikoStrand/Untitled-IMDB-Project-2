@@ -321,3 +321,17 @@ function displayData() {
 
   loadCharts();
 }
+
+function sendData(episodes) {
+  var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+  xhr.open("POST", "episodes.php", true); // Specify the request type and URL
+
+  // Set up a callback function to handle the response
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      return xhr.responseText;
+    }
+  };
+
+  xhr.send(episodes); // Send the form data to the server
+}
