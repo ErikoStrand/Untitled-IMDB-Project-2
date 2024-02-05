@@ -34,6 +34,8 @@ const generalData = {
 
 const shows = {
   totalMedia: 0,
+  totalWatchtimeMinutes: 0,
+  totalWatchtimeHours: 0,
   totalRating: 0,
   totalRatingIMDB: 0,
   averageRating: 0,
@@ -52,6 +54,7 @@ function loadData() {
 function handleData() {
   //handle data
   data.splice(0, 1);
+  var allShowID = {};
   var allDates = {};
   generalData["totalMedia"] = data.length;
   data.forEach(function (col) {
@@ -81,6 +84,7 @@ function handleData() {
     }
 
     if (col[5] == "tvSeries" || col[5] == "tvMiniSeries") {
+      allShowID[col[0]] = checkNaN(parseInt(col[7]));
       shows["totalMedia"] += 1;
       shows["totalRating"] += parseInt(col[1]);
       shows["totalRatingIMDB"] += parseFloat(col[6]);
@@ -89,6 +93,7 @@ function handleData() {
       getMediaPerYear(col[2], shows);
     }
   });
+
   //handle data that needs other data or that need to be a bit more advanced
   //general
   generalData["totalAverageRating"] =
@@ -106,17 +111,30 @@ function handleData() {
     movies["averageRatingPerMonth"],
   );
   movies["totalDirectors"] = getLenghtOfObject(movies["directors"]);
-
-  //shows
-  shows["genres"] = sortObjectByValues(shows["genres"]);
-  getAverageRatings(shows);
-
   getAverageRatingPerMonth(
     movies["ratingPerMonth"],
     movies["perMonth"],
     movies,
   );
+
+  //shows
+  sendData(allShowID, function (response) {
+    time = response.split(" ");
+    shows["totalWatchtimeMinutes"] = parseInt(time[0]);
+    shows["totalWatchtimeHours"] = parseInt(time[1]);
+  });
+  shows["genres"] = sortObjectByValues(shows["genres"]);
+  getAverageRatings(shows);
+
   displayData();
+  console.log(shows);
+}
+function checkNaN(thing) {
+  if (isNaN(thing)) {
+    return 20;
+  } else {
+    return thing;
+  }
 }
 function getTitleData(title) {
   if (title.length > generalData["titleData"]["longest"]["title"].length) {
@@ -160,7 +178,6 @@ function getIMDBStreak(dates) {
   generalData["streak"]["startDate"] = longestStreak[0];
   generalData["streak"]["endDate"] = longestStreak[longestStreak.length - 1];
   generalData["streak"]["currentStreak"] = currentStreak.length;
-  console.log(generalData);
 }
 
 function getRatingPerMonth(date, rating, type) {
@@ -322,16 +339,17 @@ function displayData() {
   loadCharts();
 }
 
-function sendData(episodes) {
+function sendData(episodes, callback) {
   var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
   xhr.open("POST", "episodes.php", true); // Specify the request type and URL
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // Set the content type header
 
   // Set up a callback function to handle the response
   xhr.onreadystatechange = function () {
     if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-      return xhr.responseText;
+      callback(xhr.responseText); // Call the callback function with the response
     }
   };
 
-  xhr.send(episodes); // Send the form data to the server
+  xhr.send("data=" + JSON.stringify(episodes)); // Send the form data to the server
 }
