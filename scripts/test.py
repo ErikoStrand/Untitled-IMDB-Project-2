@@ -7,7 +7,7 @@ payload = json.dumps({
     "database": "Untitled_Project",
     "dataSource": "UntitledProject",
     "projection": {
-        "data": 1
+        "data": 1,
     }
 })
 headers = {
