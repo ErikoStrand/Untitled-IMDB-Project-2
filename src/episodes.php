@@ -9,6 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     // Process the data 
     foreach ($data as $key => $value) {
+        //cleans string
+        $key = cleanString(htmlspecialchars($key));
+        
+        //cleans value
+        if (!is_int($value)) {
+            $value = 20;
+        }
+
         if ($value <= 120) {
             if (array_key_exists($key, $json)) {
                 $minutes += $value * $json[$key];
@@ -23,4 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // If the script is not accessed via an HTTP request, return an error message
     echo "Error: This script can only be accessed via an HTTP request.";
 }
-?>
+
+function cleanString($string) { 
+    return preg_replace("/[^a-zA-Z0-9_-]/", "", $string); // Removes special chars.
+}
