@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Process the data 
     foreach ($data as $key => $value) {
         //cleans string
-        $key = cleanString(htmlspecialchars($key));
+        $key = cleanString($key);
         
         //cleans value
         if (!is_int($value)) {
