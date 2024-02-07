@@ -1,30 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="m-0 p-0">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMDB Statistics - Your one stop shop to get all* the data</title>
     <link href="./output.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/0a145d8537.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body class="bg-neutral-50">
-    <h1>Welcome to paradies mother fucker</h1>
-    <div class="mx-auto flex max-w-screen-md justify-center pl-4">
+  <body class="m-0 w-dvw bg-neutral-50 p-0">
+    <canvas class="background absolute left-0 top-0 z-0 block"></canvas>
+
+    <div class="mx-auto mt-36 flex max-w-screen-md justify-center pl-6 pr-6">
       <div class="flex max-w-md flex-col gap-4">
-        <h1 class="inline-block text-center font-sans text-6xl font-extrabold">
+        <h1
+          class="inline-block text-center font-sans text-7xl font-extrabold drop-shadow-xl"
+        >
           STATISTICS FOR
           <div class="inline-block text-accent">IMDb</div>
         </h1>
-        <a
-          href="download.html"
-          class="flex min-h-28 flex-col items-center justify-center rounded-xl border-2 text-2xl font-bold text-yellow-500 shadow-inner drop-shadow-sm duration-100 ease-linear hover:drop-shadow-lg"
-          >How do I get my data?</a
+        <div
+          class="flex min-h-28 flex-row items-center justify-center rounded-xl bg-neutral-50 text-2xl font-bold text-neutral-400 shadow-inner drop-shadow-xl duration-100 ease-linear hover:drop-shadow-lg"
         >
-        <a
-          href="download.html"
-          class="flex min-h-28 flex-col items-center justify-center rounded-xl border-2 text-2xl font-bold text-yellow-500 shadow-inner drop-shadow-sm duration-100 ease-linear hover:drop-shadow-lg"
-          >Already got your data?</a
+          <i class="fa-regular fa-circle-question fa-2xl mr-4 text-red-600"></i>
+          <a href="download.html" class="">How do I get my data?</a>
+        </div>
+        <div
+          class="flex min-h-28 flex-row items-center justify-center rounded-xl bg-neutral-50 text-2xl font-bold text-neutral-400 shadow-inner drop-shadow-xl duration-100 ease-linear hover:drop-shadow-lg"
         >
+          <i
+            class="fa-solid fa-arrow-up-from-bracket fa-2xl mr-4 text-green-600"
+          ></i>
+          <a href="download.html" class="">Already got your data?</a>
+        </div>
       </div>
     </div>
+
+    <script src="particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
   </body>
 </html>

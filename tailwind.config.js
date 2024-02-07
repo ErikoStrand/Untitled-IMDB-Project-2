@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         accent: "#f6c615",
         "accent-dark": "#d0a508",
+        "bg-normal": "#ebebeb",
       },
     },
   },
