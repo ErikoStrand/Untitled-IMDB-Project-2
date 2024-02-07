@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Welcome</title>
+    <link href="./output.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/0a145d8537.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-neutral-50">
+    <header class="container mx-auto mt-8 max-w-[800px] text-center text-xl">
+      <p>
+        To view your IMDb statistics, this website will need a copy of your
+        ratings. If you are worried about personal information the file only
+        contains data about the media you have watched so no personal
+        information is gotten.
+      </p>
+    </header>
+    <div
+      class="container mx-auto mt-8 flex max-w-screen-md flex-col bg-white pl-4 pr-4 drop-shadow-xl *:bg-neutral-300"
+    >
+      <div id="page" class="mb-4 flex h-8 w-full"></div>
+
+      <div
+        id="image-container"
+        class="mb-4 flex h-96 w-full items-center justify-between gap-2"
+      >
+        <button
+          id="back"
+          class="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-neutral-50 drop-shadow-lg duration-500 ease-in-out hover:scale-110 hover:drop-shadow-xl"
+        >
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+
+        <div class="relative flex-1 overflow-hidden">
+          <img
+            src="images/ratings.png"
+            alt="export.png"
+            id="image"
+            class="h-auto w-full"
+          />
+        </div>
+        <button
+          id="next"
+          class="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-neutral-50 drop-shadow-lg duration-500 ease-in-out hover:scale-110 hover:drop-shadow-xl"
+        >
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
+
+      <div id="description" class="mb-8 h-16 w-full">
+        <div id="description-text"></div>
+      </div>
+    </div>
+    <script src="tutorial.js"></script>
+    <script src="input.js"></script>
+  </body>
+</html>
+
+<!--     
+  <div class="flex h-dvh items-center justify-center">
+    <input type="file" id="file" />
+  </div>
+-->
