@@ -122,12 +122,12 @@ function handleData() {
     time = response.split(" ");
     shows["totalWatchtimeMinutes"] = parseInt(time[0]);
     shows["totalWatchtimeHours"] = parseInt(time[1]);
+    //its async so display when getting data
+    displayEpisodeWatchtime();
   });
   shows["genres"] = sortObjectByValues(shows["genres"]);
   getAverageRatings(shows);
-
   displayData();
-  console.log(shows);
 }
 function checkNaN(thing) {
   if (isNaN(thing)) {
@@ -289,19 +289,26 @@ function getGenre(allGenres, type) {
   });
 }
 
+function displayEpisodeWatchtime() {
+  var showWatchtimeMinutes = document.getElementById("showWatchtimeMinutes");
+  var showWatchtimeHours = document.getElementById("showWatchtimeHours");
+
+  showWatchtimeHours.textContent = shows["totalWatchtimeHours"];
+  showWatchtimeMinutes.textContent = shows["totalWatchtimeMinutes"];
+}
 function displayData() {
   //movies
   var movie = document.getElementById("movies");
   var director = document.getElementById("directors");
-  var watchtimeMinutes = document.getElementById("movieWatchtimeMinutes");
-  var watchtimeHours = document.getElementById("movieWatchtimeHours");
+  var movieWatchtimeMinutes = document.getElementById("movieWatchtimeMinutes");
+  var movieWatchtimeHours = document.getElementById("movieWatchtimeHours");
   var averageRating = document.getElementById("movieAverageRating");
   var averageRatingIMDB = document.getElementById("movieAverageRatingIMDB");
 
   director.textContent = movies["totalDirectors"];
   movie.textContent = movies["totalMedia"];
-  watchtimeMinutes.textContent = movies["totalWatchtimeMinutes"];
-  watchtimeHours.textContent = movies["totalWatchtimeHours"];
+  movieWatchtimeMinutes.textContent = movies["totalWatchtimeMinutes"];
+  movieWatchtimeHours.textContent = movies["totalWatchtimeHours"];
   averageRating.textContent = movies["averageRating"].toFixed(1);
   averageRatingIMDB.textContent = movies["averageRatingIMDB"].toFixed(1);
   //tv episodes
