@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMDB Statistics</title>
     <link href="./output.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/0a145d8537.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="bg-neutral-50">
     <div class="container mx-auto max-w-screen-lg pl-4">
@@ -39,10 +43,13 @@
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
             Highest Streak
-            <div
-              id="highestStreak"
-              class="text-4xl font-bold text-neutral-900"
-            ></div>
+            <div class="flex flex-row items-center">
+              <i class="fa-solid fa-trophy fa-lg text-accent"></i>
+              <div
+                id="highestStreak"
+                class="text-4xl font-bold text-neutral-900"
+              ></div>
+            </div>
           </h2>
           <h3
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
