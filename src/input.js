@@ -8,17 +8,15 @@ const data = [];
   var i = document.getElementById("file"); // File input element
 
   // Check if the file input element exists
-  if (!i) {
-    return;
+  if (i) {
+    // Add event listener for the 'change' event on the file input element
+    i.addEventListener("change", function () {
+      // Check if files are present and at least one file is selected also if the name is correct.
+      if (!!i.files && i.files.length > 0 && i.files[0].name == "ratings.csv") {
+        parseCSV(i.files[0]); // Parse the selected CSV file
+      }
+    });
   }
-
-  // Add event listener for the 'change' event on the file input element
-  i.addEventListener("change", function () {
-    // Check if files are present and at least one file is selected also if the name is correct.
-    if (!!i.files && i.files.length > 0 && i.files[0].name == "ratings.csv") {
-      parseCSV(i.files[0]); // Parse the selected CSV file
-    }
-  });
 
   // Function to parse CSV file
   function parseCSV(file) {
@@ -91,4 +89,15 @@ const data = [];
     result.push(currentField);
     return result;
   }
+
+  document
+    .getElementById("sampleButton")
+    .addEventListener("click", function () {
+      console.log("hello");
+      fetch("sampleData.php")
+        .then((response) => response.blob())
+        .then((blob) => {
+          parseCSV(blob);
+        });
+    });
 })();
