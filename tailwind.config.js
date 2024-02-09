@@ -1,5 +1,3 @@
-const { default: daisyui } = require("daisyui");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js}"],
@@ -12,5 +10,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require(daisyui)],
+  plugins: [require("daisyui")],
 };
