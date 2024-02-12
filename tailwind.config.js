@@ -9,6 +9,13 @@ module.exports = {
         archivo: ['"Archivo"', "sans-serif"],
       },
       colors: {
+        "licorice-xl": "#3D3029",
+        "licorice-l": "#40322a",
+        floral: "#FBF4EA",
+        dogwood: "#CCB6A9",
+        mortuum: "#632B29",
+        jasmine: "#F6DB65",
+        licorice: "#211A16",
         accent: "#f6c615",
         "accent-dark": "#d0a508",
         "bg-normal": "#ebebeb",
