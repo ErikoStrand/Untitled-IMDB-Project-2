@@ -13,6 +13,7 @@ module.exports = {
         "licorice-l": "#40322a",
         floral: "#FBF4EA",
         dogwood: "#CCB6A9",
+        champagne: "#f5ebdd",
         mortuum: "#632B29",
         jasmine: "#F6DB65",
         licorice: "#211A16",
