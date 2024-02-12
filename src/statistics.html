@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMDB Statistics</title>
-    <link href="./output.css" rel="stylesheet" />
+    <link href="output.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800&family=Heebo:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/0a145d8537.js"
       crossorigin="anonymous"
@@ -14,13 +20,15 @@
     <div class="container mx-auto max-w-screen-lg pl-4 pr-4">
       <header class="flex flex-row items-end pt-4">
         <div id="slogan" class="relative flex flex-col">
-          <h1 class="inline-block font-sans text-4xl font-bold">
+          <h1
+            class="inline-block font-sans text-4xl font-bold text-neutral-900"
+          >
             Your
             <div class="inline-block text-accent">IMDb</div>
             Statistics
           </h1>
           <h2
-            class="mb-8 inline-block font-sans text-2xl font-semibold text-gray-700 opacity-80"
+            class="mb-8 inline-block font-sans text-2xl font-semibold text-neutral-700"
           >
             View how you spent your time
           </h2>
@@ -33,10 +41,10 @@
       </header>
 
       <div
-        class="m-0 mb-4 grid select-none grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg md:grid-cols-4"
+        class="m-0 mb-4 grid grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg md:grid-cols-4"
       >
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!-- 1 -->
           <h2
@@ -66,20 +74,20 @@
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
+          class="max-h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
         >
           <h2
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
             Media Per Release Year
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="mediaPerReleaseYear" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!-- 1 -->
           <h2
@@ -106,7 +114,7 @@
         </div>
 
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
         >
           <!-- 1 -->
           <h2
@@ -129,7 +137,7 @@
           </h3>
         </div>
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
         >
           <!-- 1 -->
           <h2
@@ -179,10 +187,10 @@
         </h2>
       </header>
       <div
-        class="m-0 mb-3 grid select-none grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg md:grid-cols-4"
+        class="m-0 mb-3 grid grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg md:grid-cols-4"
       >
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!-- 1 -->
           <h2
@@ -203,7 +211,7 @@
         </div>
 
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!-- 2 -->
           <h2
@@ -227,13 +235,13 @@
         </div>
 
         <div
-          class="> flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="> flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!--3  -->
           <h2
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
-            Average Rating By You
+            Your Avg Rating
             <div>
               <div
                 id="movieAverageRating"
@@ -245,7 +253,7 @@
           <h2
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
-            Average Rating By IMDB
+            IMDb's Avg Rating
             <div class="">
               <div
                 id="movieAverageRatingIMDB"
@@ -257,7 +265,7 @@
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!--4 -->
           <h2
@@ -265,13 +273,13 @@
           >
             Movies Per Year
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="moviesPerYear" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:row-span-1 md:row-span-1"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:row-span-1"
         >
           <!-- 5-->
           <h2
@@ -279,7 +287,7 @@
           >
             Top Directors
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="topDirectors" class="p-1"></canvas>
           </div>
         </div>
@@ -293,13 +301,13 @@
           >
             Top Genres
           </h2>
-          <div>
+          <div class="">
             <canvas id="movieTopGenres" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
         >
           <!-- 7 -->
           <h2
@@ -307,13 +315,13 @@
           >
             Average Rating Per Month
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="movieAverageRatingPerMonth" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2 md:row-span-1"
         >
           <!-- 8 -->
           <h2
@@ -321,13 +329,13 @@
           >
             Movies Per Month
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="moviesPerMonth" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:row-span-1"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:row-span-1"
         >
           <!--9  -->
           <h2
@@ -335,7 +343,7 @@
           >
             Movies Per Rating
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="movieRatingsPerScore" class="p-1"></canvas>
           </div>
         </div>
@@ -350,10 +358,10 @@
       </header>
 
       <div
-        class="m-0 mb-4 grid select-none grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg md:grid-cols-4"
+        class="m-0 mb-4 grid grid-flow-dense grid-cols-1 gap-4 drop-shadow-lg md:grid-cols-4"
       >
         <div
-          class="flex min-h-28 items-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 items-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <h2
             class="px-3 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
@@ -364,13 +372,13 @@
         </div>
 
         <div
-          class="flex min-h-28 flex-col justify-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 flex-col justify-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <!--3  -->
           <h2
             class="px-2 pt-1 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
-            Average Rating By You
+            Your Avg Rating
             <div>
               <div
                 id="showAverageRating"
@@ -382,7 +390,7 @@
           <h2
             class="px-2 pb-1 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
-            Average Rating By IMDB
+            IMDb's Avg Rating
             <div class="">
               <div
                 id="showAverageRatingIMDB"
@@ -394,45 +402,45 @@
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
         >
           <h2
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
             Shows Per Year
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="showsPerYear" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
         >
           <h2
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
             Shows Per Rating
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="showsPerRating" class="p-1"></canvas>
           </div>
         </div>
 
         <div
-          class="min-h-28 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
+          class="h-48 rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%] md:col-span-2"
         >
           <h2
             class="px-2 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
           >
             Top Genres
           </h2>
-          <div>
+          <div class="max-h-48">
             <canvas id="showTopGenres" class="p-1"></canvas>
           </div>
         </div>
         <div
-          class="flex min-h-28 items-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 items-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <h2
             class="px-3 font-mono text-lg font-semibold text-gray-600 text-opacity-90"
@@ -445,7 +453,7 @@
           </h2>
         </div>
         <div
-          class="flex min-h-28 items-center rounded-xl bg-neutral-50 duration-700 ease-in-out hover:scale-[102%]"
+          class="flex h-48 items-center rounded-xl bg-neutral-50 px-4 duration-700 ease-in-out hover:scale-[102%]"
         >
           <h2
             class="px-3 font-mono text-lg font-semibold text-gray-600 text-opacity-90"

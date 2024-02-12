@@ -23,7 +23,7 @@ function loadCharts() {
       labels: Object.keys(generalData["mediaPerReleaseYear"]),
       datasets: [
         {
-          label: "# of media",
+          label: "# of Media",
           data: Object.values(generalData["mediaPerReleaseYear"]),
           borderWidth: 1,
           backgroundColor: "#5ac43b",
@@ -31,10 +31,23 @@ function loadCharts() {
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       maintainAspectRatio: false,
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -55,10 +68,23 @@ function loadCharts() {
     },
     options: {
       aspectRatio: 30 / 13,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       maintainAspectRatio: false,
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -78,10 +104,23 @@ function loadCharts() {
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       maintainAspectRatio: false,
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -102,9 +141,22 @@ function loadCharts() {
     },
     options: {
       maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -124,11 +176,24 @@ function loadCharts() {
     },
     options: {
       aspectRatio: 220 / 270,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       maintainAspectRatio: false,
       indexAxis: "y",
       scales: {
+        x: {
+          grid: {
+            display: true,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: false,
+          },
         },
       },
     },
@@ -149,9 +214,22 @@ function loadCharts() {
     options: {
       maintainAspectRatio: false,
       indexAxis: "y",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       scales: {
+        x: {
+          grid: {
+            display: true,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: false,
+          },
         },
       },
     },
@@ -171,10 +249,22 @@ function loadCharts() {
     },
     options: {
       maintainAspectRatio: false,
-      indexAxis: "y",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -195,9 +285,22 @@ function loadCharts() {
     },
     options: {
       maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -217,9 +320,22 @@ function loadCharts() {
     },
     options: {
       maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
@@ -239,11 +355,23 @@ function loadCharts() {
       ],
     },
     options: {
-      aspectRatio: 30 / 13,
       maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
       scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
         y: {
           beginAtZero: true,
+          grid: {
+            display: true,
+          },
         },
       },
     },
