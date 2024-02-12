@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         "licorice-xl": "#3D3029",
         "licorice-l": "#40322a",
-        floral: "#FBF4EA",
+        floral: "#fdfaf5",
         dogwood: "#CCB6A9",
         champagne: "#f1eae1",
         mortuum: "#632B29",
