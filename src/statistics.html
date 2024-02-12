@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMDB Statistics</title>
     <link href="output.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800&family=mono:wght@100;200;300;400;500;600;700;800&family=heefont-mono:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+
     <script
       src="https://kit.fontawesome.com/0a145d8537.js"
       crossorigin="anonymous"
@@ -18,13 +13,22 @@
   </head>
   <body class="dark:bg-floral">
     <div class="container mx-auto max-w-screen-lg pl-4 pr-4">
-      <header class="mb-2 flex flex-row items-end pt-4">
+      <header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
         <div id="slogan" class="relative mb-4 flex flex-col">
           <h1
-            class="inline-block font-quicksand text-4xl font-bold tracking-wider text-licorice"
+            class="text-left font-quicksand text-4xl font-extrabold leading-tight tracking-wider text-licorice"
           >
             Your
-            <div class="inline-block text-5xl text-jasmine">IMDb</div>
+            <div class="inline-grid">
+              <span
+                class="z-20 col-start-1 row-start-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent"
+                >IMDb</span
+              >
+              <span
+                aria-hidden="true"
+                class="z-10 col-start-1 row-start-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 opacity-30 blur-xl"
+              ></span>
+            </div>
             Statistics
           </h1>
           <h2

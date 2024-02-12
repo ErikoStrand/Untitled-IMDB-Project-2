@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMDB Statistics - Your one stop shop to get all* the data</title>
     <link href="./output.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800&family=Heebo:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+
     <script
       src="https://kit.fontawesome.com/0a145d8537.js"
       crossorigin="anonymous"
@@ -19,21 +14,32 @@
   </head>
   <body class="m-0 w-dvw bg-neutral-50 p-0">
     <canvas class="background absolute left-0 top-0 z-0 block"></canvas>
+
     <div
       class="mx-auto mt-36 flex max-w-screen-md flex-col justify-center pl-6 pr-6"
     >
       <h1
-        class="font-archivo inline-block text-center text-8xl font-extrabold drop-shadow-xl"
+        class="font-poppin text-center text-8xl font-extrabold leading-tight tracking-tight text-licorice"
       >
-        STATISTICS FOR
-        <div class="inline-block text-accent">IMDb</div>
+        Statistics for <br />
+        <div class="inline-grid">
+          <span
+            class="z-20 col-start-1 row-start-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent"
+            >IMDb</span
+          >
+          <span
+            aria-hidden="true"
+            class="z-10 col-start-1 row-start-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 opacity-30 blur-xl"
+          ></span>
+        </div>
+        <br />
       </h1>
       <div class="mt-8 flex flex-col gap-4 self-center *:p-8">
         <div
           class="flex min-h-28 flex-row items-center justify-center rounded-xl bg-neutral-50 text-2xl font-bold text-neutral-400 shadow-inner drop-shadow-xl duration-100 ease-linear hover:drop-shadow-lg"
         >
           <i class="fa-regular fa-circle-question fa-2xl mr-4 text-red-600"></i>
-          <a href="upload.html" class="font-heebo flex h-full items-center"
+          <a href="upload.html" class="flex h-full items-center font-heebo"
             >How do I get my data?</a
           >
         </div>
