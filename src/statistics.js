@@ -36,7 +36,7 @@ function displayData() {
   var averageRating = document.getElementById("movieAverageRating");
   var averageRatingIMDB = document.getElementById("movieAverageRatingIMDB");
 
-  for (let i = 0; i < 3 && i < Object.keys(movies["directors"]).length; i++) {
+  for (let i = 0; i < 5 && i < Object.keys(movies["directors"]).length; i++) {
     const director = Object.keys(movies["directors"])[i];
     const directorElement = document.createElement("p");
     directorElement.textContent = i + 1 + ". " + director;
