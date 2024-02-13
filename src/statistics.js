@@ -29,11 +29,19 @@ function displayData() {
   //movies
   var movie = document.getElementById("movies");
   var director = document.getElementById("directors");
+  var topDirector = document.getElementById("topDirectors");
+
   var movieWatchtimeMinutes = document.getElementById("movieWatchtimeMinutes");
   var movieWatchtimeHours = document.getElementById("movieWatchtimeHours");
   var averageRating = document.getElementById("movieAverageRating");
   var averageRatingIMDB = document.getElementById("movieAverageRatingIMDB");
 
+  for (let i = 0; i < 3 && i < Object.keys(movies["directors"]).length; i++) {
+    const director = Object.keys(movies["directors"])[i];
+    const directorElement = document.createElement("p");
+    directorElement.textContent = i + 1 + ". " + director;
+    topDirector.appendChild(directorElement);
+  }
   director.textContent = movies["totalDirectors"];
   movie.textContent = movies["totalMedia"];
   movieWatchtimeMinutes.textContent = nFormatter(

@@ -1,12 +1,8 @@
 function loadCharts() {
   //movies
   var moviesPerYear = document.getElementById("moviesPerYear");
-  var averageRatingPerMonth = document.getElementById(
-    "movieAverageRatingPerMonth",
-  );
-  var moviesPerMonth = document.getElementById("moviesPerMonth");
+
   var top20Genres = document.getElementById("movieTopGenres");
-  var topDirectors = document.getElementById("topDirectors");
   var ratingsPerScore = document.getElementById("movieRatingsPerScore");
 
   //shows
@@ -67,7 +63,6 @@ function loadCharts() {
       ],
     },
     options: {
-      aspectRatio: 30 / 13,
       plugins: {
         legend: {
           display: false,
@@ -90,80 +85,6 @@ function loadCharts() {
     },
   });
 
-  new Chart(averageRatingPerMonth, {
-    type: "line",
-    data: {
-      labels: Object.keys(movies["averageRatingPerMonth"]),
-      datasets: [
-        {
-          borderWidth: 1,
-          pointRadius: 1,
-          label: "x/10 per Month",
-          data: Object.values(movies["averageRatingPerMonth"]),
-          borderWidth: 1,
-          backgroundColor: "rgba(246, 219, 101, 0.7)",
-          fill: true,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          grid: {
-            display: false,
-          },
-        },
-        y: {
-          beginAtZero: true,
-          grid: {
-            display: true,
-          },
-        },
-      },
-    },
-  });
-
-  new Chart(moviesPerMonth, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["perMonth"]),
-      datasets: [
-        {
-          label: "# of Movies",
-          data: Object.values(movies["perMonth"]),
-          borderWidth: 1,
-          backgroundColor: "#F6DB65",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false,
-          },
-        },
-        y: {
-          beginAtZero: true,
-          grid: {
-            display: true,
-          },
-        },
-      },
-    },
-  });
   new Chart(top20Genres, {
     type: "bar",
     data: {
@@ -178,14 +99,12 @@ function loadCharts() {
       ],
     },
     options: {
-      aspectRatio: 220 / 260,
       plugins: {
         legend: {
           display: false,
         },
       },
       maintainAspectRatio: false,
-      indexAxis: "y",
       scales: {
         x: {
           grid: {
@@ -201,42 +120,7 @@ function loadCharts() {
       },
     },
   });
-  new Chart(topDirectors, {
-    type: "bar",
-    data: {
-      labels: Object.keys(movies["directors"]).slice(0, 10),
-      datasets: [
-        {
-          label: "# of Directors",
-          data: Object.values(movies["directors"]).slice(0, 10),
-          borderWidth: 1,
-          backgroundColor: "#F6DB65",
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      indexAxis: "y",
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            display: true,
-          },
-        },
-        y: {
-          beginAtZero: true,
-          grid: {
-            display: false,
-          },
-        },
-      },
-    },
-  });
+
   new Chart(ratingsPerScore, {
     type: "bar",
     data: {
