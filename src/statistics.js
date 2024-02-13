@@ -7,6 +7,22 @@ generalData = loadData("generalData");
 movies = loadData("movies");
 shows = loadData("shows");
 
+function nFormatter(num, digits) {
+  const lookup = [
+    { value: 1, symbol: "" },
+    { value: 1e3, symbol: "K" },
+    { value: 1e6, symbol: "M" },
+    { value: 1e9, symbol: "G" },
+    { value: 1e12, symbol: "T" },
+    { value: 1e15, symbol: "P" },
+    { value: 1e18, symbol: "E" },
+  ];
+  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+  const item = lookup.findLast((item) => num >= item.value);
+  return item
+    ? (num / item.value).toFixed(digits).replace(regexp, "").concat(item.symbol)
+    : "0";
+}
 displayData();
 
 function displayData() {
@@ -20,7 +36,10 @@ function displayData() {
 
   director.textContent = movies["totalDirectors"];
   movie.textContent = movies["totalMedia"];
-  movieWatchtimeMinutes.textContent = movies["totalWatchtimeMinutes"];
+  movieWatchtimeMinutes.textContent = nFormatter(
+    movies["totalWatchtimeMinutes"],
+    0,
+  );
   movieWatchtimeHours.textContent = movies["totalWatchtimeHours"];
   averageRating.textContent = movies["averageRating"].toFixed(1);
   averageRatingIMDB.textContent = movies["averageRatingIMDB"].toFixed(1);
@@ -32,7 +51,10 @@ function displayData() {
   var showWatchtimeHours = document.getElementById("showWatchtimeHours");
 
   showWatchtimeHours.textContent = shows["totalWatchtimeHours"];
-  showWatchtimeMinutes.textContent = shows["totalWatchtimeMinutes"];
+  showWatchtimeMinutes.textContent = nFormatter(
+    shows["totalWatchtimeMinutes"],
+    0,
+  );
   show.textContent = shows["totalMedia"];
   showAverageRating.textContent = shows["averageRating"].toFixed(1);
   showAverageRatingIMDB.textContent = shows["averageRatingIMDB"].toFixed(1);
@@ -55,7 +77,10 @@ function displayData() {
   totalAverageRating.textContent = generalData["totalAverageRating"].toFixed(1);
   longestTitle.textContent = generalData["titleData"]["longest"]["title"];
   shortestTitle.textContent = generalData["titleData"]["shortest"]["title"];
-  mostVotes.textContent = generalData["numVotes"]["highest"]["votes"];
+  mostVotes.textContent = nFormatter(
+    generalData["numVotes"]["highest"]["votes"],
+    2,
+  );
   leastVotes.textContent = generalData["numVotes"]["lowest"]["votes"];
   mostVotesTitle.textContent = generalData["numVotes"]["highest"]["title"];
   leastVotesTitle.textContent = generalData["numVotes"]["lowest"]["title"];
