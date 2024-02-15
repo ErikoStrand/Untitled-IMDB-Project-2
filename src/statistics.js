@@ -92,6 +92,6 @@ function displayData() {
   leastVotes.textContent = generalData["numVotes"]["lowest"]["votes"];
   mostVotesTitle.textContent = generalData["numVotes"]["highest"]["title"];
   leastVotesTitle.textContent = generalData["numVotes"]["lowest"]["title"];
-
+  console.log(movies["perMonth"], generalData);
   loadCharts();
 }
