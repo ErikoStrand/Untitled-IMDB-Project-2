@@ -11,12 +11,12 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body class="bg-slate-50">
+  <body class="bg-zinc-900">
     <div class="container mx-auto max-w-screen-lg pl-4 pr-4">
       <header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
         <div id="slogan" class="relative mb-4 flex flex-col">
           <h1
-            class="text-left font-quicksand text-4xl font-extrabold leading-tight tracking-wider text-zinc-900"
+            class="text-left font-quicksand text-4xl font-extrabold leading-tight tracking-wider text-stone-50"
           >
             Your
             <div class="inline-grid">
@@ -32,13 +32,13 @@
             Statistics
           </h1>
           <h2
-            class="inline-block font-quicksand text-2xl font-bold tracking-wider text-stone-700"
+            class="inline-block font-quicksand text-2xl font-bold tracking-wider text-stone-400"
           >
             View how you spend your time
           </h2>
         </div>
         <h2
-          class="ml-auto inline-block font-sans text-3xl font-bold text-neutral-950"
+          class="ml-auto inline-block font-sans text-3xl font-bold text-slate-100"
         >
           <i class="fa-solid fa-globe"></i> General
         </h2>
@@ -48,41 +48,71 @@
         class="m-0 mb-4 grid grid-flow-dense grid-cols-1 gap-8 drop-shadow-md md:grid-cols-4"
       >
         <div
-          class="flex min-h-96 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4 md:col-span-2 md:row-span-2 md:min-h-48"
-        ></div>
+          class="flex min-h-96 flex-col gap-1 rounded-xl bg-zinc-800 p-4 md:col-span-2 md:row-span-2 md:min-h-48"
+        >
+          <div class="flex flex-col gap-2">
+            <div
+              id="totalWatchtime"
+              class="inline-block font-mono text-8xl font-extrabold text-stone-50"
+            ></div>
+            <div
+              class="font-archivo text-xl font-semibold tracking-wider text-stone-400"
+            >
+              Total hours watched
+            </div>
+          </div>
+          <div class="flex flex-row gap-2">
+            <div
+              class="self-end font-archivo text-2xl font-semibold tracking-wider text-stone-400"
+            >
+              That's
+              <div
+                id="totalWatchtimeDays"
+                class="inline-block font-mono text-4xl font-extrabold text-stone-50"
+              ></div>
+              Days, or
+              <div
+                id="totalWatchtimeProcent"
+                class="inline-block font-mono text-3xl font-extrabold text-green-500"
+              ></div>
+              of a year
+            </div>
+          </div>
+        </div>
+
         <div
-          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4"
+          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4"
         >
           <!-- 1 -->
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div class="flex flex-row items-center gap-1">
               <i class="fa-solid fa-trophy fa-2xl text-accent"></i>
               <div
                 id="highestStreak"
-                class="font-mono text-5xl font-extrabold text-zinc-900"
+                class="font-mono text-5xl font-extrabold text-stone-50"
               ></div>
             </div>
             Highest Streak
           </h2>
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
-            <div class="flex flex-row items-center gap-1">
-              <i class="fa-solid fa-fire fa-2xl text-red-600"></i>
+            <div class="ml-1 flex flex-row items-center gap-2">
+              <i class="fa-solid fa-fire fa-2xl self-center text-red-600"></i>
               <div
                 id="currentStreak"
-                class="font-mono text-5xl font-extrabold text-zinc-900"
+                class="font-mono text-5xl font-extrabold text-stone-50"
               ></div>
             </div>
             Current Streak
           </h2>
         </div>
 
-        <div class="max-h-48 rounded-xl bg-slate-50 md:col-span-2">
+        <div class="max-h-48 rounded-xl bg-zinc-800 md:col-span-2">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Media Per Release Year
           </h2>
@@ -92,26 +122,26 @@
         </div>
 
         <div
-          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4"
+          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4"
         >
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="totalMedia"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Media Watched
           </h2>
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div>
               <div
                 id="totalAverageRating"
-                class="inline-block font-mono text-5xl font-extrabold text-zinc-900"
+                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
               ></div>
-              <div class="inline-block font-mono text-xl text-zinc-900">
+              <div class="inline-block font-mono text-xl text-stone-50">
                 /10
               </div>
             </div>
@@ -120,32 +150,32 @@
         </div>
 
         <div
-          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4 md:col-span-2"
+          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 md:col-span-2"
         >
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Longest Title
             <div
               id="longestTitle"
-              class="line-clamp-2 font-mono text-2xl font-bold text-zinc-900"
+              class="line-clamp-2 font-mono text-2xl font-bold text-stone-50"
             ></div>
           </h2>
           <h3
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Shortest Title
             <div
               id="shortestTitle"
-              class="font-mono text-3xl font-bold text-zinc-900"
+              class="font-mono text-3xl font-bold text-stone-50"
             ></div>
           </h3>
         </div>
         <div
-          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4 md:col-span-2"
+          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 md:col-span-2"
         >
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Most Votes
             <div class="flex flex-row items-center gap-1">
@@ -153,17 +183,17 @@
               <div class="flex flex-row items-end">
                 <div
                   id="mostVotes"
-                  class="font-mono text-4xl font-extrabold text-zinc-900"
+                  class="font-mono text-4xl font-extrabold text-stone-50"
                 ></div>
                 <div
                   id="mostVotesTitle"
-                  class="line-clamp-1 pl-1 font-mono text-xl font-bold text-stone-700"
+                  class="line-clamp-1 pl-1 font-mono text-xl font-bold text-stone-400"
                 ></div>
               </div>
             </div>
           </h2>
           <h3
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Least Votes
             <div class="flex flex-row items-center gap-1">
@@ -171,11 +201,11 @@
               <div class="flex flex-row items-end">
                 <div
                   id="leastVotes"
-                  class="font-mono text-4xl font-extrabold text-zinc-900"
+                  class="font-mono text-4xl font-extrabold text-stone-50"
                 ></div>
                 <div
                   id="leastVotesTitle"
-                  class="line-clamp-1 pl-1 font-mono text-xl font-bold text-stone-700"
+                  class="line-clamp-1 pl-1 font-mono text-xl font-bold text-stone-400"
                 ></div>
               </div>
             </div>
@@ -185,7 +215,7 @@
 
       <header class="mt-4 flex flex-row">
         <h2
-          class="ml-auto mt-6 inline-block pb-2 font-sans text-3xl font-bold text-neutral-950"
+          class="ml-auto mt-6 inline-block pb-2 font-sans text-3xl font-bold text-slate-50"
         >
           <i class="fa-solid fa-film"></i> Movies
         </h2>
@@ -194,77 +224,77 @@
         class="m-0 mb-3 grid grid-flow-dense grid-cols-1 gap-8 drop-shadow-md md:grid-cols-4"
       >
         <div
-          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4"
+          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4"
         >
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="movies"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Movies Watched
           </h2>
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="directors"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Directors Watched
           </h2>
         </div>
 
         <div
-          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4"
+          class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4"
         >
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="movieWatchtimeHours"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Hours Watched
           </h2>
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="movieWatchtimeMinutes"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Minutes Watched
           </h2>
         </div>
 
         <div
-          class="> flex h-48 flex-col justify-center gap-1 rounded-xl bg-slate-50 px-4"
+          class="> flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4"
         >
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div>
               <div
                 id="movieAverageRating"
-                class="inline-block font-mono text-5xl font-extrabold text-zinc-900"
+                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
               ></div>
-              <div class="inline-block font-mono text-2xl text-zinc-900">
+              <div class="inline-block font-mono text-2xl text-stone-50">
                 /10
               </div>
             </div>
             Your Avg Rating
           </h2>
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div class="">
               <div
                 id="movieAverageRatingIMDB"
-                class="inline-block font-mono text-5xl font-extrabold text-zinc-900"
+                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
               ></div>
-              <div class="inline-block font-mono text-2xl text-zinc-900">
+              <div class="inline-block font-mono text-2xl text-stone-50">
                 /10
               </div>
             </div>
@@ -272,22 +302,22 @@
           </h2>
         </div>
         <div
-          class="flex min-h-48 flex-col justify-center rounded-xl bg-slate-50 px-4 md:row-span-1"
+          class="flex min-h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 md:row-span-1"
         >
           <h2
-            class="px-2 font-archivo text-xl font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-xl font-semibold tracking-wider text-stone-400"
           >
             Top Directors
           </h2>
           <div
             id="topDirectors"
-            class="flex flex-col gap-1 px-2 font-archivo text-base font-semibold text-zinc-900 *:line-clamp-1"
+            class="flex flex-col gap-1 px-2 font-archivo text-base font-semibold text-stone-50 *:line-clamp-1"
           ></div>
         </div>
 
-        <div class="rounded-xl bg-slate-50 md:col-span-2">
+        <div class="rounded-xl bg-zinc-800 md:col-span-2">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Top Genres
           </h2>
@@ -296,9 +326,9 @@
           </div>
         </div>
 
-        <div class="h-48 rounded-xl bg-slate-50 md:col-span-2">
+        <div class="h-48 rounded-xl bg-zinc-800 md:col-span-2">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Movies Per Rating
           </h2>
@@ -306,9 +336,9 @@
             <canvas id="movieRatingsPerScore" class="p-1"></canvas>
           </div>
         </div>
-        <div class="h-48 rounded-xl bg-slate-50">
+        <div class="h-48 rounded-xl bg-zinc-800">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Movies Per Year
           </h2>
@@ -320,7 +350,7 @@
 
       <header class="mt-4 flex flex-row">
         <h2
-          class="ml-auto mt-6 inline-block pb-2 font-sans text-3xl font-bold text-neutral-950"
+          class="ml-auto mt-6 inline-block pb-2 font-sans text-3xl font-bold text-slate-50"
         >
           <i class="fa-solid fa-display"></i> Shows
         </h2>
@@ -329,65 +359,65 @@
       <div
         class="m-0 mb-4 grid grid-flow-dense grid-cols-1 gap-8 drop-shadow-md md:grid-cols-4"
       >
-        <div class="flex h-48 items-center rounded-xl bg-slate-50 px-4">
+        <div class="flex h-48 items-center rounded-xl bg-zinc-800 px-4">
           <h2
-            class="px-3 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-3 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             <div
               id="shows"
-              class="font-mono text-6xl font-extrabold text-zinc-900"
+              class="font-mono text-6xl font-extrabold text-stone-50"
             ></div>
             Shows Watched
           </h2>
         </div>
         <div
-          class="flex h-48 flex-col justify-center rounded-xl bg-slate-50 px-4"
+          class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4"
         >
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="showWatchtimeHours"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Hours Watched
           </h2>
           <h2
-            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div
               id="showWatchtimeMinutes"
-              class="font-mono text-5xl font-extrabold text-zinc-900"
+              class="font-mono text-5xl font-extrabold text-stone-50"
             ></div>
             Minutes Watched
           </h2>
         </div>
         <div
-          class="flex h-48 flex-col justify-center rounded-xl bg-slate-50 px-4"
+          class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4"
         >
           <h2
-            class="px-2 pt-1 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 pt-1 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div>
               <div
                 id="showAverageRating"
-                class="inline-block font-mono text-5xl font-extrabold text-zinc-900"
+                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
               ></div>
-              <div class="inline-block font-mono text-2xl text-zinc-900">
+              <div class="inline-block font-mono text-2xl text-stone-50">
                 /10
               </div>
             </div>
             Your Avg Rating
           </h2>
           <h2
-            class="px-2 pb-1 font-archivo text-base font-semibold tracking-wider text-stone-700"
+            class="px-2 pb-1 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
             <div class="">
               <div
                 id="showAverageRatingIMDB"
-                class="inline-block font-mono text-5xl font-extrabold text-zinc-900"
+                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
               ></div>
-              <div class="inline-block font-mono text-2xl text-zinc-900">
+              <div class="inline-block font-mono text-2xl text-stone-50">
                 /10
               </div>
             </div>
@@ -395,9 +425,9 @@
           </h2>
         </div>
 
-        <div class="h-48 rounded-xl bg-slate-50 md:col-span-1">
+        <div class="h-48 rounded-xl bg-zinc-800 md:col-span-1">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Shows Per Year
           </h2>
@@ -406,9 +436,9 @@
           </div>
         </div>
 
-        <div class="h-48 rounded-xl bg-slate-50 md:col-span-2">
+        <div class="h-48 rounded-xl bg-zinc-800 md:col-span-2">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Shows Per Rating
           </h2>
@@ -417,9 +447,9 @@
           </div>
         </div>
 
-        <div class="h-48 rounded-xl bg-slate-50 md:col-span-2">
+        <div class="h-48 rounded-xl bg-zinc-800 md:col-span-2">
           <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-700"
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
             Top Genres
           </h2>
