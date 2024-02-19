@@ -15,7 +15,7 @@
     <nav
       class="flex h-12 flex-row items-center justify-between border-b-[1px] border-b-zinc-800 drop-shadow-xl"
     >
-      <div class="px-4 font-heebo text-lg font-bold text-stone-50">Erik.</div>
+      <div class="px-4 font-heebo text-lg font-bold text-stone-50">Erik*</div>
       <ul
         class="flex flex-row gap-6 px-6 font-heebo text-base font-semibold tracking-wide text-stone-50"
       >
@@ -80,33 +80,38 @@
         <div
           class="flex min-h-96 flex-col gap-1 rounded-xl bg-zinc-800 p-4 md:col-span-2 md:row-span-2 md:min-h-48"
         >
-          <div class="flex flex-col gap-2">
+          <div
+            class="flex flex-col font-archivo text-2xl font-semibold tracking-wider text-stone-400"
+          >
             <div
               id="totalWatchtime"
               class="inline-block font-mono text-8xl font-extrabold text-stone-50"
             ></div>
-            <div
-              class="font-archivo text-xl font-semibold tracking-wider text-stone-400"
-            >
-              Total hours watched
-            </div>
+            Hours watched in total.
           </div>
-          <div class="flex flex-row gap-2">
+          <div
+            class="flex items-center gap-2 font-archivo text-xl font-semibold tracking-wider text-stone-500"
+          >
+            That's
             <div
-              class="self-end font-archivo text-2xl font-semibold tracking-wider text-stone-400"
+              id="totalWatchtimeDays"
+              class="inline-block font-mono text-2xl font-extrabold text-stone-400"
+            ></div>
+            Days or
+            <div
+              id="totalWatchtimeProcent"
+              class="inline-block font-mono text-2xl font-extrabold text-green-600"
+            ></div>
+            of a year
+            <svg
+              class="inline-block h-6 w-6 fill-stone-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
             >
-              That's
-              <div
-                id="totalWatchtimeDays"
-                class="inline-block font-mono text-4xl font-extrabold text-stone-50"
-              ></div>
-              Days, or
-              <div
-                id="totalWatchtimeProcent"
-                class="inline-block font-mono text-3xl font-extrabold text-green-500"
-              ></div>
-              of a year
-            </div>
+              <path
+                d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm176.4-80a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM256 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+              />
+            </svg>
           </div>
         </div>
 
