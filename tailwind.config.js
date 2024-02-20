@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+import { fluidExtractor, fluidCorePlugins } from "fluid-tailwind";
+
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: {
+    files: ["./src/**/*.{html,js}"],
+    extract: fluidExtractor(),
+  },
   theme: {
     extend: {
       fontFamily: {
@@ -24,5 +29,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [fluidCorePlugins],
 };

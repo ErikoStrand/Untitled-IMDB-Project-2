@@ -87,10 +87,10 @@
       </header>
 
       <div
-        class="m-0 mb-4 grid grid-flow-dense grid-cols-1 gap-8 drop-shadow-md md:grid-cols-4"
+        class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-8 drop-shadow-md md:grid-cols-4"
       >
         <div
-          class="flex min-h-96 flex-col gap-1 rounded-xl bg-zinc-800 p-4 md:col-span-2 md:row-span-2 md:min-h-48"
+          class="col-span-2 row-span-2 flex min-h-48 flex-col gap-1 rounded-xl bg-zinc-800 p-4 md:min-h-96"
         >
           <div
             class="flex flex-col font-archivo text-2xl font-semibold tracking-wider text-stone-400"
@@ -156,10 +156,10 @@
             Current Streak
           </h2>
         </div>
-        <div class="min-h-48 rounded-xl bg-zinc-300 p-4 md:row-span-2">
-          <div class="flex flex-col">
+        <div class="row-span-2 min-h-48 rounded-xl bg-zinc-300 p-4">
+          <div class="flex h-full flex-col justify-end">
             <h1
-              class="font-archivo text-4xl font-bold tracking-wide text-zinc-950"
+              class="mb-2 font-archivo text-6xl font-bold tracking-wider text-stone-600"
             >
               Fact
             </h1>
@@ -169,7 +169,7 @@
             </p>
           </div>
         </div>
-        <div class="max-h-48 rounded-xl bg-zinc-800 md:col-span-2">
+        <div class="col-span-2 max-h-48 rounded-xl bg-zinc-800">
           <h2
             class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
@@ -217,7 +217,7 @@
             Longest Title
             <div
               id="longestTitle"
-              class="line-clamp-2 font-mono text-2xl font-bold text-stone-50"
+              class="line-clamp-2 font-mono text-base font-bold text-stone-50 md:text-2xl"
             ></div>
           </h2>
           <h3
@@ -226,7 +226,7 @@
             Shortest Title
             <div
               id="shortestTitle"
-              class="font-mono text-3xl font-bold text-stone-50"
+              class="font-mono text-xl font-bold text-stone-50 md:text-3xl"
             ></div>
           </h3>
         </div>
@@ -238,15 +238,15 @@
           >
             Most Votes
             <div class="flex flex-row items-center gap-1">
-              <i class="fa-solid fa-up-long fa-xl text-green-600"></i>
+              <i class="fa-solid fa-up-long md:fa-xl text-green-600"></i>
               <div class="flex flex-row items-end">
                 <div
                   id="mostVotes"
-                  class="font-mono text-4xl font-extrabold text-stone-50"
+                  class="font-mono text-2xl font-extrabold text-stone-50 md:text-4xl"
                 ></div>
                 <div
                   id="mostVotesTitle"
-                  class="line-clamp-1 pl-1 font-mono text-xl font-bold text-stone-400"
+                  class="line-clamp-1 pl-1 font-mono text-base font-bold text-stone-400 md:text-xl"
                 ></div>
               </div>
             </div>
@@ -256,15 +256,15 @@
           >
             Least Votes
             <div class="flex flex-row items-center gap-1">
-              <i class="fa-solid fa-down-long fa-xl text-red-600"></i>
+              <i class="fa-solid fa-down-long md:fa-xl text-red-600"></i>
               <div class="flex flex-row items-end">
                 <div
                   id="leastVotes"
-                  class="font-mono text-4xl font-extrabold text-stone-50"
+                  class="font-mono text-2xl font-extrabold text-stone-50 md:text-4xl"
                 ></div>
                 <div
                   id="leastVotesTitle"
-                  class="line-clamp-1 pl-1 font-mono text-xl font-bold text-stone-400"
+                  class="line-clamp-1 pl-1 font-mono text-base font-bold text-stone-400 md:text-xl"
                 ></div>
               </div>
             </div>
@@ -280,7 +280,7 @@
         </h2>
       </header>
       <div
-        class="m-0 mb-3 grid grid-flow-dense grid-cols-1 gap-8 drop-shadow-md md:grid-cols-4"
+        class="m-0 mb-3 grid grid-flow-dense grid-cols-2 gap-8 drop-shadow-md md:grid-cols-4"
       >
         <div
           class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4"
@@ -374,7 +374,7 @@
           ></div>
         </div>
 
-        <div class="rounded-xl bg-zinc-800 md:col-span-2">
+        <div class="col-span-2 rounded-xl bg-zinc-800">
           <h2
             class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
           >
@@ -416,7 +416,7 @@
       </header>
 
       <div
-        class="m-0 mb-4 grid grid-flow-dense grid-cols-1 gap-8 drop-shadow-md md:grid-cols-4"
+        class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-8 drop-shadow-md md:grid-cols-4"
       >
         <div class="flex h-48 items-center rounded-xl bg-zinc-800 px-4">
           <h2
@@ -495,6 +495,16 @@
           </div>
         </div>
 
+        <div class="col-span-2 h-48 rounded-xl bg-zinc-800">
+          <h2
+            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
+          >
+            Top Genres
+          </h2>
+          <div class="max-h-48">
+            <canvas id="showTopGenres" class="p-1"></canvas>
+          </div>
+        </div>
         <div class="h-48 rounded-xl bg-zinc-800 md:col-span-2">
           <h2
             class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
@@ -503,17 +513,6 @@
           </h2>
           <div class="max-h-48">
             <canvas id="showsPerRating" class="p-1"></canvas>
-          </div>
-        </div>
-
-        <div class="h-48 rounded-xl bg-zinc-800 md:col-span-2">
-          <h2
-            class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400"
-          >
-            Top Genres
-          </h2>
-          <div class="max-h-48">
-            <canvas id="showTopGenres" class="p-1"></canvas>
           </div>
         </div>
       </div>
