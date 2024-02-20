@@ -4,9 +4,15 @@ import { fluidExtractor, fluidCorePlugins } from "fluid-tailwind";
 module.exports = {
   content: {
     files: ["./src/**/*.{html,js}"],
-    extract: fluidExtractor(),
   },
   theme: {
+    screens: {
+      sm: "640px",
+      md: "836px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1535px",
+    },
     extend: {
       fontFamily: {
         poppin: ['"Poppins"', "sans-serif"],

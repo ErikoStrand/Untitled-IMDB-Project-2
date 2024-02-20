@@ -562,9 +562,9 @@ video {
   }
 }
 
-@media (min-width: 768px){
+@media (min-width: 836px){
   .container{
-    max-width: 768px;
+    max-width: 836px;
   }
 }
 
@@ -580,9 +580,9 @@ video {
   }
 }
 
-@media (min-width: 1536px){
+@media (min-width: 1535px){
   .container{
-    max-width: 1536px;
+    max-width: 1535px;
   }
 }
 
@@ -782,7 +782,7 @@ video {
 }
 
 .max-w-screen-md{
-  max-width: 768px;
+  max-width: 836px;
 }
 
 .grid-flow-dense{
@@ -1044,6 +1044,11 @@ video {
   line-height: 1;
 }
 
+.text-7xl{
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
 .text-8xl{
   font-size: 6rem;
   line-height: 1;
@@ -1062,6 +1067,11 @@ video {
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold{
@@ -1094,6 +1104,10 @@ video {
 
 .tracking-wider{
   letter-spacing: 0.05em;
+}
+
+.tracking-normal{
+  letter-spacing: 0em;
 }
 
 .text-accent{
@@ -1241,7 +1255,7 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-@media (min-width: 768px){
+@media (min-width: 836px){
   .md\:col-span-1{
     grid-column: span 1 / span 1;
   }
@@ -1279,6 +1293,11 @@ video {
   .md\:text-4xl{
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+
+  .md\:text-8xl{
+    font-size: 6rem;
+    line-height: 1;
   }
 
   .md\:text-xl{
