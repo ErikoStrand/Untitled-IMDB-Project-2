@@ -833,10 +833,6 @@ video {
   gap: 2rem;
 }
 
-.self-end{
-  align-self: flex-end;
-}
-
 .self-center{
   align-self: center;
 }
@@ -918,10 +914,6 @@ video {
 
 .fill-stone-400{
   fill: #a8a29e;
-}
-
-.fill-accent{
-  fill: #f6c615;
 }
 
 .p-0{
@@ -1167,6 +1159,11 @@ video {
 
 .text-transparent{
   color: transparent;
+}
+
+.text-stone-300{
+  --tw-text-opacity: 1;
+  color: rgb(214 211 209 / var(--tw-text-opacity));
 }
 
 .underline{
