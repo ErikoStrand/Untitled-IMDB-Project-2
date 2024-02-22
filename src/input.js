@@ -125,17 +125,21 @@ const movies = {
 const generalData = {
   streak: { highestStreak: 0, currentStreak: 0, startDate: "", endDate: "" },
   numVotes: {
-    highest: { title: "", votes: 1000 },
+    highest: { title: "", votes: 100 },
     lowest: { title: "", votes: 100000 },
   },
   titleData: {
-    longest: { title: "r", char: 0 },
-    shortest: { title: "e123ddffawd", char: 0 },
+    longest: { title: "shrt", char: 0 },
+    shortest: { title: "placeholder", char: 0 },
   },
   mediaPerReleaseYear: {},
   totalMedia: 0,
   totalRating: 0,
   totalAverageRating: 0,
+  averageMediaPerWeek: 0,
+  averageMediaPerMonth: 0,
+  monthsSinceStart: 0,
+  weeksSinceStart: 0,
 };
 
 const shows = {
@@ -245,6 +249,14 @@ function handleData() {
   });
   shows["genres"] = sortObjectByValues(shows["genres"]);
   getAverageRatings(shows);
+  generalData["monthsSinceStart"] = getMonthsSinceStart(
+    Object.keys(movies["perMonth"])[0],
+    Object.keys(movies["perMonth"])[Object.keys(movies["perMonth"]).length - 1],
+  );
+  generalData["weeksSinceStart"] = parseInt(
+    generalData["monthsSinceStart"] * 4.34812141,
+  );
+  //check if done
   allDataDone[0] = true;
   checkAllDataDone();
 }
@@ -255,6 +267,17 @@ function checkNaN(thing) {
     return thing;
   }
 }
+//converts the dates to a Date
+function getMonthsSinceStart(start, end) {
+  start = new Date(start);
+  end = new Date(end);
+
+  let diffMonths = (end.getFullYear() - start.getFullYear()) * 12;
+  diffMonths -= start.getMonth();
+  diffMonths += end.getMonth() + 1;
+  return diffMonths;
+}
+
 function getTitleData(title) {
   if (title.length > generalData["titleData"]["longest"]["title"].length) {
     generalData["titleData"]["longest"]["title"] = title;
