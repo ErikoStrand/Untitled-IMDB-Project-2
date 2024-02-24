@@ -1,11 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-import { fluidExtractor, fluidCorePlugins } from "fluid-tailwind";
+import {
+  fluidExtractor,
+  fluidCorePlugins,
+  defaultThemeScreensInRems,
+  defaultThemeFontSizeInRems,
+} from "fluid-tailwind";
 
 module.exports = {
   content: {
     files: ["./src/**/*.{html,js}"],
+    extract: fluidExtractor(),
   },
   theme: {
+    fontSize: defaultThemeFontSizeInRems,
     screens: {
       sm: "640px",
       md: "836px",
@@ -13,6 +20,7 @@ module.exports = {
       xl: "1280px",
       "2xl": "1535px",
     },
+    defaultThemeFontSizeInRems,
     extend: {
       fontFamily: {
         poppin: ['"Poppins"', "sans-serif"],
