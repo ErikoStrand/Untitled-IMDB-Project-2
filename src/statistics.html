@@ -139,30 +139,28 @@
         <div
           class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
         >
-          <!-- 1 -->
           <h2
             class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
-            <div class="flex flex-row items-center gap-1">
-              <i class="fa-solid fa-trophy fa-2xl text-accent"></i>
-              <div
-                id="highestStreak"
-                class="font-mono text-5xl font-extrabold text-stone-50"
-              ></div>
-            </div>
-            Highest Streak
+            <div
+              id="totalMedia"
+              class="font-mono text-5xl font-extrabold text-stone-50"
+            ></div>
+            Media Watched
           </h2>
           <h2
             class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
-            <div class="ml-1 flex flex-row items-center gap-2">
-              <i class="fa-solid fa-fire fa-2xl self-center text-red-600"></i>
+            <div>
               <div
-                id="currentStreak"
-                class="font-mono text-5xl font-extrabold text-stone-50"
+                id="totalAverageRating"
+                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
               ></div>
+              <div class="inline-block font-mono text-xl text-stone-50">
+                /10
+              </div>
             </div>
-            Current Streak
+            Average Rating
           </h2>
         </div>
         <div
@@ -201,32 +199,32 @@
             <canvas id="mediaPerReleaseYear" class="p-1"></canvas>
           </div>
         </div>
-
         <div
           class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
         >
           <h2
             class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
-            <div
-              id="totalMedia"
-              class="font-mono text-5xl font-extrabold text-stone-50"
-            ></div>
-            Media Watched
+            <div class="flex flex-row items-center gap-1">
+              <i class="fa-solid fa-trophy fa-2xl text-accent"></i>
+              <div
+                id="highestStreak"
+                class="font-mono text-5xl font-extrabold text-stone-50"
+              ></div>
+            </div>
+            Highest Streak
           </h2>
           <h2
             class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
           >
-            <div>
+            <div class="ml-1 flex flex-row items-center gap-2">
+              <i class="fa-solid fa-fire fa-2xl self-center text-red-600"></i>
               <div
-                id="totalAverageRating"
-                class="inline-block font-mono text-5xl font-extrabold text-stone-50"
+                id="currentStreak"
+                class="font-mono text-5xl font-extrabold text-stone-50"
               ></div>
-              <div class="inline-block font-mono text-xl text-stone-50">
-                /10
-              </div>
             </div>
-            Average Rating
+            Current Streak
           </h2>
         </div>
 
