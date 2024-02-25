@@ -2,7 +2,6 @@
 import {
   fluidExtractor,
   fluidCorePlugins,
-  defaultThemeScreensInRems,
   defaultThemeFontSizeInRems,
 } from "fluid-tailwind";
 
@@ -20,7 +19,6 @@ module.exports = {
       xl: "1280px",
       "2xl": "1535px",
     },
-    defaultThemeFontSizeInRems,
     extend: {
       fontFamily: {
         poppin: ['"Poppins"', "sans-serif"],
