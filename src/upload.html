@@ -11,6 +11,48 @@
     ></script>
   </head>
   <body class="bg-zinc-900">
+    <nav
+      class="flex h-12 flex-row items-center justify-between border-b-[1px] border-b-zinc-800 drop-shadow-xl"
+    >
+      <div>
+        <a
+          class="block px-4 font-heebo text-lg font-bold leading-10 text-stone-50"
+          href="https://github.com/ErikoStrand"
+          title="Github"
+          target="_blank"
+          rel="noopener"
+          >Erik*</a
+        >
+      </div>
+      <ul
+        class="flex flex-row gap-6 px-6 font-heebo text-base font-semibold tracking-wide text-stone-50"
+      >
+        <li>
+          <a
+            href="index.html"
+            class="block leading-10 duration-200 ease-in-out hover:text-stone-400"
+            title="Home"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="statistics.html"
+            class="block leading-10 duration-200 ease-in-out hover:text-stone-400"
+            title="Statistics"
+            >Statistics</a
+          >
+        </li>
+        <li>
+          <a
+            href=""
+            class="block leading-10 duration-200 ease-in-out hover:text-stone-400"
+            title="Profile"
+            >Profile</a
+          >
+        </li>
+      </ul>
+    </nav>
     <header
       class="mx-auto mt-8 max-w-screen-md text-center text-lg font-semibold text-stone-200"
     >
@@ -116,10 +158,12 @@
                 class="mt-2 flex flex-col gap-2 font-archivo tracking-wide text-stone-200"
               >
                 <div>
-                  If you are reading this i am happy because you made it this
+                  If you are reading this I am happy because you made it this
                   far, and I believe you can do great things in life so let's
                   continue. To download your data visit
                   <a
+                    target="_blank"
+                    rel="noopener"
                     href="https://www.imdb.com/list/ratings?user"
                     class="font-semibold text-yellow-500 underline underline-offset-1"
                     >your ratings</a
@@ -148,7 +192,7 @@
         </article>
       </section>
 
-      <div class="flex h-12 flex-col gap-4 text-center md:flex-row">
+      <div class="mb-16 flex h-12 flex-col gap-4 text-center md:flex-row">
         <button
           class="rounded-xl bg-accent p-2 font-archivo text-2xl font-bold text-zinc-900 outline outline-2 outline-yellow-500 drop-shadow-lg md:w-2/3"
           onclick="document.getElementById('file').click()"
