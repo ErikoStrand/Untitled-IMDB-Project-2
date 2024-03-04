@@ -256,6 +256,11 @@ function handleData() {
   generalData["weeksSinceStart"] = parseInt(
     generalData["monthsSinceStart"] * 4.34812141,
   );
+  generalData["averageMediaPerWeek"] =
+    generalData["totalMedia"] / generalData["weeksSinceStart"];
+  generalData["averageMediaPerMonth"] =
+    generalData["totalMedia"] / generalData["monthsSinceStart"];
+
   //check if done
   allDataDone[0] = true;
   checkAllDataDone();
