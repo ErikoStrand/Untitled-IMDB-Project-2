@@ -169,7 +169,6 @@ function checkAllDataDone() {
 }
 
 function saveData(name, data) {
-  Alpine.store("working", { check: "hello" });
   sessionStorage.setItem(name, JSON.stringify(data));
 }
 
