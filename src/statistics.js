@@ -83,7 +83,19 @@ function displayData() {
   let totalWatchtime = document.getElementById("totalWatchtime");
   let totalWatchtimeDays = document.getElementById("totalWatchtimeDays");
   let totalWatchtimeProcent = document.getElementById("totalWatchtimeProcent");
+  let mediaPerWeek = document.getElementById("mediaPerWeek");
+  let mediaPerMonth = document.getElementById("mediaPerMonth");
+  let accountAgeYears = document.getElementById("accountAgeYears");
+  let accountAgeMonths = document.getElementById("accountAgeMonths");
 
+  let years = (generalData["weeksSinceStart"] / 52.177457)
+    .toString()
+    .split(".")[0];
+  let months = generalData["monthsSinceStart"] - years * 12;
+  accountAgeYears.textContent = years;
+  accountAgeMonths.textContent = months;
+  mediaPerMonth.textContent = generalData["averageMediaPerMonth"].toFixed(0);
+  mediaPerWeek.textContent = generalData["averageMediaPerWeek"].toFixed(1);
   totalWatchtimeDays.textContent = (totalWatchtimeNumber / 24).toFixed(0);
   totalWatchtime.textContent = totalWatchtimeNumber;
   totalWatchtimeProcent.textContent =
