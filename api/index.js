@@ -7,8 +7,9 @@ const app = express();
 // Serve static files from the 'src' directory
 app.use(express.static(path.join(__dirname, "../src")));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.listen(3000, () => console.log("Server ready on port 3000."));
+app.listen(3001, () => console.log("Server ready on port 3000."));
 
 module.exports = app;
 
