@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMDb Statistics - Your one stop shop to get all* the data</title>
     <link href="./output.css" rel="stylesheet" />
+    <link href="../animated-bg/block.css" rel="stylesheet" />
+    <script defer src="../animated-bg/block.js"></script>
 
     <script
       defer
@@ -16,6 +18,8 @@
   <body
     class="m-0 h-dvh w-full bg-zinc-900 bg-[url('images/layered-waves-haikei.svg')] bg-cover bg-fixed bg-bottom bg-no-repeat p-0"
   >
+  <div id="flying-notes-container">
+  </div>
     <nav
       class="mb-10 flex h-12 flex-row items-center justify-between border-b-[1px] border-b-zinc-800 drop-shadow-xl"
     >
@@ -76,7 +80,7 @@
         <div class="inline-grid">
           <span
             class="z-20 col-start-1 row-start-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent"
-            >IMDb</span
+            >IMDb.</span
           >
           <span
             aria-hidden="true"

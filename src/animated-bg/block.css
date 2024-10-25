@@ -1,0 +1,27 @@
+#flying-notes-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -10;
+}
+
+.flying-note {
+  position: absolute;
+  font-size: 24px;
+  animation: flyDown 5s linear infinite;
+}
+
+@keyframes flyDown {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
