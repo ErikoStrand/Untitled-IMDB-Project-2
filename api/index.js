@@ -2,9 +2,10 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
-import { inject } from "@vercel/analytics";
 const app = express();
 
+//does vercel analytics.
+import { inject } from "@vercel/analytics";
 inject();
 // Serve static files from the 'src' directory
 app.use(express.static(path.join(__dirname, "../src")));
