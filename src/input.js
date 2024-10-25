@@ -47,6 +47,7 @@ const data = [];
 
     // Split CSV content into rows based on newline characters
     var rows = text.split(NEWLINE);
+    console.log(rows);
 
     // Extract headers (column names) from the first row
 
@@ -67,6 +68,7 @@ const data = [];
       }
     });
   }
+
   function parseCSVRow(row) {
     var result = [];
     var currentField = "";
@@ -86,6 +88,8 @@ const data = [];
     }
 
     result.push(currentField);
+    result.splice(4, 1);
+    console.log(result);
     return result;
   }
 

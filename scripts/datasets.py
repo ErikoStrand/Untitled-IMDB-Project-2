@@ -4,8 +4,6 @@ import csv
 import gzip
 import shutil
 import requests
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 from collections import defaultdict
 
 # Function to download and extract the file
@@ -23,21 +21,6 @@ def download_and_extract(url, destination_folder):
     # Delete the compressed file
     os.remove(file_path)
 
-# Replace placeholders with your actual password and database name
-password = "TtL3EaYzGSgaTT6q"
-
-# Construct the connection URI
-uri = f"mongodb+srv://UntitledProject:{password}@untitledproject.lj87vfy.mongodb.net/?retryWrites=true&w=majority"
-
-# Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
-
-# Send a ping to confirm a successful connection
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print("Error:", e)
 
 try:
     # Root directory
@@ -72,31 +55,9 @@ try:
     with open(json_file_path, 'w') as json_file:
         json_file.write(json_data)
 
-    # MongoDB connection parameters
-    db_name = "Untitled_Project"
-    collection_name = "episode_count"
 
-    # Get the database and collection
-    db = client[db_name]
-    collection = db[collection_name]
-
-    # Check if a document already exists in the collection
-    existing_document = collection.find_one()
-
-    if existing_document:
-        # Update the existing document with the new data
-        collection.replace_one({}, {"data": json_data})
-        print("Existing document updated in MongoDB.")
-    else:
-        # Insert the new document
-        collection.insert_one({"data": json_data})
-        print("New document inserted into MongoDB.")
 
 finally:
-    # Close the MongoDB connection
-    client.close()
-    print("MongoDB connection closed.")
-
     # Delete the extracted files
     extracted_files = os.listdir(data_folder)
     for file_name in extracted_files:
