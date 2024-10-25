@@ -92,14 +92,15 @@ const data = [];
     console.log(result);
     return result;
   }
-
+  // gets ratings.csv from the server, using fetch and some js on the backend.
   document
     .getElementById("sampleButton")
     .addEventListener("click", function () {
-      console.log("hello");
-      fetch("sampleData.php")
+      console.log("Trying to get sampleData");
+      fetch("/sampleData")
         .then((response) => response.blob())
         .then((blob) => {
+          console.log("Got Sample Data Trying to Parse :)");
           parseCSV(blob);
         });
     });
@@ -192,7 +193,7 @@ function handleData() {
     getMediaPerReleaseYear(col[11]);
     allDates[col[2]] = 1;
     //other stuff
-    if (col[5] == "movie" || col[5] == "tvMovie") {
+    if (col[5] == "Movie" || col[5] == "TV Movie") {
       movies["totalMedia"] += 1;
       movies["totalWatchtimeMinutes"] += parseInt(col[7]);
       movies["totalWatchtimeHours"] = parseInt(
@@ -208,7 +209,7 @@ function handleData() {
       getRatingPerMonth(col[2], parseInt(col[1]), movies);
     }
 
-    if (col[5] == "tvSeries" || col[5] == "tvMiniSeries") {
+    if (col[5] == "TV Series" || col[5] == "TV Mini Series") {
       allShowID[col[0]] = checkNaN(parseInt(col[7]));
       shows["totalMedia"] += 1;
       shows["totalRating"] += parseInt(col[1]);
@@ -243,7 +244,7 @@ function handleData() {
   );
 
   //shows
-  sendData(allShowID, function (response) {
+  sendData(allShowID, function (response) { //gets watchtime for episodes iirc.
     time = response.split(" ");
     shows["totalWatchtimeMinutes"] = parseInt(time[0]);
     shows["totalWatchtimeHours"] = parseInt(time[1]);
@@ -251,6 +252,7 @@ function handleData() {
     allDataDone[1] = true;
     checkAllDataDone();
   });
+
   shows["genres"] = sortObjectByValues(shows["genres"]);
   getAverageRatings(shows);
   generalData["monthsSinceStart"] = getMonthsSinceStart(
@@ -441,16 +443,14 @@ function getGenre(allGenres, type) {
 }
 
 function sendData(episodes, callback) {
-  var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-  xhr.open("POST", "episodes.php", true); // Specify the request type and URL
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // Set the content type header
-
-  // Set up a callback function to handle the response
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-      callback(xhr.responseText); // Call the callback function with the response
-    }
-  };
-
-  xhr.send("data=" + JSON.stringify(episodes)); // Send the form data to the server
+  fetch('/episodes', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({ data: JSON.stringify(episodes) })
+  })
+  .then(response => response.text())
+  .then(responseText => callback(responseText))
+  .catch(error => console.error('Error:', error));
 }
