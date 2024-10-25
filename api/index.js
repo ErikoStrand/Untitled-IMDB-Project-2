@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, "../src")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//loads sample data, and sets the data to get parsed in input.js
 app.get("/sampleData", (req, res) => {
   const filePath = path.join(__dirname, "../data/ratings.csv");
 
@@ -57,6 +58,7 @@ function cleanString(string) {
   return string.replace(/[^a-zA-Z0-9_-]/g, "");
 }
 
-app.listen(3001, () => console.log("Server ready on port 3000."));
+//gotta be after to get it to work, because order of operations.
+app.listen(3000, () => console.log("Server ready on port 3000."));
 
 module.exports = app;
