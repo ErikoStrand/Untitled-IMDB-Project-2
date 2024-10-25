@@ -1,9 +1,12 @@
+import { inject } from "@vercel/analytics";
+
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const app = express();
 
+inject();
 // Serve static files from the 'src' directory
 app.use(express.static(path.join(__dirname, "../src")));
 app.use(bodyParser.urlencoded({ extended: true }));
