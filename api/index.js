@@ -9,10 +9,6 @@ app.use(express.static(path.join(__dirname, "../src")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.listen(3001, () => console.log("Server ready on port 3000."));
-
-module.exports = app;
-
 app.get("/sampleData", (req, res) => {
   const filePath = path.join(__dirname, "../data/ratings.csv");
 
@@ -60,3 +56,7 @@ app.post("/episodes", (req, res) => {
 function cleanString(string) {
   return string.replace(/[^a-zA-Z0-9_-]/g, "");
 }
+
+app.listen(3001, () => console.log("Server ready on port 3000."));
+
+module.exports = app;
