@@ -65,7 +65,6 @@ if (browser) {
 		showAverageRatingIMDB.textContent = shows['averageRatingIMDB'].toFixed(1);
 
 		//general
-		let totalWatchtimeNumber = movies['totalWatchtimeHours'] + shows['totalWatchtimeHours'];
 		let highestStreak = document.getElementById('highestStreak');
 		let currentStreak = document.getElementById('currentStreak');
 		let totalMedia = document.getElementById('totalMedia');
@@ -77,8 +76,6 @@ if (browser) {
 		let leastVotes = document.getElementById('leastVotes');
 		let leastVotesTitle = document.getElementById('leastVotesTitle');
 		let totalWatchtime = document.getElementById('totalWatchtime');
-		let totalWatchtimeDays = document.getElementById('totalWatchtimeDays');
-		let totalWatchtimeProcent = document.getElementById('totalWatchtimeProcent');
 		let mediaPerWeek = document.getElementById('mediaPerWeek');
 		let mediaPerMonth = document.getElementById('mediaPerMonth');
 		let accountAgeYears = document.getElementById('accountAgeYears');
@@ -90,10 +87,6 @@ if (browser) {
 		accountAgeMonths.textContent = months;
 		mediaPerMonth.textContent = generalData['averageMediaPerMonth'].toFixed(0);
 		mediaPerWeek.textContent = generalData['averageMediaPerWeek'].toFixed(1);
-		totalWatchtimeDays.textContent = (totalWatchtimeNumber / 24).toFixed(0);
-		totalWatchtime.textContent = totalWatchtimeNumber;
-		totalWatchtimeProcent.textContent =
-			((totalWatchtimeNumber / 8765.81277) * 100).toFixed(1) + '%';
 		highestStreak.textContent = generalData['streak']['highestStreak'];
 		currentStreak.textContent = generalData['streak']['currentStreak'];
 		totalMedia.textContent = generalData['totalMedia'];
