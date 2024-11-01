@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { _handleFileUpload } from './+page';
+</script>
+
 <header class="mx-auto mt-8 max-w-screen-md text-center text-lg font-semibold text-stone-200">
 	<p>
 		To view your IMDb statistics, this website will need a copy of your ratings. If you are worried
@@ -25,7 +29,7 @@
 			</svg>
 		</nav>
 		<article
-			class="font-heebo flex flex-col rounded-lg bg-gradient-to-b from-neutral-800 to-zinc-800 to-90%"
+			class="flex flex-col rounded-lg bg-gradient-to-b from-neutral-800 to-zinc-800 to-90% font-heebo"
 		>
 			<div class="px-4 pt-4 text-stone-300">1234 &#40;of 1234&#41; titles</div>
 			<div
@@ -55,19 +59,19 @@
 						1.
 						<a
 							href="#top"
-							class="font-archivo pl-1 text-lg font-semibold tracking-wide text-blue-500"
+							class="pl-1 font-archivo text-lg font-semibold tracking-wide text-blue-500"
 							>Look at the movie description</a
-						><span class="font-archivo ml-2 text-neutral-400">&#40;1932&#41;</span>
+						><span class="ml-2 font-archivo text-neutral-400">&#40;1932&#41;</span>
 					</div>
 					<div class="mb-1 tracking-wider text-neutral-400 opacity-50">
 						15 | 1 hr 53 min | Drama, Fantasy, Mystery
 					</div>
-					<div class="font-archivo flex flex-row text-stone-50">
+					<div class="flex flex-row font-archivo text-stone-50">
 						<i class="fa-solid fa-star mr-1 self-center text-blue-600"></i>
 						<span class="relative -bottom-[2px] left-2">8</span>
 					</div>
 					<div class="mt-1 tracking-wider text-neutral-400 opacity-50">Rated on 16 Feb 2005</div>
-					<div class="font-archivo mt-2 flex flex-col gap-2 tracking-wide text-stone-200">
+					<div class="mt-2 flex flex-col gap-2 font-archivo tracking-wide text-stone-200">
 						<div>
 							If you are reading this I am happy because you made it this far, and I believe you can
 							do great things in life so let's continue. To download your data visit
@@ -100,7 +104,7 @@
 
 	<div class="mb-16 flex h-12 flex-col gap-4 text-center md:flex-row">
 		<button
-			class="bg-accent font-archivo rounded-xl p-2 text-2xl font-bold text-zinc-900 outline outline-2 outline-yellow-500 drop-shadow-lg md:w-2/3"
+			class="rounded-xl bg-accent p-2 font-archivo text-2xl font-bold text-zinc-900 outline outline-2 outline-yellow-500 drop-shadow-lg md:w-2/3"
 			onclick={() => {
 				const fileInput = document.getElementById('file');
 				if (fileInput) {
@@ -110,10 +114,10 @@
 		>
 			Upload Your Ratings
 		</button>
-		<input type="file" id="file" style="display: none" />
+		<input type="file" id="file" style="display:none" onchange={_handleFileUpload} />
 		<button
 			id="sampleButton"
-			class="font-archivo flex-1 rounded-xl border-2 border-stone-400 bg-zinc-800 p-2 text-xl font-semibold text-stone-200 drop-shadow-lg"
+			class="flex-1 rounded-xl border-2 border-stone-400 bg-zinc-800 p-2 font-archivo text-xl font-semibold text-stone-200 drop-shadow-lg"
 		>
 			Load Sample Data
 		</button>

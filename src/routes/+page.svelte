@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Modal from '$lib/Modal.svelte';
+	import { _handleFileUpload } from './+page';
 	let showModal = $state(false);
 </script>
 
@@ -83,7 +84,7 @@
 					>
 						Upload Ratings
 					</button>
-					<input type="file" id="file" style="display: none" />
+					<input type="file" id="file" style="display:none" onchange={_handleFileUpload} />
 				</div>
 			</div>
 		</Modal>
