@@ -1,4 +1,6 @@
 <script>
+	import { _nFormatter } from './+page.js';
+
 	let movies = $state({
 		totalMedia: 0,
 		totalWatchtimeMinutes: 0,
@@ -49,7 +51,6 @@
 		ratingsPerScore: {},
 		genres: {}
 	});
-
 	let { data } = $props();
 	generalData = data.generalData;
 	movies = data.movies;
@@ -113,18 +114,15 @@
 				class="flex items-center gap-2 font-heebo text-lg font-semibold tracking-normal text-stone-500"
 			>
 				That's
-				<div class="inline-block font-mono text-xl font-extrabold text-stone-400">
+				<span class="font-mono text-xl font-extrabold text-stone-400">
 					{((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 24).toFixed(0)}
-				</div>
+				</span>
 				Days or
-				<div
-					id="totalWatchtimeProcent"
-					class="inline-block font-mono text-xl font-extrabold text-lime-600"
-				>
+				<span id="totalWatchtimeProcent" class="font-mono text-xl font-extrabold text-lime-600">
 					{(((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 8765.81277) * 100).toFixed(
 						1
 					)}%
-				</div>
+				</span>
 				of a year
 				<svg
 					class="inline-block h-6 w-6 fill-stone-400"
@@ -142,7 +140,9 @@
 			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div id="totalMedia" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+				<div id="totalMedia" class="font-mono text-5xl font-extrabold text-stone-50">
+					{generalData.totalMedia}
+				</div>
 				Media Watched
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
@@ -150,7 +150,9 @@
 					<div
 						id="totalAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
-					></div>
+					>
+						{generalData.totalAverageRating.toFixed(1)}
+					</div>
 					<div class="inline-block font-mono text-xl text-stone-50">/10</div>
 				</div>
 				Average Rating
@@ -187,14 +189,18 @@
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
 				<div class="flex flex-row items-center gap-1">
 					<i class="fa-solid fa-trophy fa-2xl text-accent"></i>
-					<div id="highestStreak" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+					<div id="highestStreak" class="font-mono text-5xl font-extrabold text-stone-50">
+						{generalData.streak.highestStreak}
+					</div>
 				</div>
 				Highest Streak
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
 				<div class="ml-1 flex flex-row items-center gap-2">
 					<i class="fa-solid fa-fire fa-2xl self-center text-red-600"></i>
-					<div id="currentStreak" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+					<div id="currentStreak" class="font-mono text-5xl font-extrabold text-stone-50">
+						{generalData.streak.currentStreak}
+					</div>
 				</div>
 				Current Streak
 			</h2>
@@ -208,11 +214,15 @@
 				<div
 					id="longestTitle"
 					class="line-clamp-2 font-mono text-base font-bold text-stone-50 md:text-2xl"
-				></div>
+				>
+					{generalData.titleData.longest.title}
+				</div>
 			</h2>
 			<h3 class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400">
 				Shortest Title
-				<div id="shortestTitle" class="font-mono text-xl font-bold text-stone-50 md:text-3xl"></div>
+				<div id="shortestTitle" class="font-mono text-xl font-bold text-stone-50 md:text-3xl">
+					{generalData.titleData.shortest.title}
+				</div>
 			</h3>
 		</div>
 		<div
@@ -223,14 +233,15 @@
 				<div class="flex flex-row items-center gap-1">
 					<i class="fa-solid fa-up-long md:fa-xl text-green-600"></i>
 					<div class="flex flex-row items-end">
-						<div
-							id="mostVotes"
-							class="font-mono text-2xl font-extrabold text-stone-50 md:text-4xl"
-						></div>
+						<div id="mostVotes" class="font-mono text-2xl font-extrabold text-stone-50 md:text-4xl">
+							{_nFormatter(generalData.numVotes.highest.votes)}
+						</div>
 						<div
 							id="mostVotesTitle"
 							class="line-clamp-1 pl-1 font-mono text-base font-bold text-stone-400 md:text-xl"
-						></div>
+						>
+							{generalData.numVotes.highest.title}
+						</div>
 					</div>
 				</div>
 			</h2>
@@ -242,11 +253,15 @@
 						<div
 							id="leastVotes"
 							class="font-mono text-2xl font-extrabold text-stone-50 md:text-4xl"
-						></div>
+						>
+							{generalData.numVotes.lowest.votes}
+						</div>
 						<div
 							id="leastVotesTitle"
 							class="line-clamp-1 pl-1 font-mono text-base font-bold text-stone-400 md:text-xl"
-						></div>
+						>
+							{generalData.numVotes.lowest.title}
+						</div>
 					</div>
 				</div>
 			</h3>
@@ -255,11 +270,15 @@
 			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+				<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
+					{generalData.averageMediaPerWeek.toFixed(1)}
+				</div>
 				~ media/ww
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div id="mediaPerMonth" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+				<div id="mediaPerMonth" class="font-mono text-5xl font-extrabold text-stone-50">
+					{generalData.averageMediaPerMonth.toFixed(1)}
+				</div>
 				~ media/mm
 			</h2>
 		</div>
@@ -272,15 +291,15 @@
 					class="flex flex-col flex-wrap gap-1 font-mono text-2xl font-extrabold text-stone-50"
 				>
 					<div class="flex gap-1">
-						<span id="accountAgeYears"></span><span
-							class="self-end font-archivo text-xl text-stone-50"
-							>years
-						</span>
+						<span id="accountAgeYears"
+							>{(generalData.weeksSinceStart / 52.177457).toString().split('.')[0]}</span
+						><span class="self-end font-archivo text-xl text-stone-50"> years </span>
 					</div>
 					<div class="flex gap-1">
-						<span id="accountAgeMonths"></span><span
-							class="self-end font-archivo text-xl text-stone-50">months</span
-						>
+						<span id="accountAgeMonths"
+							>{generalData.monthsSinceStart -
+								(generalData.weeksSinceStart / 52.177457).toString().split('.')[0] * 12}</span
+						><span class="self-end font-archivo text-xl text-stone-50"> months</span>
 					</div>
 				</div>
 				Account Age
@@ -300,7 +319,9 @@
 			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div id="movies" class="font-mono text-6xl font-extrabold text-stone-50"></div>
+				<div id="movies" class="font-mono text-6xl font-extrabold text-stone-50">
+					{movies.totalMedia}
+				</div>
 				Movies Watched
 			</h2>
 		</div>
@@ -309,14 +330,15 @@
 			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+				<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
+					{movies.totalWatchtimeHours}
+				</div>
 				Hours Watched
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div
-					id="movieWatchtimeMinutes"
-					class="font-mono text-5xl font-extrabold text-stone-50"
-				></div>
+				<div id="movieWatchtimeMinutes" class="font-mono text-5xl font-extrabold text-stone-50">
+					{_nFormatter(movies.totalWatchtimeMinutes, 0)}
+				</div>
 				Minutes Watched
 			</h2>
 		</div>
@@ -329,7 +351,9 @@
 					<div
 						id="movieAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
-					></div>
+					>
+						{movies.averageRating.toFixed(1)}
+					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
 				Your Avg Rating
@@ -339,7 +363,9 @@
 					<div
 						id="movieAverageRatingIMDB"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
-					></div>
+					>
+						{movies.averageRatingIMDB.toFixed(1)}
+					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
 				IMDb's Avg Rating
@@ -351,7 +377,9 @@
 			<h2
 				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-base font-semibold tracking-wider text-stone-400"
 			>
-				<div id="directors" class="font-mono text-6xl font-extrabold text-stone-50"></div>
+				<div id="directors" class="font-mono text-6xl font-extrabold text-stone-50">
+					{movies.totalDirectors}
+				</div>
 				Directors Watched
 			</h2>
 			<span class="h-[1px] border-b-2 border-zinc-400"></span>
@@ -361,8 +389,12 @@
 				Top Directors
 				<div
 					id="topDirectors"
-					class="mt-1 flex flex-col gap-1 px-2 font-archivo text-base font-normal text-stone-50 *:line-clamp-1"
-				></div>
+					class="mt-1 flex flex-col gap-1 font-archivo text-base font-normal text-stone-50 *:line-clamp-1"
+				>
+					{#each Object.entries(movies.directors).slice(0, 5) as [director, count], i}
+						<p><span class="mr-1">{i + 1}.</span>{director}</p>
+					{/each}
+				</div>
 			</h2>
 		</div>
 
@@ -404,7 +436,9 @@
 	>
 		<div class="flex h-48 items-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800">
 			<h2 class="px-3 font-archivo text-lg font-semibold tracking-wider text-stone-400">
-				<div id="shows" class="font-mono text-6xl font-extrabold text-stone-50"></div>
+				<div id="shows" class="font-mono text-6xl font-extrabold text-stone-50">
+					{shows.totalMedia}
+				</div>
 				Shows Watched
 			</h2>
 		</div>
@@ -412,14 +446,15 @@
 			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div id="showWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50"></div>
+				<div id="showWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
+					{shows.totalWatchtimeHours}
+				</div>
 				Hours Watched
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
-				<div
-					id="showWatchtimeMinutes"
-					class="font-mono text-5xl font-extrabold text-stone-50"
-				></div>
+				<div id="showWatchtimeMinutes" class="font-mono text-5xl font-extrabold text-stone-50">
+					{_nFormatter(shows.totalWatchtimeMinutes)}
+				</div>
 				Minutes Watched
 			</h2>
 		</div>
@@ -431,7 +466,9 @@
 					<div
 						id="showAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
-					></div>
+					>
+						{shows.averageRating.toFixed(2)}
+					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
 				Your Avg Rating
@@ -441,7 +478,9 @@
 					<div
 						id="showAverageRatingIMDB"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
-					></div>
+					>
+						{shows.averageRatingIMDB.toFixed(2)}
+					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
 				IMDb's Avg Rating

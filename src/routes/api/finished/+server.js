@@ -1,6 +1,6 @@
 let storedData = {
 	generalData: {},
-	moviers: {},
+	movies: {},
 	shows: {}
 };
 import { json } from '@sveltejs/kit';
@@ -24,5 +24,6 @@ export async function POST({ request }) {
 
 export async function GET() {
 	// Return the stored data
+
 	return json(storedData);
 }
