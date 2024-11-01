@@ -25,7 +25,7 @@ def download_and_extract(url, destination_folder):
 try:
     # Root directory
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    data_folder = os.path.join(root_dir, "../data")
+    data_folder = os.path.join(root_dir, "../static/data")
 
     # Download and extract the file
     download_and_extract("https://datasets.imdbws.com/title.episode.tsv.gz", data_folder)
