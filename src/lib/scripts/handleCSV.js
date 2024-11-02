@@ -1,5 +1,17 @@
 import { browser } from '$app/environment';
 
+export async function _handleSampleData() {
+	fetch('/api/sample')
+		.then((response) => response.blob())
+		.then((blob) => {
+			console.log('Got Sample Data Trying to Parse :)');
+			handleCSV(blob);
+		})
+		.catch((error) => {
+			console.error('Error fetching sample data:', error);
+		});
+}
+
 export default function handleCSV(file) {
 	if (browser) {
 		console.log('File uploaded, Loading handleCSV.');
@@ -85,20 +97,6 @@ export default function handleCSV(file) {
 				return result;
 			}
 			// gets ratings.csv from the server, using fetch and some js on the backend.
-			if (document.getElementById('sampleButton')) {
-				document.getElementById('sampleButton').addEventListener('click', function () {
-					console.log('Trying to get sampleData');
-					fetch('/api/sample')
-						.then((response) => response.blob())
-						.then((blob) => {
-							console.log('Got Sample Data Trying to Parse :)');
-							parseCSV(blob);
-						})
-						.catch((error) => {
-							console.error('Error fetching sample data:', error);
-						});
-				});
-			}
 		})();
 
 		//prob not elegant way but should work? add new false for new data point,

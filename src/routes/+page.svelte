@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Modal from '$lib/Modal.svelte';
 	import { _handleFileUpload } from './+page';
+	import { _handleSampleData } from '$lib/scripts/handleCSV.js';
+
 	let showModal = $state(false);
 </script>
 
@@ -100,6 +102,7 @@
 				/>
 			</svg>
 			<button
+				onclick={_handleSampleData}
 				class="text-left font-archivo text-xl font-bold leading-6 tracking-wide text-stone-200"
 				id="sampleButton"
 			>
