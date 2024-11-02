@@ -2,18 +2,25 @@
 	import { _nFormatter } from './+page.js';
 
 	let movies = $state({
-		totalMedia: 0,
-		totalWatchtimeMinutes: 0,
-		totalWatchtimeHours: 0,
-		totalDirectors: 0,
-		totalRating: 0,
-		averageRating: 0,
-		totalRatingIMDB: 0,
-		averageRatingIMDB: 0,
+		totalMedia: 10,
+		totalWatchtimeMinutes: 1,
+		totalWatchtimeHours: 10,
+		totalDirectors: 10,
+		totalRating: 10,
+		averageRating: 10,
+		totalRatingIMDB: 10,
+		averageRatingIMDB: 10,
 		perYear: {}, // year: yyyy, count: int
 		perMonth: {}, // date: yyyy-mm, count: int
 		genres: {}, //genre: int
-		directors: {}, // director: count
+		directors: {
+			'Why are you here': 5,
+			'go upload your ratings': 4,
+			'Nothing Magical Wont happen': 3,
+			'I swear': 2,
+			'Really I promise you': 1,
+			"I guess that's it then": 0
+		}, // director: count
 		averageRatingPerMonth: {},
 		ratingPerMonth: {},
 		ratingsPerScore: {} //10: int, 9: int, 8: int etc
@@ -30,31 +37,33 @@
 			shortest: { title: 'placeholder', char: 0 }
 		},
 		mediaPerReleaseYear: {},
-		totalMedia: 0,
-		totalRating: 0,
-		totalAverageRating: 0,
-		averageMediaPerWeek: 0,
-		averageMediaPerMonth: 0,
-		monthsSinceStart: 0,
-		weeksSinceStart: 0
+		totalMedia: 10,
+		totalRating: 10,
+		totalAverageRating: 10,
+		averageMediaPerWeek: 10,
+		averageMediaPerMonth: 10,
+		monthsSinceStart: 10,
+		weeksSinceStart: 10
 	});
 
 	let shows = $state({
-		totalMedia: 0,
-		totalWatchtimeMinutes: 0,
-		totalWatchtimeHours: 0,
-		totalRating: 0,
-		totalRatingIMDB: 0,
-		averageRating: 0,
-		averageRatingIMDB: 0,
+		totalMedia: 10,
+		totalWatchtimeMinutes: 10,
+		totalWatchtimeHours: 10,
+		totalRating: 10,
+		totalRatingIMDB: 10,
+		averageRating: 10,
+		averageRatingIMDB: 10,
 		perYear: {},
 		ratingsPerScore: {},
 		genres: {}
 	});
 	let { data } = $props();
-	generalData = data.generalData;
-	movies = data.movies;
-	shows = data.shows;
+	if (!Object.entries(data).length <= 0) {
+		generalData = data.generalData;
+		movies = data.movies;
+		shows = data.shows;
+	}
 </script>
 
 <svelte:head>
@@ -391,9 +400,11 @@
 					id="topDirectors"
 					class="mt-1 flex flex-col gap-1 font-archivo text-base font-normal text-stone-50 *:line-clamp-1"
 				>
-					{#each Object.entries(movies.directors).slice(0, 5) as [director, count], i}
-						<p><span class="mr-1">{i + 1}.</span>{director}</p>
-					{/each}
+					{#if !Object.entries(movies.directors).length <= 0}
+						{#each Object.entries(movies.directors).slice(0, 5) as [director, count], i}
+							<p><span class="mr-1">{i + 1}.</span>{director}</p>
+						{/each}
+					{/if}
 				</div>
 			</h2>
 		</div>
