@@ -2,6 +2,12 @@
 	import { onMount } from 'svelte';
 	import { _nFormatter } from './+page.js';
 	import { _loadCharts } from './+page.js';
+	import { goto } from '$app/navigation';
+	import { uploaded } from '$lib/stores';
+
+	if (!$uploaded) {
+		goto('/upload');
+	}
 
 	let movies = $state({
 		totalMedia: 10,

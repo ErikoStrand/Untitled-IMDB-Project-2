@@ -1,5 +1,5 @@
 <script>
-	import { _getUploaded } from './globals';
+	import { uploaded } from '$lib/stores';
 </script>
 
 <nav
@@ -33,7 +33,7 @@
 		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 			<a href="/" class="block leading-10" title="Home">Home</a>
 		</li>
-		{#if _getUploaded()}
+		{#if $uploaded}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 				<a
 					href="/statistics"

@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { uploaded } from '$lib/stores';
 
 export async function _handleSampleData() {
 	fetch('/api/sample')
@@ -172,11 +173,12 @@ export default function handleCSV(file) {
 			}
 		}
 		function loadData(name) {
-			data = JSON.parse(sessionStorage.getItem(name));
+			data = JSON.parse(localStorage.getItem(name));
 			return data;
 		}
 		function checkAllDataDone() {
 			if (allDataDone.every(Boolean)) {
+				uploaded.set(true);
 				sendDataToServer();
 				saveData('movies', movies);
 				saveData('shows', shows);
@@ -186,7 +188,7 @@ export default function handleCSV(file) {
 		}
 
 		function saveData(name, data) {
-			sessionStorage.setItem(name, JSON.stringify(data));
+			localStorage.setItem(name, JSON.stringify(data));
 		}
 
 		function handleData() {
