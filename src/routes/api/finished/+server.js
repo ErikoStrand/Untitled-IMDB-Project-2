@@ -4,6 +4,7 @@ let storedData = {
 	shows: {}
 };
 import { json } from '@sveltejs/kit';
+import { _setUploaded } from '$lib/globals';
 
 export async function POST({ request }) {
 	const data = await request.json();
@@ -13,10 +14,7 @@ export async function POST({ request }) {
 	storedData.generalData = generalData;
 	storedData.movies = movies;
 	storedData.shows = shows;
-	// You can store the data in a database, perform calculations, etc.
-
-	// Example: Logging the received data
-	//console.log('Received data:', { generalData, movies, shows });
+	_setUploaded(true);
 
 	// Return a response
 	return json({ success: true });

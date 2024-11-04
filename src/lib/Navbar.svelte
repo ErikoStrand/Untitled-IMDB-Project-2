@@ -1,9 +1,13 @@
+<script>
+	import { _getUploaded } from './globals';
+</script>
+
 <nav
 	class="mb-10 flex h-12 flex-row items-center justify-between border-b-[1px] border-b-zinc-800 bg-zinc-800 drop-shadow-xl"
 >
 	<div>
 		<a
-			class="font-heebo block px-4 text-lg font-bold leading-10 text-stone-50"
+			class="block px-4 font-heebo text-lg font-bold leading-10 text-stone-50"
 			href="https://github.com/ErikoStrand"
 			title="Github"
 			target="_blank"
@@ -11,7 +15,7 @@
 		>
 	</div>
 	<ul
-		class="font-heebo flex flex-row gap-4 px-6 text-base font-semibold tracking-wide text-stone-50"
+		class="flex flex-row gap-4 px-6 font-heebo text-base font-semibold tracking-wide text-stone-50"
 	>
 		<li class="self-center rounded-md duration-200 ease-in-out hover:bg-zinc-700/50">
 			<a href="/help" class="block p-2" title="Help & FAQ" aria-label="Info & FAQ"
@@ -29,8 +33,15 @@
 		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 			<a href="/" class="block leading-10" title="Home">Home</a>
 		</li>
-		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-			<a href="/statistics" class="block leading-10" title="Statistics" data-sveltekit-preload-data="off">Statistics</a>
-		</li>
+		{#if _getUploaded()}
+			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
+				<a
+					href="/statistics"
+					class="block leading-10"
+					title="Statistics"
+					data-sveltekit-preload-data="off">Statistics</a
+				>
+			</li>
+		{/if}
 	</ul>
 </nav>
