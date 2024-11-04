@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _handleSampleData } from '$lib/scripts/handleCSV';
 	import { _handleFileUpload } from './+page';
 </script>
 
@@ -116,6 +117,7 @@
 		</button>
 		<input type="file" id="file" style="display:none" onchange={_handleFileUpload} />
 		<button
+			onclick={_handleSampleData}
 			id="sampleButton"
 			class="flex-1 rounded-xl border-2 border-stone-400 bg-zinc-800 p-2 font-archivo text-xl font-semibold text-stone-200 drop-shadow-lg"
 		>
