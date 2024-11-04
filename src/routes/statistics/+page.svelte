@@ -66,12 +66,9 @@
 		generalData = _loadData('generalData');
 		movies = _loadData('movies');
 		shows = _loadData('shows');
+		_loadCharts();
 	});
 </script>
-
-<svelte:head>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</svelte:head>
 
 <div class="mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
 	<header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
@@ -529,7 +526,3 @@
 		</div>
 	</div>
 </div>
-
-{onMount(() => {
-	_loadCharts();
-})}
