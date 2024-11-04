@@ -30,7 +30,7 @@
 			<a href="/" class="block leading-10" title="Home">Home</a>
 		</li>
 		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-			<a href="/statistics" class="block leading-10" title="Statistics">Statistics</a>
+			<a href="/statistics" class="block leading-10" title="Statistics" data-sveltekit-preload-data="off">Statistics</a>
 		</li>
 	</ul>
 </nav>

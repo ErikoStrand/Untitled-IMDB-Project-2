@@ -1,5 +1,7 @@
 <script>
+	import { onMount } from 'svelte';
 	import { _nFormatter } from './+page.js';
+	import { _loadCharts } from './+page.js';
 
 	let movies = $state({
 		totalMedia: 10,
@@ -27,7 +29,7 @@
 	});
 
 	let generalData = $state({
-		streak: { highestStreak: 0, currentStreak: 0, startDate: '', endDate: '' },
+		streak: { highestStreak: 10, currentStreak: 0, startDate: '', endDate: '' },
 		numVotes: {
 			highest: { title: '', votes: 100 },
 			lowest: { title: '', votes: 100000 }
@@ -64,6 +66,7 @@
 		movies = data.movies;
 		shows = data.shows;
 	}
+	
 </script>
 
 <svelte:head>
@@ -124,13 +127,11 @@
 			>
 				That's
 				<span class="font-mono text-xl font-extrabold text-stone-400">
-					{((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 24).toFixed(0)}
+					{_nFormatter(((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 24), 0)}
 				</span>
 				Days or
 				<span id="totalWatchtimeProcent" class="font-mono text-xl font-extrabold text-lime-600">
-					{(((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 8765.81277) * 100).toFixed(
-						1
-					)}%
+					{_nFormatter((((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 8765.81277) * 100), 1)}%
 				</span>
 				of a year
 				<svg
@@ -160,7 +161,7 @@
 						id="totalAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
 					>
-						{generalData.totalAverageRating.toFixed(1)}
+					{_nFormatter(generalData.totalAverageRating, 1)}
 					</div>
 					<div class="inline-block font-mono text-xl text-stone-50">/10</div>
 				</div>
@@ -280,13 +281,13 @@
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
 				<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
-					{generalData.averageMediaPerWeek.toFixed(1)}
+					{_nFormatter(generalData.averageMediaPerWeek, 1)}
 				</div>
 				~ media/ww
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-stone-400">
 				<div id="mediaPerMonth" class="font-mono text-5xl font-extrabold text-stone-50">
-					{generalData.averageMediaPerMonth.toFixed(1)}
+					{_nFormatter(generalData.averageMediaPerMonth, 1)}
 				</div>
 				~ media/mm
 			</h2>
@@ -361,7 +362,7 @@
 						id="movieAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
 					>
-						{movies.averageRating.toFixed(1)}
+						{_nFormatter(movies.averageRating, 1)}
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
@@ -373,7 +374,7 @@
 						id="movieAverageRatingIMDB"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
 					>
-						{movies.averageRatingIMDB.toFixed(1)}
+						{_nFormatter(movies.averageRatingIMDB, 1)}
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
@@ -478,7 +479,7 @@
 						id="showAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
 					>
-						{shows.averageRating.toFixed(2)}
+						{_nFormatter(shows.averageRating, 1)}
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
@@ -490,7 +491,7 @@
 						id="showAverageRatingIMDB"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
 					>
-						{shows.averageRatingIMDB.toFixed(2)}
+						{_nFormatter(shows.averageRatingIMDB, 1)}
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
@@ -525,3 +526,9 @@
 		</div>
 	</div>
 </div>
+
+{onMount(() => {
+_loadCharts()
+})
+
+}

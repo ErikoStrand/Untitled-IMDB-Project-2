@@ -1,4 +1,6 @@
 import { json } from '@sveltejs/kit';
+import { browser } from '$app/environment';
+import { _loadCharts } from './+page';
 
 export async function load({ fetch }) {
 	try {
