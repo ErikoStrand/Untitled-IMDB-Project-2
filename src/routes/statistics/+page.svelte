@@ -3,10 +3,17 @@
 	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
 	import { goto } from '$app/navigation';
 	import { uploaded } from '$lib/stores';
+	import { browser } from '$app/environment';
+
+	if (browser) {
+		if (!$uploaded) {
+			location.href = '/upload';
+		}
+	}
 
 	let movies = $state({
 		totalMedia: 10,
-		totalWatchtimeMinutes: 1,
+		totalWatchtimeMinutes: 10,
 		totalWatchtimeHours: 10,
 		totalDirectors: 10,
 		totalRating: 10,
