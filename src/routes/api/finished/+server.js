@@ -24,6 +24,5 @@ export async function POST({ request }) {
 
 export async function GET() {
 	// Return the stored data
-
 	return json(storedData);
 }

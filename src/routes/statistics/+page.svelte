@@ -66,7 +66,6 @@
 		movies = data.movies;
 		shows = data.shows;
 	}
-	
 </script>
 
 <svelte:head>
@@ -127,11 +126,14 @@
 			>
 				That's
 				<span class="font-mono text-xl font-extrabold text-stone-400">
-					{_nFormatter(((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 24), 0)}
+					{_nFormatter((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 24, 0)}
 				</span>
 				Days or
 				<span id="totalWatchtimeProcent" class="font-mono text-xl font-extrabold text-lime-600">
-					{_nFormatter((((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 8765.81277) * 100), 1)}%
+					{_nFormatter(
+						((movies.totalWatchtimeHours + shows.totalWatchtimeHours) / 8765.81277) * 100,
+						1
+					)}%
 				</span>
 				of a year
 				<svg
@@ -161,7 +163,7 @@
 						id="totalAverageRating"
 						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
 					>
-					{_nFormatter(generalData.totalAverageRating, 1)}
+						{_nFormatter(generalData.totalAverageRating, 1)}
 					</div>
 					<div class="inline-block font-mono text-xl text-stone-50">/10</div>
 				</div>
@@ -528,7 +530,5 @@
 </div>
 
 {onMount(() => {
-_loadCharts()
-})
-
-}
+	_loadCharts();
+})}
