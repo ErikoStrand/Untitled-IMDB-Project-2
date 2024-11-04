@@ -14,11 +14,16 @@ export function _nFormatter(num, digits) {
 	const item = lookup.findLast((item) => num >= item.value);
 	return item ? (num / item.value).toFixed(digits).replace(regexp, '').concat(item.symbol) : '0';
 }
+export function _loadData(name) {
+	let data = JSON.parse(sessionStorage.getItem(name));
+	return data;
+}
 
 export function _loadCharts() {
 	if (browser) {
+		console.log('loaded +page.js');
 		function loadData(name) {
-			let data = JSON.parse(localStorage.getItem(name));
+			let data = JSON.parse(sessionStorage.getItem(name));
 			return data;
 		}
 

@@ -1,13 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-	import { _nFormatter } from './+page.js';
-	import { _loadCharts } from './+page.js';
+	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
 	import { goto } from '$app/navigation';
 	import { uploaded } from '$lib/stores';
-
-	if (!$uploaded) {
-		goto('/upload');
-	}
 
 	let movies = $state({
 		totalMedia: 10,
@@ -66,12 +61,12 @@
 		ratingsPerScore: {},
 		genres: {}
 	});
-	let { data } = $props();
-	if (!Object.entries(data).length <= 0) {
-		generalData = data.generalData;
-		movies = data.movies;
-		shows = data.shows;
-	}
+
+	onMount(() => {
+		generalData = _loadData('generalData');
+		movies = _loadData('movies');
+		shows = _loadData('shows');
+	});
 </script>
 
 <svelte:head>

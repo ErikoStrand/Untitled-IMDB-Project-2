@@ -153,33 +153,14 @@ export default function handleCSV(file) {
 			ratingsPerScore: {},
 			genres: {}
 		};
-		async function sendDataToServer() {
-			try {
-				const response = await fetch('/api/finished', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ generalData, movies, shows })
-				});
 
-				if (response.ok) {
-					console.log('Data sent to the server successfully');
-				} else {
-					console.error('Error sending data to the server');
-				}
-			} catch (error) {
-				console.error('Error:', error);
-			}
-		}
 		function loadData(name) {
-			data = JSON.parse(localStorage.getItem(name));
+			data = JSON.parse(sessionStorage.getItem(name));
 			return data;
 		}
 		function checkAllDataDone() {
 			if (allDataDone.every(Boolean)) {
 				uploaded.set(true);
-				sendDataToServer();
 				saveData('movies', movies);
 				saveData('shows', shows);
 				saveData('generalData', generalData);
@@ -188,7 +169,7 @@ export default function handleCSV(file) {
 		}
 
 		function saveData(name, data) {
-			localStorage.setItem(name, JSON.stringify(data));
+			sessionStorage.setItem(name, JSON.stringify(data));
 		}
 
 		function handleData() {
