@@ -461,6 +461,12 @@
 				Shows Watched
 			</h2>
 		</div>
+		<a
+			href="/statistics/shows"
+			class="flex h-48 items-center rounded-xl bg-blue-400 px-4 font-archivo text-3xl font-semibold text-blue-900 shadow-md shadow-stone-800 duration-75 ease-in hover:scale-105"
+		>
+			Click me to get more information.
+		</a>
 		<div
 			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
 		>
