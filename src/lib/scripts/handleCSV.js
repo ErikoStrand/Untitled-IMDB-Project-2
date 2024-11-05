@@ -151,7 +151,8 @@ export default function handleCSV(file) {
 			averageRatingIMDB: 0,
 			perYear: {},
 			ratingsPerScore: {},
-			genres: {}
+			genres: {},
+			completed: {}
 		};
 
 		function loadData(name) {
@@ -164,7 +165,7 @@ export default function handleCSV(file) {
 				saveData('movies', movies);
 				saveData('shows', shows);
 				saveData('generalData', generalData);
-				location.href = '/statistics';
+				//location.href = '/statistics';
 			}
 		}
 
@@ -175,8 +176,9 @@ export default function handleCSV(file) {
 		function handleData() {
 			//handle data
 			data.splice(0, 1);
-			var allShowID = {};
-			var allDates = {};
+			let allShowID = {};
+			let allDates = {};
+			let allEpisodes = {};
 			generalData['totalMedia'] = data.length;
 			data.forEach(function (col) {
 				//general
@@ -211,8 +213,11 @@ export default function handleCSV(file) {
 					getGenre(col[9], shows);
 					getMediaPerYear(col[2], shows);
 				}
+				if (col[5] == 'TV Episode') {
+					allEpisodes[col[0]] = col;
+				}
 			});
-
+			console.log(Object.keys(allEpisodes));
 			//handle data that needs other data or that need to be a bit more advanced
 			//general
 			generalData['totalAverageRating'] = generalData['totalRating'] / generalData['totalMedia'];
