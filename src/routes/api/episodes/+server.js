@@ -17,7 +17,7 @@ export async function POST({ request }) {
 		let minutes = 0;
 		let hours = 0;
 
-		const jsonFilePath = path.join(__dirname, '../../../../static/data/episodes_data.json');
+		const jsonFilePath = path.join(__dirname, '../../../../static/data/data.json');
 		const jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
 		// Process the data
@@ -31,7 +31,7 @@ export async function POST({ request }) {
 
 			if (value <= 120) {
 				if (jsonData.hasOwnProperty(key)) {
-					minutes += value * jsonData[key];
+					minutes += value * jsonData[key]['episodeCount'];
 				}
 			} else {
 				minutes += value;
