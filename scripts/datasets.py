@@ -32,6 +32,10 @@ connection = pymysql.connect(
   user=db_user,
   write_timeout=timeout,
 )
+cursor = connection.cursor()
+data = {}
+root_dir = os.path.dirname(os.path.abspath(__file__))
+data_folder = os.path.join(root_dir, "../static/data")
 
 # Function to download and extract the file
 def download_and_extract(url, destination_folder):
@@ -59,6 +63,9 @@ def deleteOld():
 
 
 def processTSV(which):
+
+    batchSize = 5000
+    batchValues = []
     tsv_file = os.path.join(data_folder, "data.tsv")
     with open(tsv_file, mode='r', encoding='utf-8') as file:
         print("Opened file")
@@ -79,112 +86,123 @@ def processTSV(which):
                 if index % max(1, count // 1000) == 0:
                     print(f"Processing Basics: {index}/{count} ({index/count*100:.2f}%)")
 
-                if row[0] not in data:
-                    data[row[0]] = {}
-
-                data[row[0]]["type"] = row[1]
-                data[row[0]]["title"] = row[2]
-                data[row[0]]["isAdult"] = row[4]
-                data[row[0]]["release"] = row[5]
-                data[row[0]]["ended"] = row[6]
-                data[row[0]]["runtime"] = int(float(row[7])) if row[7] and row[7] != '\\N' and isinstance(row[7], (str, int, float)) and str(row[7]).replace('.','',1).isdigit() else 0
                 
+                runtime = int(float(row[7])) if row[7] and row[7] != '\\N' and isinstance(row[7], (str, int, float)) and str(row[7]).replace('.','',1).isdigit() else 0
                 if len(row) == 9:
                     genres = row[8].split(",")
-                    data[row[0]]["genres"] = ','.join(genres) if len(row) == 9 else None
+                    genres = ','.join(genres) if len(row) == 9 else None
 
-        elif (which == "episode"):
+
+                sql = """
+                INSERT INTO basic 
+                (ID, type, title, isAdult, `release`, ended, runtime, genres) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """
+
+                values = (
+                    row[0],        # id
+                    row[1],        # type
+                    row[2],        # title
+                    row[4],        # isAdult
+                    row[5],        # release
+                    row[6],        # ended
+                    runtime,       # runtime
+                    genres         # genres
+                )
+                batchValues.append(values)
+
+                if (len(batchValues) >= batchSize):
+                    try:
+                        cursor.executemany(sql, batchValues)
+                        connection.commit()
+                        batchValues = []
+                    except Exception as e:
+                        print(f"Error inserting batch: {e}")
+                        connection.rollback()
+
+            if batchValues:
+                cursor.executemany(sql, batchValues)
+                connection.commit()
+                batchValues = []
+
+        if (which == "episode"):
             for index, row in enumerate(reader, 1):
                 if index % max(1, count // 1000) == 0:
                     print(f"Processing Episode: {index}/{count} ({index/count*100:.2f}%)")
 
-                if (row[0] in data):
-                    data[row[0]]["parent"] = row[1]
-                    data[row[0]]["season"] = row[2] if row[2] != '\\N' else 0
-                    data[row[0]]["episode"] = row[3] if row[3] != '\\N' else 0
-                    if ("episodeCount" not in data[row[1]]):
-                        data[row[1]]["episodeCount"] = 0
-                    data[row[1]]["episodeCount"] += 1
+                sql = """
+                INSERT INTO episode 
+                (ID, parentID, season, episode) 
+                VALUES (%s, %s, %s, %s)
+                """
+                season = int(row[2]) if row[2] != '\\N' else 0
+                episode = int(row[3]) if row[3] != '\\N' else 0
 
-        elif (which == "rating"):
+                values = (
+                row[0],        # id
+                row[1],        # parentID
+                season,        # season
+                episode,        # episode
+                )
+                batchValues.append(values)
+
+                if (len(batchValues) >= batchSize):
+                    cursor.executemany(sql, batchValues)
+                    connection.commit()
+                    batchValues = []
+
+            if batchValues:
+                cursor.executemany(sql, batchValues)
+                connection.commit()
+                batchValues = []
+
+        if (which == "rating"):
             for index, row in enumerate(reader, 1):
                 if index % max(1, count // 1000) == 0:
                     print(f"Processing Ratings: {index}/{count} ({index/count*100:.2f}%)")
 
-                if (row[0] in data):
-                    data[row[0]]["rating"] = row[1]
-                    data[row[0]]["votes"] = row[2]
+                sql = """
+                INSERT INTO rating 
+                (ID, rating, votes) 
+                VALUES (%s, %s, %s, %s)
+                """
+                rating = float(row[1]) if row[1] != '\\N' else 0.0
+                votes = int(row[2]) if row[2] != '\\N' else 0
+                values = (
+                row[0],        # id
+                rating,        # rating
+                votes,        # votes
+            )
+                batchValues.append(values)
 
+                if (len(batchValues) >= batchSize):
+                    cursor.executemany(sql, batchValues)
+                    connection.commit()
+                    batchValues = []
+
+            if batchValues:
+                cursor.executemany(sql, batchValues)
+                connection.commit()
+                batchValues = []
             
-cursor = connection.cursor()
-def processJSON():
-    batchSize = 5000
-    batchValues = []
-    # Iterate over each row in the TSV file
-    sql = """
-    INSERT INTO data 
-    (id, parent, title, type, release, ended, genres, rating, votes, runtime, season, episode, episodeCount, isAdult) 
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """
-    for key, value in data.items():
-        ## continute changing making db upload with finished json. you know dont forget please.
-        values = (
-            key, #id
-            value.get("parent", None),
-            value["title"],
-            value["type"],
-            value["release"],
-            value["ended"],
-            value["genres"],
-            value.get("rating", 0),
-            value.get("votes", 0),
-            value.get("runtime", 0),
-            value.get("season", 0),
-            value.get("episode", 0),
-            value.get("episodeCount", 0),
-            value["isAdult"],
-        )
+try:
+   # Root directory
 
-        batchValues.append(values)
+    #Download and extract the file
+    #download_and_extract(titleBasics, data_folder)
+    #processTSV("basic")
+    #deleteOld()
+    download_and_extract(episodeLink, data_folder)
+    processTSV("episode")
+    deleteOld()
+    download_and_extract(titleRatings, data_folder)
+    processTSV("rating")
+    deleteOld()
 
-        if (len(batchValues) >= batchSize):
-            print("Sent Data to Db")
-            cursor.executemany(sql, batchValues)
-            connection.commit()
-            batchValues = []
-
-    if batchValues:
-        cursor.executemany(sql, batchValues)
-        connection.commit()
-        batchValues = []
-
-data = {}
-root_dir = os.path.dirname(os.path.abspath(__file__))
-data_folder = os.path.join(root_dir, "../static/data")
-
-with open("./static/data/data.json", "r") as file:
-    data = json.load(file)
-
-processJSON()
-
-#try:
-    # Root directory
-
-
-#
-#    #Download and extract the file
-#    download_and_extract(titleBasics, data_folder)
-#    processTSV("basic")
-#    deleteOld()
-#    download_and_extract(episodeLink, data_folder)
-#    processTSV("episode")
-#    deleteOld()
-#    download_and_extract(titleRatings, data_folder)
-#    processTSV("rating")
-#    deleteOld()
-#
-#finally:
-#    #fix so it uploads to database.
+finally:
+    connection.close()
+    print("DONE")
+    #fix so it uploads to database.
 #    data = json.dumps(data)
 #    
 #    #Save json_data to a JSON file named 'episodes_data.json' in the data folder
@@ -192,9 +210,8 @@ processJSON()
 #    with open(json_file_path, 'w') as json_file:
 #        json_file.write(data)
 #    print("Finished Making JSON")
-#    deleteOld()
-#
-#    processJSON()
-#
+    deleteOld()
+
+
 
 

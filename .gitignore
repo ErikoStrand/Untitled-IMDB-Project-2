@@ -6,6 +6,9 @@ node_modules
 /.svelte-kit
 /build
 /static/data/data.json
+/static/data/data.tsv
+
+
 # OS
 .DS_Store
 Thumbs.db
