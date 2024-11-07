@@ -164,7 +164,7 @@ def processTSV(which):
                 sql = """
                 INSERT INTO rating 
                 (ID, rating, votes) 
-                VALUES (%s, %s, %s, %s)
+                VALUES (%s, %s, %s)
                 """
                 rating = float(row[1]) if row[1] != '\\N' else 0.0
                 votes = int(row[2]) if row[2] != '\\N' else 0
@@ -189,9 +189,9 @@ try:
    # Root directory
 
     #Download and extract the file
-    #download_and_extract(titleBasics, data_folder)
-    #processTSV("basic")
-    #deleteOld()
+    download_and_extract(titleBasics, data_folder)
+    processTSV("basic")
+    deleteOld()
     download_and_extract(episodeLink, data_folder)
     processTSV("episode")
     deleteOld()
