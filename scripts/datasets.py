@@ -159,7 +159,8 @@ def processJSON():
         batchValues = []
 
 data = {}
-
+root_dir = os.path.dirname(os.path.abspath(__file__))
+data_folder = os.path.join(root_dir, "../static/data")
 
 with open("./static/data/data.json", "r") as file:
     data = json.load(file)
@@ -169,8 +170,7 @@ processJSON()
 #try:
     # Root directory
 
-#    root_dir = os.path.dirname(os.path.abspath(__file__))
-#    data_folder = os.path.join(root_dir, "../static/data")
+
 #
 #    #Download and extract the file
 #    download_and_extract(titleBasics, data_folder)
