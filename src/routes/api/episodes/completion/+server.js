@@ -3,6 +3,7 @@ import { querymany } from '$lib/server/db/mysql.js';
 
 const parentSQL =
 	'SELECT DISTINCT b.*, r.rating, r.votes FROM basic b INNER JOIN episode e ON b.ID = e.parentID LEFT JOIN rating r ON b.ID = r.ID WHERE e.ID IN (?)';
+const completionSQL = '';
 
 export async function POST({ request }) {
 	try {
