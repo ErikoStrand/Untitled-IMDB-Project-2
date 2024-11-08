@@ -67,48 +67,116 @@ export async function POST({ request }) {
 async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 	const VALID_SIZES = ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original'];
 
-	// Validate and use the provided sizes
 	posterSize = VALID_SIZES.includes(posterSize) ? posterSize : 'w500';
 	backdropSize = VALID_SIZES.includes(backdropSize) ? backdropSize : 'original';
+
 	for (const episode of episodes) {
 		try {
 			await sleep(250);
 
-			const searchResponse = await fetch(
-				`${BASE_URL}/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(episode.title)}`
+			// First try with IMDB ID
+			const findResponse = await fetch(
+				`${BASE_URL}/find/${episode.ID}?api_key=${TMDB_API_KEY}&external_source=imdb_id`
 			);
 
-			if (!searchResponse.ok) {
-				throw error(searchResponse.status, `TMDB API error: ${searchResponse.statusText}`);
+			if (!findResponse.ok) {
+				throw error(findResponse.status, `TMDB API error: ${findResponse.statusText}`);
 			}
 
-			const searchData = await searchResponse.json();
+			const findData = await findResponse.json();
 
-			if (searchData.results && searchData.results.length > 0) {
-				const show = searchData.results[0];
+			// Check if we got results from IMDB ID
+			if (findData.tv_results?.length > 0 || findData.tv_episode_results?.length > 0) {
+				const show = findData.tv_results?.[0] || findData.tv_episode_results?.[0];
 				yield {
 					id: episode.ID,
 					images: {
 						poster: show.poster_path
 							? `https://image.tmdb.org/t/p/${posterSize}${show.poster_path}`
-							: null,
+							: show.still_path
+								? `https://image.tmdb.org/t/p/${posterSize}${show.still_path}`
+								: null,
 						backdrop: show.backdrop_path
 							? `https://image.tmdb.org/t/p/${backdropSize}${show.backdrop_path}`
 							: null
 					}
 				};
 			} else {
+				// If IMDB ID search failed, try with title
+				await sleep(250); // Additional rate limiting before second request
+
+				const searchResponse = await fetch(
+					`${BASE_URL}/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(episode.title)}`
+				);
+
+				if (!searchResponse.ok) {
+					throw error(searchResponse.status, `TMDB API error: ${searchResponse.statusText}`);
+				}
+
+				const searchData = await searchResponse.json();
+
+				if (searchData.results && searchData.results.length > 0) {
+					const show = searchData.results[0];
+					yield {
+						id: episode.ID,
+						images: {
+							poster: show.poster_path
+								? `https://image.tmdb.org/t/p/${posterSize}${show.poster_path}`
+								: null,
+							backdrop: show.backdrop_path
+								? `https://image.tmdb.org/t/p/${backdropSize}${show.backdrop_path}`
+								: null
+						}
+					};
+				} else {
+					yield {
+						id: episode.ID,
+						images: { poster: null, backdrop: null }
+					};
+				}
+			}
+		} catch (error) {
+			console.error(`Failed to fetch image for ${episode.ID}:`, error);
+			try {
+				// Try title search as last resort after error
+				await sleep(250);
+
+				const searchResponse = await fetch(
+					`${BASE_URL}/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(episode.title)}`
+				);
+
+				if (!searchResponse.ok) {
+					throw error(searchResponse.status, `TMDB API error: ${searchResponse.statusText}`);
+				}
+
+				const searchData = await searchResponse.json();
+
+				if (searchData.results && searchData.results.length > 0) {
+					const show = searchData.results[0];
+					yield {
+						id: episode.ID,
+						images: {
+							poster: show.poster_path
+								? `https://image.tmdb.org/t/p/${posterSize}${show.poster_path}`
+								: null,
+							backdrop: show.backdrop_path
+								? `https://image.tmdb.org/t/p/${backdropSize}${show.backdrop_path}`
+								: null
+						}
+					};
+				} else {
+					yield {
+						id: episode.ID,
+						images: { poster: null, backdrop: null }
+					};
+				}
+			} catch (secondError) {
+				console.error(`Failed both ID and title search for ${episode.title}:`, secondError);
 				yield {
 					id: episode.ID,
 					images: { poster: null, backdrop: null }
 				};
 			}
-		} catch (error) {
-			console.error(`Failed to fetch image for ${episode.title}:`, error);
-			yield {
-				id: episode.ID,
-				images: { poster: null, backdrop: null }
-			};
 		}
 	}
 }
