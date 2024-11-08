@@ -103,7 +103,7 @@ export default function handleCSV(file) {
 		//prob not elegant way but should work? add new false for new data point,
 		//js data, server data (episodes).
 		var allDataDone = [false, false];
-		const movies = {
+		let movies = {
 			totalMedia: 0,
 			totalWatchtimeMinutes: 0,
 			totalWatchtimeHours: 0,
@@ -121,7 +121,7 @@ export default function handleCSV(file) {
 			ratingsPerScore: {} //10: int, 9: int, 8: int etc
 		};
 
-		const generalData = {
+		let generalData = {
 			streak: { highestStreak: 0, currentStreak: 0, startDate: '', endDate: '' },
 			numVotes: {
 				highest: { title: '', votes: 100 },
@@ -141,7 +141,7 @@ export default function handleCSV(file) {
 			weeksSinceStart: 0
 		};
 
-		const shows = {
+		let shows = {
 			totalMedia: 0,
 			totalWatchtimeMinutes: 0,
 			totalWatchtimeHours: 0,
@@ -152,7 +152,8 @@ export default function handleCSV(file) {
 			perYear: {},
 			ratingsPerScore: {},
 			genres: {},
-			completed: {}
+			episodes: {},
+			shows: {}
 		};
 
 		function loadData(name) {
@@ -205,6 +206,7 @@ export default function handleCSV(file) {
 				}
 
 				if (col[5] == 'TV Series' || col[5] == 'TV Mini Series') {
+					shows['shows'][col[0]] = col;
 					allShowID.push(col[0]);
 					shows['totalMedia'] += 1;
 					shows['totalRating'] += parseInt(col[1]);
@@ -214,7 +216,7 @@ export default function handleCSV(file) {
 					getMediaPerYear(col[2], shows);
 				}
 				if (col[5] == 'TV Episode') {
-					allEpisodes[col[0]] = col;
+					shows['episodes'][col[0]] = col;
 				}
 			});
 			console.log(Object.keys(allEpisodes));

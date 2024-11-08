@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
-	import { goto } from '$app/navigation';
 	import { uploaded } from '$lib/stores';
 	import { browser } from '$app/environment';
 

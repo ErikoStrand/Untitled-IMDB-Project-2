@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const sql =
-	'SELECT b.runtime FROM basic b INNER JOIN episode e ON b.ID = e.ID WHERE e.parentID = IN (?)';
+	'SELECT SUM(b.runtime) as runtime FROM basic b INNER JOIN episode e ON b.ID = e.ID WHERE e.parentID IN (?)';
 function cleanString(str) {
 	// Implement your cleanString function here
 	return str.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -17,14 +17,11 @@ function cleanString(str) {
 export async function POST({ request }) {
 	try {
 		const episodes = await request.json();
-		const runtime = await querymany(sql, episodes['episodes']);
-		console.log(runetime);
+		// needs to be nested array but it works yippie
+		const runtime = await querymany(sql, [episodes['episodes']]);
 
-		let minutes = 10;
-		let hours = 10;
-
-		const jsonFilePath = path.join(__dirname, '../../../../static/data/data.json');
-		const jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+		let minutes = parseInt(runtime[0]['runtime']);
+		let hours = 0;
 
 		// Process the data
 		hours = minutes / 60;
