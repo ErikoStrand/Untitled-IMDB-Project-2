@@ -1,18 +1,8 @@
 import { json } from '@sveltejs/kit';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { querymany } from '$lib/server/db/mysql.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const sql =
 	'SELECT SUM(b.runtime) as runtime FROM basic b INNER JOIN episode e ON b.ID = e.ID WHERE e.parentID IN (?)';
-function cleanString(str) {
-	// Implement your cleanString function here
-	return str.toLowerCase().replace(/[^a-z0-9]/g, '');
-}
 
 export async function POST({ request }) {
 	try {

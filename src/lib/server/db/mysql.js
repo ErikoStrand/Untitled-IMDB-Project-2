@@ -17,9 +17,11 @@ export async function query(sql, params) {
 	const pool = getMysqlPool();
 	try {
 		const [results] = await pool.execute(sql, params);
+		await pool.end();
 		return results;
 	} catch (error) {
 		console.error('Database query error:', error);
+		await pool.end();
 		throw error;
 	}
 }
@@ -28,9 +30,11 @@ export async function querymany(sql, params) {
 	const pool = getMysqlPool();
 	try {
 		const [results] = await pool.query(sql, params);
+		await pool.end();
 		return results;
 	} catch (error) {
 		console.error('Database query error:', error);
+		await pool.end();
 		throw error;
 	}
 }
