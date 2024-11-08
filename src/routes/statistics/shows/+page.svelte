@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter } from '../+page';
-	import { _sendEpisodes, _percentToHex } from './+page';
+	import { _sendEpisodes } from './+page';
 	let done = $state(false);
 	let episodes = $state({});
 	let shows = $state({
@@ -84,7 +84,6 @@
 						<span>/</span>
 						<span>{episode.episodeCount}</span>
 					</div>
-					{console.log((episode.watched / episode.episodeCount) * 100)}
 					<div>
 						{((episode.watched / episode.episodeCount) * 100).toFixed(2)}%
 					</div>
