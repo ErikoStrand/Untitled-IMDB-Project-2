@@ -27,6 +27,7 @@
 	},
 	"dependencies": {
 		"@macfja/svelte-persistent-store": "^2.4.2",
-		"mysql2": "^3.11.4"
+		"mysql2": "^3.11.4",
+		"tmdb-js-wrapper": "^1.0.4"
 	}
 }
