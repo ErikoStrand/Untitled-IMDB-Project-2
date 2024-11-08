@@ -20,24 +20,37 @@ export async function _sendEpisodes(episodes) {
 	}
 }
 
-export async function _getImages(episodes) {
+export async function _loadImages(
+	episodes,
+	posterSize = 'w154',
+	backdropSize = 'original',
+	onResult
+) {
 	try {
 		const response = await fetch('/api/episodes/images', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ episodes })
+			body: JSON.stringify({
+				episodes,
+				posterSize,
+				backdropSize
+			})
 		});
 
-		if (!response.ok) {
-			throw new Error('Network response was not ok');
-		}
+		const reader = response.body.getReader();
+		const decoder = new TextDecoder();
 
-		const result = await response.json();
-		return result;
+		while (true) {
+			const { done, value } = await reader.read();
+			if (done) break;
+
+			const result = JSON.parse(decoder.decode(value));
+			// Call callback with each result
+			onResult(result.id, result.images);
+		}
 	} catch (error) {
-		console.error('Error:', error);
-		throw error;
+		console.error('Error loading images:', error);
 	}
 }
