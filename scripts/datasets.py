@@ -95,7 +95,7 @@ def processTSV(which):
 
                 sql = """
                 INSERT INTO basic 
-                (ID, type, title, isAdult, `release`, ended, runtime, genres) 
+                (ID, titleType, title, isAdult, `release`, ended, runtime, genres) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
 

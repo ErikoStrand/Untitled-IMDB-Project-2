@@ -176,7 +176,7 @@ export default function handleCSV(file) {
 		function handleData() {
 			//handle data
 			data.splice(0, 1);
-			let allShowID = {};
+			let allShowID = [];
 			let allDates = {};
 			let allEpisodes = {};
 			generalData['totalMedia'] = data.length;
@@ -205,7 +205,7 @@ export default function handleCSV(file) {
 				}
 
 				if (col[5] == 'TV Series' || col[5] == 'TV Mini Series') {
-					allShowID[col[0]] = checkNaN(parseInt(col[7]));
+					allShowID.push(col[0]);
 					shows['totalMedia'] += 1;
 					shows['totalRating'] += parseInt(col[1]);
 					shows['totalRatingIMDB'] += parseFloat(col[6]);
