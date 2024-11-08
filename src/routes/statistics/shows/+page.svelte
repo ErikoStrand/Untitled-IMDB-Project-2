@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { _loadData } from '../+page';
 
 	let shows = $state({
 		totalMedia: 0,
@@ -18,6 +19,7 @@
 
 	onMount(() => {
 		shows = _loadData('shows');
+		console.log(shows);
 	});
 </script>
 
