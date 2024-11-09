@@ -9,7 +9,7 @@
 <div id="flying-notes-container"></div>
 <div class="mx-auto mt-28 flex max-w-screen-md flex-col justify-center pb-48 pl-6 pr-6 sm:pb-0">
 	<h1
-		class="text-center font-archivo text-7xl font-extrabold leading-tight tracking-tight text-stone-100 md:text-8xl"
+		class="animate-slide-up text-center font-archivo text-7xl font-extrabold leading-tight tracking-tight text-stone-100 md:text-8xl"
 	>
 		STATS FOR <br />
 		<div class="inline-grid">
@@ -25,13 +25,15 @@
 		<br />
 	</h1>
 	<p
-		class="mt-4 max-w-[500px] self-center text-center font-archivo text-lg font-medium text-stone-400"
+		class="animate-slide-up mt-4 max-w-[500px] self-center text-center font-archivo text-lg font-medium text-stone-400"
 	>
 		Ever wondered how many hours you've actually spent watching movies and tv-shows? Download your
 		IMDb ratings and get your IMdb statistics in under four minutes!
 	</p>
 	<div class="mt-8 flex max-w-[400px] flex-col gap-4 self-center">
-		<div class="flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800">
+		<div
+			class="animate-slide-up flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-12 w-12 fill-stone-300"
@@ -47,7 +49,9 @@
 				>I'm new here! Show me how to get my data.</a
 			>
 		</div>
-		<div class="flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800">
+		<div
+			class="animate-slide-up flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-12 w-12 fill-stone-300"
@@ -91,7 +95,9 @@
 			</div>
 		</Modal>
 
-		<div class="flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800">
+		<div
+			class="animate-slide-up flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-12 w-12 fill-stone-300"

@@ -45,7 +45,7 @@
 					{#if images[episode.ID]}
 						<img src={images[episode.ID].poster} alt="{episode.title} poster" loading="lazy" />
 					{:else}
-						<div class="h-[138px] w-[92px] bg-zinc-700"></div>
+						<div class="h-[138px] w-[92px] animate-pulse bg-zinc-700"></div>
 					{/if}
 				</div>
 				<section class="mt-auto">
