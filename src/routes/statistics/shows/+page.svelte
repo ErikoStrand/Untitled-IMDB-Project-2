@@ -36,7 +36,9 @@
 
 <!-- ID, ended, genres, isAdult, rating, release, runtime, title, titleType, votes, watched, episodeCount -->
 {#if done}
-	<div class="relative mx-auto mb-32 flex max-w-screen-lg flex-col gap-4 pl-4 pr-4 text-stone-50">
+	<div
+		class="animate-slide-up relative mx-auto mb-32 flex max-w-screen-lg flex-col gap-4 pl-4 pr-4 text-stone-50"
+	>
 		{#each episodes as episode}
 			<div
 				class="flex flex-row gap-3 rounded-md bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800"

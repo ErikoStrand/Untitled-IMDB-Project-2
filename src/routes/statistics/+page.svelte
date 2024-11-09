@@ -69,7 +69,7 @@
 	});
 </script>
 
-<div class="relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
+<div class="animate-slide-up relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
 	<header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">
 			<h1
