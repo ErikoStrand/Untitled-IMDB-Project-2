@@ -35,7 +35,6 @@
 </script>
 
 <!-- ID, ended, genres, isAdult, rating, release, runtime, title, titleType, votes, watched, episodeCount -->
-{$inspect(images)}
 {#if done}
 	<div class="relative mx-auto mb-32 flex max-w-screen-lg flex-col gap-4 pl-4 pr-4 text-stone-50">
 		{#each episodes as episode}
