@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { uploaded } from '$lib/stores';
+import { loading } from '$lib/stores';
 
 export async function _handleSampleData() {
 	fetch('/api/sample')
@@ -15,6 +16,7 @@ export async function _handleSampleData() {
 
 export default function handleCSV(file) {
 	if (browser) {
+		loading.set(true);
 		console.log('File uploaded, Loading handleCSV.');
 		const data = [];
 		(function () {

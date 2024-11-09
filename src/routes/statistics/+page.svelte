@@ -1,14 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
-	import { uploaded } from '$lib/stores';
 	import { browser } from '$app/environment';
-
-	if (browser) {
-		if (!$uploaded) {
-			location.href = '/upload';
-		}
-	}
 
 	let movies = $state({
 		totalMedia: 10,
