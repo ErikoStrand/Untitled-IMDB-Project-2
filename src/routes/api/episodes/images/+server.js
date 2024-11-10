@@ -18,7 +18,7 @@ export async function POST({ request }) {
 			throw error(400, 'Request body is required');
 		}
 
-		const { episodes, posterSize, backdropSize } = await request.json();
+		const { episodes, posterSize, backdropSize, post } = await request.json();
 
 		if (!episodes || !Array.isArray(episodes)) {
 			throw error(400, 'Episodes must be an array');
@@ -26,16 +26,22 @@ export async function POST({ request }) {
 
 		// Execute SQL query with error handling
 		let episodesData;
-		try {
-			episodesData = await querymany(parentSQL, [episodes]);
-		} catch (dbError) {
-			console.error('Database error:', dbError);
-			throw error(500, 'Database query failed');
-		}
 
-		if (!episodesData || episodesData.length === 0) {
-			return json({ results: [] });
+		if (!post) {
+			try {
+				episodesData = await querymany(parentSQL, [episodes]);
+			} catch (dbError) {
+				console.error('Database error:', dbError);
+				throw error(500, 'Database query failed');
+			}
+
+			if (!episodesData || episodesData.length === 0) {
+				return json({ results: [] });
+			}
+		} else {
+			episodesData = episodes;
 		}
+		console.log(episodes);
 
 		// Create stream for response
 		const stream = new ReadableStream({

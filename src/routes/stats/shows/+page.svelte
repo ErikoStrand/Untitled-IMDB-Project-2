@@ -31,7 +31,7 @@
 		});
 	});
 	onMount(async () => {
-		await _loadImages(Object.keys(shows['episodes']), 'w92', 'w780', (id, result) => {
+		await _loadImages(Object.keys(shows['episodes']), 'w92', 'w780', false, (id, result) => {
 			images[id] = result;
 		});
 	});

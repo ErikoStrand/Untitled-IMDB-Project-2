@@ -26,6 +26,7 @@ export async function _loadImages(
 	episodes,
 	posterSize = 'w154',
 	backdropSize = 'original',
+	post = false,
 	onResult
 ) {
 	try {
@@ -37,7 +38,8 @@ export async function _loadImages(
 			body: JSON.stringify({
 				episodes,
 				posterSize,
-				backdropSize
+				backdropSize,
+				post
 			})
 		});
 
