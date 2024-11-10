@@ -40,21 +40,37 @@ export async function POST({ request }) {
 		// Create stream for response
 		const stream = new ReadableStream({
 			async start(controller) {
+				let isControllerClosed = false; // Add flag to track controller state
+
 				try {
 					for await (const result of getShowImages(episodesData, posterSize, backdropSize)) {
-						let queryParams = [
-							...[result.id, result.images.poster, result.images.backdrop],
-							result.id
-						];
-						query(insertImages, queryParams);
-						const chunk = JSON.stringify(result) + '\n';
-						controller.enqueue(new TextEncoder().encode(chunk));
+						if (isControllerClosed) break;
+
+						try {
+							let queryParams = [
+								...[result.id, result.images.poster, result.images.backdrop],
+								result.id
+							];
+							query(insertImages, queryParams);
+							const chunk = JSON.stringify(result) + '\n';
+							controller.enqueue(new TextEncoder().encode(chunk));
+						} catch (error) {
+							if (error.code === 'ERR_INVALID_STATE') {
+								isControllerClosed = true;
+								break;
+							}
+							throw error;
+						}
 					}
 				} catch (streamError) {
 					console.error('Stream error:', streamError);
-					controller.error(streamError);
+					if (!isControllerClosed) {
+						controller.error(streamError);
+					}
 				} finally {
-					controller.close();
+					if (!isControllerClosed) {
+						controller.close();
+					}
 				}
 			}
 		});
