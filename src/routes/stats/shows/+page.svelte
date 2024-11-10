@@ -64,7 +64,7 @@
 						_navigateWithData(episode.ID, shows['episodes']);
 					}
 				}}
-				class="flex flex-row gap-3 rounded-md border-2 border-transparent bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800 duration-300 ease-linear hover:border-dashed hover:border-blue-500"
+				class="flex flex-row gap-3 rounded-md border-2 border-dashed border-transparent bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800 duration-300 ease-linear hover:border-dashed hover:border-blue-500"
 			>
 				<div id="image">
 					{#if images[episode.ID]}
