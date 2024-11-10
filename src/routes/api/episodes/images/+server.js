@@ -41,7 +41,6 @@ export async function POST({ request }) {
 		} else {
 			episodesData = episodes;
 		}
-		console.log(episodes);
 
 		// Create stream for response
 		const stream = new ReadableStream({
@@ -57,7 +56,9 @@ export async function POST({ request }) {
 								...[result.id, result.images.poster, result.images.backdrop],
 								result.id
 							];
-							query(insertImages, queryParams);
+							if (result && (result.images.poster || result.images.backdrop)) {
+								query(insertImages, queryParams);
+							}
 							const chunk = JSON.stringify(result) + '\n';
 							controller.enqueue(new TextEncoder().encode(chunk));
 						} catch (error) {
@@ -104,7 +105,6 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 			const storedImages = await query(getStoredImages, [episode.ID]);
 
 			if (storedImages && storedImages.length > 0) {
-				// If images exist in database, return them
 				yield {
 					id: episode.ID,
 					images: {
@@ -112,10 +112,9 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 						backdrop: storedImages[0].backdrop
 					}
 				};
-				continue; // Skip TMDB API calls for this episode
+				continue;
 			}
 
-			// If not in database, proceed with TMDB API calls
 			await sleep(50);
 
 			const findResponse = await fetch(
@@ -131,29 +130,37 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 
 			if (findData.tv_results?.length > 0 || findData.tv_episode_results?.length > 0) {
 				const show = findData.tv_results?.[0] || findData.tv_episode_results?.[0];
-				result = {
-					id: episode.ID,
-					images: {
-						poster: show.poster_path
-							? `https://image.tmdb.org/t/p/${posterSize}${show.poster_path}`
-							: show.still_path
-								? `https://image.tmdb.org/t/p/${posterSize}${show.still_path}`
-								: null,
-						backdrop: show.backdrop_path
-							? `https://image.tmdb.org/t/p/${backdropSize}${show.backdrop_path}`
-							: null
-					}
-				};
-			} else {
-				// Title search fallback remains the same...
-				// ... (rest of your existing TMDB API logic)
+				const posterUrl = show.poster_path
+					? `https://image.tmdb.org/t/p/${posterSize}${show.poster_path}`
+					: show.still_path
+						? `https://image.tmdb.org/t/p/${posterSize}${show.still_path}`
+						: null;
+				const backdropUrl = show.backdrop_path
+					? `https://image.tmdb.org/t/p/${backdropSize}${show.backdrop_path}`
+					: null;
+
+				// Only create result if we have at least one image
+				if (posterUrl || backdropUrl) {
+					result = {
+						id: episode.ID,
+						images: {
+							poster: posterUrl,
+							backdrop: backdropUrl
+						}
+					};
+				}
 			}
 
-			// Store the new images in database
-			if (result) {
+			// Only store and yield if we have valid images
+			if (result && (result.images.poster || result.images.backdrop)) {
 				const queryParams = [result.id, result.images.poster, result.images.backdrop, result.id];
 				await query(insertImages, queryParams);
 				yield result;
+			} else {
+				yield {
+					id: episode.ID,
+					images: { poster: null, backdrop: null }
+				};
 			}
 		} catch (error) {
 			console.error(`Failed to fetch image for ${episode.ID}:`, error);

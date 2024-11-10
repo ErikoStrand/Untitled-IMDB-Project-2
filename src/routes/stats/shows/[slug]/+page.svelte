@@ -3,11 +3,13 @@
 	import { _loadData, _nFormatter } from '../../+page.js';
 	import { _getNotWatched } from './+page.js';
 	import { _loadImages } from '../+page.js';
+	import { loading } from '$lib/stores.js';
 
 	let { data } = $props();
 	let episodes = $state({});
 	let images = $state({});
 	let done = $state(false);
+	loading.set(true);
 	// Group episodes by season
 	let seasonMap = $derived(
 		Object.values(episodes).reduce((acc, episode) => {
@@ -37,13 +39,14 @@
 		episodes = _loadData(data.showID);
 		episodes = await _getNotWatched(data.showID, Object.keys(episodes));
 		done = true;
+		loading.set(false);
 		setActiveTab(seasons[0]);
 		await _loadImages(
 			Object.values(episodes).map((episode) => ({
 				title: episode.title,
 				ID: episode.ID
 			})),
-			'w92',
+			'w342',
 			'w780',
 			true,
 			(id, result) => {
@@ -53,17 +56,26 @@
 	});
 </script>
 
-{#if done}
-	<div
-		class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col gap-4 pl-4 pr-4 text-stone-50"
-	>
-		<div class="flex flex-row gap-4 text-stone-50">
+<div
+	class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col gap-4 pl-4 pr-4 text-stone-50"
+>
+	<div class="text-xl">
+		<h1 class="font-semibold">Episodes You havn't rated</h1>
+		<p class="text-sm text-gray-400">Disclaimer: Any episode you've rated won't show up here.</p>
+	</div>
+	{#if done}
+		<div
+			class="flex gap-4 overflow-auto rounded-xl pb-2 text-stone-50 [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  [&::-webkit-scrollbar]:h-2"
+		>
 			{#each seasons as season}
 				<button
-					class=" {activeTab === season
-						? 'rounded-xl border-2 border-yellow-300 px-2 py-1 font-semibold text-stone-50'
-						: 'rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 px-2 py-1 font-semibold text-zinc-800'}"
-					class:active={activeTab === season}
+					class="whitespace-nowrap rounded-xl px-3 py-1 font-semibold {activeTab === season
+						? 'border-2 border-yellow-300  text-stone-50'
+						: 'bg-gradient-to-tr from-amber-400 to-yellow-300  text-zinc-800'}"
 					onclick={() => setActiveTab(season)}
 				>
 					Season {season}
@@ -78,32 +90,42 @@
 				>
 					<div id="image">
 						{#if images[episode.ID]}
-							<img src={images[episode.ID].poster} alt="{episode.title} poster" loading="lazy" />
+							{#if images[episode.ID]['poster'] !== null}
+								<img
+									class="h-[124px] w-[184px] rounded-md object-cover"
+									src={images[episode.ID].poster}
+									alt="{episode.title} poster"
+									loading="lazy"
+								/>
+							{:else}
+								<div class="h-[124px] w-[184px] animate-pulse rounded-md bg-zinc-700"></div>
+							{/if}
 						{:else}
-							<div class="h-[138px] w-[92px] animate-pulse bg-zinc-700"></div>
+							<div class="h-[124px] w-[184px] animate-pulse rounded-md bg-zinc-700"></div>
 						{/if}
 					</div>
 					<section class="mt-auto">
-						<div class="flex flex-row gap-2">
+						<a
+							class="flex flex-row gap-2"
+							href="https://www.imdb.com/title/{episode.ID}/"
+							rel="noopener noreferrer"
+							target="”_blank”"
+						>
+							<div>S{episode.season}.E{episode.episode}</div>
 							<svg
 								class="self-center fill-blue-400"
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 640 512"
-								width="20px"
-								height="20px"
+								width="18px"
+								height="18px"
 								><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
 									d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"
 								/></svg
 							>
-							<a
-								href="https://www.imdb.com/title/{episode.ID}/"
-								rel="noopener noreferrer"
-								target="”_blank”"
-								class="text-xl">{episode.title}</a
-							>
-						</div>
+							<p class="text-l">{episode.title}</p>
+						</a>
 						<div class="flex flex-row gap-3">
-							<span>{episode.release}</span>
+							<span class="font-light text-gray-400">{episode.release}</span>
 							<div class="flex flex-row gap-1 font-mono">
 								<svg
 									class="self-center fill-yellow-500"
@@ -118,7 +140,7 @@
 								<span class="text-gray-400">({_nFormatter(episode.votes, 1)})</span>
 							</div>
 						</div>
-						<div class="flex gap-2">
+						<div class="flex gap-2 text-base font-light">
 							{#each episode.genres.split(',') as genre, i}
 								{#if i < episode.genres.split(',').length - 1}
 									<span>{genre},</span>
@@ -131,5 +153,5 @@
 				</div>
 			{/each}
 		</div>
-	</div>
-{/if}
+	{/if}
+</div>
