@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter } from '../+page';
 	import { _sendEpisodes, _loadImages } from './+page';
+	import { loading } from '$lib/stores';
 	let done = $state(false);
 	let episodes = $state({});
 	let images = $state({});
@@ -19,11 +20,12 @@
 		episodes: {},
 		shows: {}
 	});
-
+	loading.set(true);
 	onMount(() => {
 		shows = _loadData('shows');
 		_sendEpisodes(Object.keys(shows['episodes'])).then((response) => {
 			episodes = response;
+			loading.set(false);
 			done = true;
 		});
 	});
@@ -37,7 +39,7 @@
 <!-- ID, ended, genres, isAdult, rating, release, runtime, title, titleType, votes, watched, episodeCount -->
 {#if done}
 	<div
-		class="animate-slide-up relative mx-auto mb-32 flex max-w-screen-lg flex-col gap-4 pl-4 pr-4 text-stone-50"
+		class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col gap-4 pl-4 pr-4 text-stone-50"
 	>
 		{#each episodes as episode}
 			<div

@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
 	import { browser } from '$app/environment';
-	import { loading } from '$lib/stores';
 
 	let movies = $state({
 		totalMedia: 10,

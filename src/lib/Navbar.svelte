@@ -3,7 +3,7 @@
 </script>
 
 <nav
-	class="mb-10 flex h-12 flex-row items-center justify-between border-b-[1px] border-b-zinc-800 bg-zinc-800 drop-shadow-xl"
+	class="sticky top-0 z-50 mb-10 flex h-12 w-full flex-row items-center justify-between bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 drop-shadow-lg"
 >
 	<div>
 		<a
