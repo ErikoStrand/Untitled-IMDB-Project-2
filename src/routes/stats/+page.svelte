@@ -504,15 +504,14 @@
 			</h2>
 		</div>
 
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-1">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-2">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400">
-				Shows Per Year
+				Shows Per Rating
 			</h2>
 			<div class="max-h-48">
-				<canvas id="showsPerYear" class="p-1"></canvas>
+				<canvas id="showsPerRating" class="p-1"></canvas>
 			</div>
 		</div>
-
 		<div class="col-span-2 h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400">
 				Top Genres
@@ -521,12 +520,12 @@
 				<canvas id="showTopGenres" class="p-1"></canvas>
 			</div>
 		</div>
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-2">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-1">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-stone-400">
-				Shows Per Rating
+				Shows Per Year
 			</h2>
 			<div class="max-h-48">
-				<canvas id="showsPerRating" class="p-1"></canvas>
+				<canvas id="showsPerYear" class="p-1"></canvas>
 			</div>
 		</div>
 	</div>

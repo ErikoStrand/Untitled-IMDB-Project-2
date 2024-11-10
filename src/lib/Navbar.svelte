@@ -7,7 +7,7 @@
 >
 	<div>
 		<a
-			class="text-stone-0 block px-4 font-heebo text-lg font-bold leading-10"
+			class="text-stone-0 block px-4 font-heebo text-lg font-bold leading-10 text-stone-50"
 			href="https://github.com/ErikoStrand"
 			title="Github"
 			target="_blank"

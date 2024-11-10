@@ -1,3 +1,5 @@
+import { goto } from '$app/navigation';
+
 export async function _sendEpisodes(episodes) {
 	try {
 		const response = await fetch('/api/episodes/completion', {
@@ -53,4 +55,13 @@ export async function _loadImages(
 	} catch (error) {
 		console.error('Error loading images:', error);
 	}
+}
+
+function saveData(name, data) {
+	sessionStorage.setItem(name, JSON.stringify(data));
+}
+
+export function _navigateWithData(id, data) {
+	saveData(id, data);
+	goto(`/stats/shows/${id}`);
 }
