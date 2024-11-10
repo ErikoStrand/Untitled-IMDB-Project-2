@@ -7,7 +7,7 @@
 >
 	<div>
 		<a
-			class="block px-4 font-heebo text-lg font-bold leading-10 text-stone-50"
+			class="text-stone-0 block px-4 font-heebo text-lg font-bold leading-10"
 			href="https://github.com/ErikoStrand"
 			title="Github"
 			target="_blank"
@@ -21,7 +21,7 @@
 			<a href="/help" class="block p-2" title="Help & FAQ" aria-label="Info & FAQ"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="ml-2 inline h-5 w-5 self-center fill-stone-50"
+					class=" h-5 w-5 fill-stone-50"
 					viewBox="0 0 512 512"
 				>
 					<path
