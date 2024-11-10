@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="mx-auto max-w-2xl text-center">
+<div class="mx-auto max-w-2xl text-center text-stone-50">
 	<div class="mb-8 flex justify-center">
 		<svg
 			class="self-center fill-red-500"
@@ -16,7 +16,4 @@
 	</div>
 	<h1 class="mb-4 text-6xl font-bold">{$page.status}</h1>
 	<p class="mb-4 text-xl">{$page.error?.message}</p>
-	<p class="mb-8 text-gray-400">
-		We couldn't find the show with ID: {$page.params.slug}
-	</p>
 </div>
