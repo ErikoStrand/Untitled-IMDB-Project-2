@@ -60,7 +60,9 @@
 		<div class="flex flex-row gap-4 text-stone-50">
 			{#each seasons as season}
 				<button
-					class="rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 px-2 py-1 font-semibold text-zinc-800"
+					class=" {activeTab === season
+						? 'rounded-xl border-2 border-yellow-300 px-2 py-1 font-semibold text-stone-50'
+						: 'rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 px-2 py-1 font-semibold text-zinc-800'}"
 					class:active={activeTab === season}
 					onclick={() => setActiveTab(season)}
 				>
