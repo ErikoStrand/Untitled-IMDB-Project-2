@@ -35,11 +35,8 @@
 		</li>
 		{#if $uploaded}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-				<a
-					href="/statistics"
-					class="block leading-10"
-					title="Statistics"
-					data-sveltekit-preload-data="off">Statistics</a
+				<a href="/stats" class="block leading-10" title="Stats" data-sveltekit-preload-data="off"
+					>Stats</a
 				>
 			</li>
 		{/if}

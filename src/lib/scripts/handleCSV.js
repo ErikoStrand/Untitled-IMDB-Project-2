@@ -168,7 +168,7 @@ export default function handleCSV(file) {
 				saveData('movies', movies);
 				saveData('shows', shows);
 				saveData('generalData', generalData);
-				location.href = '/statistics';
+				location.href = '/stats';
 			}
 		}
 

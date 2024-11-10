@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
 	import { browser } from '$app/environment';
+	import { loading } from '$lib/stores';
 
 	let movies = $state({
 		totalMedia: 10,
@@ -69,7 +70,7 @@
 	});
 </script>
 
-<div class="animate-slide-up relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
+<div class="relative mx-auto mb-32 max-w-screen-lg animate-slide-up pl-4 pr-4">
 	<header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">
 			<h1
@@ -454,7 +455,7 @@
 			</h2>
 		</div>
 		<a
-			href="/statistics/shows"
+			href="/stats/shows"
 			class="flex h-48 items-center rounded-xl bg-blue-400 px-4 font-archivo text-3xl font-semibold text-blue-900 shadow-md shadow-stone-800 duration-75 ease-in hover:scale-105"
 		>
 			Click me to get more information.
