@@ -3,6 +3,7 @@ import { querymany, query } from '$lib/server/db/mysql.js';
 import { env } from '$env/dynamic/private';
 
 const TMDB_API_KEY = env.TMDB_API;
+console.log(env);
 const BASE_URL = 'https://api.themoviedb.org/3';
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

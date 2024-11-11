@@ -68,12 +68,16 @@
 			>
 				<div id="image">
 					{#if images[episode.ID]}
-						<img
-							class="rounded-md"
-							src={images[episode.ID].poster}
-							alt="{episode.title} poster"
-							loading="lazy"
-						/>
+						{#if images[episode.ID]['poster'] !== null}
+							<img
+								class="h-[138px] w-[92px] rounded-md object-cover"
+								src={images[episode.ID].poster}
+								alt="{episode.title} poster"
+								loading="lazy"
+							/>
+						{:else}
+							<div class="h-[138px] w-[92px] animate-pulse rounded-md bg-zinc-700"></div>
+						{/if}
 					{:else}
 						<div class="h-[138px] w-[92px] animate-pulse rounded-md bg-zinc-700"></div>
 					{/if}
