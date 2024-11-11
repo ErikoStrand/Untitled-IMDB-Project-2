@@ -1,5 +1,4 @@
 import { error } from '@sveltejs/kit';
-import { join } from 'path';
 
 export async function GET({ url, fetch }) {
 	try {

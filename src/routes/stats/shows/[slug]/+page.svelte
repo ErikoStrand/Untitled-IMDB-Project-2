@@ -93,27 +93,27 @@
 		<div class="flex flex-col gap-4">
 			{#each seasonMap[activeTab] as episode}
 				<div
-					class="flex flex-row gap-3 rounded-md bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800"
+					class="flex flex-col gap-3 rounded-md bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800 sm:flex-row"
 				>
 					<div id="image">
 						{#if images[episode.ID]}
 							{#if images[episode.ID]['poster'] !== null}
 								<img
-									class="h-[124px] w-[184px] rounded-md object-cover"
+									class="h-[124px] w-[256px] rounded-md object-cover"
 									src={images[episode.ID].poster}
 									alt="{episode.title} poster"
 									loading="lazy"
 								/>
 							{:else}
 								<div
-									class="flex h-[124px] w-[184px] animate-pulse items-center justify-center rounded-md bg-zinc-700"
+									class="flex h-[124px] w-[256px] animate-pulse items-center justify-center rounded-md bg-zinc-700"
 								>
 									Not Found
 								</div>
 							{/if}
 						{:else}
 							<div
-								class="flex h-[124px] w-[184px] animate-pulse items-center justify-center rounded-md bg-zinc-700"
+								class="flex h-[124px] w-[256px] animate-pulse items-center justify-center rounded-md bg-zinc-700"
 							>
 								Not Found
 							</div>
