@@ -22,7 +22,7 @@
 		shows: {}
 	});
 	loading.set(true);
-	onMount(() => {
+	onMount(async () => {
 		shows = _loadData('shows');
 		_sendEpisodes(Object.keys(shows['episodes'])).then((response) => {
 			episodes = response;

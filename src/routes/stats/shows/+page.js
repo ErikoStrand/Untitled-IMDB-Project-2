@@ -22,46 +22,67 @@ export async function _sendEpisodes(episodes) {
 	}
 }
 
-export async function _loadImages(
-	episodes,
-	posterSize = 'w154',
-	backdropSize = 'original',
-	post = false,
-	onResult
-) {
+export async function _loadImages(episodes, posterSize, backdropSize, post = false, callback) {
 	try {
 		const response = await fetch('/api/episodes/images', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				episodes,
-				posterSize,
-				backdropSize,
-				post
-			})
+			body: JSON.stringify({ episodes, posterSize, backdropSize, post })
 		});
+
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
 
 		const reader = response.body.getReader();
 		const decoder = new TextDecoder();
+		let buffer = '';
 
 		while (true) {
 			const { done, value } = await reader.read();
+
 			if (done) {
-				console.log('got all images');
+				// Process any remaining data in buffer
+				if (buffer.trim()) {
+					try {
+						const result = JSON.parse(buffer);
+						if (result.id) {
+							callback(result.id, result.images);
+						}
+					} catch (e) {
+						console.error('Error parsing final buffer:', e);
+					}
+				}
 				break;
 			}
 
-			const result = JSON.parse(decoder.decode(value));
-			// Call callback with each result
-			onResult(result.id, result.images);
+			buffer += decoder.decode(value, { stream: true });
+
+			// Split by newlines and process each complete JSON object
+			const lines = buffer.split('\n');
+			buffer = lines.pop() || ''; // Keep the last incomplete line in buffer
+
+			for (const line of lines) {
+				if (line.trim()) {
+					try {
+						const result = JSON.parse(line);
+						if (result.id) {
+							callback(result.id, result.images);
+						}
+					} catch (e) {
+						console.error('Error parsing line:', e);
+						continue;
+					}
+				}
+			}
 		}
 	} catch (error) {
 		console.error('Error loading images:', error);
+		throw error;
 	}
 }
-
 function saveData(name, data) {
 	sessionStorage.setItem(name, JSON.stringify(data));
 }

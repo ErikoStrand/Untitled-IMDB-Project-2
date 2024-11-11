@@ -1,4 +1,18 @@
+import { page } from '$app/stores';
+import { goto } from '$app/navigation';
 import { browser } from '$app/environment';
+
+export function _goBack(fallbackPath = '/') {
+	if (browser) {
+		// Prefer native browser back functionality
+		if (window.history.length > 1) {
+			window.history.back();
+		} else {
+			// Fallback to a default path if no previous history
+			goto(fallbackPath);
+		}
+	}
+}
 
 export function _nFormatter(num, digits) {
 	const lookup = [

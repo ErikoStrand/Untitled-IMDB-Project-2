@@ -105,7 +105,6 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 			const storedImages = await query(getStoredImages, [episode.ID]);
 
 			if (storedImages && storedImages.length > 0) {
-				console.log('got image from db');
 				yield {
 					id: episode.ID,
 					images: {
@@ -142,7 +141,6 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 
 				// Only create result if we have at least one image
 				if (posterUrl || backdropUrl) {
-					console.log('got image from tmdb');
 					result = {
 						id: episode.ID,
 						images: {

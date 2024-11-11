@@ -83,7 +83,7 @@
 					class="whitespace-nowrap rounded-t-xl px-3 py-1 font-semibold duration-100 ease-in-out hover:text-gray-400 {activeTab ===
 					season
 						? 'border-b-2 border-yellow-300 bg-gradient-to-t from-zinc-700 from-90% to-zinc-800  text-stone-50'
-						: 'bg-gradient-to-t from-zinc-800 from-90% to-zinc-900  text-stone-50'}"
+						: 'border-b-2 border-zinc-800 bg-gradient-to-t from-zinc-800 from-90% to-zinc-900  text-stone-50'}"
 					onclick={() => setActiveTab(season)}
 				>
 					Season {season}
