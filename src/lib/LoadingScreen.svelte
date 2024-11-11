@@ -23,7 +23,7 @@
 				></div>
 			{/each}
 		</div>
-		<div class="mt-6 animate-pulse text-2xl text-stone-50">Loading...</div>
+		<div class="mt-8 animate-pulse text-2xl text-stone-50">Loading...</div>
 	</div>
 {/if}
 
@@ -59,7 +59,7 @@
 		transform: scale(0.5) translateY(50px);
 		animation:
 			smooth-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-			continuous-wave 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+			continuous-wave 1.6s ease-in-out infinite;
 		animation-delay: var(--delay), calc(0.8s + var(--delay));
 	}
 
@@ -71,14 +71,12 @@
 	}
 
 	@keyframes continuous-wave {
-		0% {
-			transform: translateY(0%) scale(1);
-		}
+		0%,
 		100% {
-			transform: translateY(25%) scale(1);
+			transform: translateY(0);
 		}
-		0% {
-			transform: translateY(0%) scale(1);
+		50% {
+			transform: translateY(30px);
 		}
 	}
 

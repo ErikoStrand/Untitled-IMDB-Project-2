@@ -25,14 +25,14 @@
 		<br />
 	</h1>
 	<p
-		class="animate-slide-up mt-4 max-w-[500px] self-center text-center font-archivo text-lg font-medium text-stone-400"
+		class="mt-4 max-w-[500px] animate-slide-up self-center text-center font-archivo text-lg font-medium text-stone-400"
 	>
 		Ever wondered how many hours you've actually spent watching movies and tv-shows? Download your
 		IMDb ratings and get your IMdb statistics in under four minutes!
 	</p>
 	<div class="mt-8 flex max-w-[400px] flex-col gap-4 self-center">
 		<div
-			class="animate-slide-up flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
+			class="flex animate-slide-up flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@
 			>
 		</div>
 		<div
-			class="animate-slide-up flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
+			class="flex animate-slide-up flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@
 		</Modal>
 
 		<div
-			class="animate-slide-up flex flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
+			class="flex animate-slide-up flex-row gap-4 rounded-xl bg-zinc-800 p-6 shadow-md shadow-stone-800"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
