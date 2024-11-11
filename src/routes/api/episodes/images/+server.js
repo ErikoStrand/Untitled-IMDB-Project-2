@@ -116,7 +116,7 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 				continue;
 			}
 
-			await sleep(50);
+			await sleep(25);
 
 			const findResponse = await fetch(
 				`${BASE_URL}/find/${episode.ID}?api_key=${TMDB_API_KEY}&external_source=imdb_id`
