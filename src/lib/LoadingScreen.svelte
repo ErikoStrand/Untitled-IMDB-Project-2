@@ -14,11 +14,16 @@
 </script>
 
 {#if showLoader}
-	<div class="loading-screen bg-zinc-900">
-		<div class="loader">
-			<div class="spinner"></div>
-			<span>Loading...</span>
+	<div class="loading-screen flex flex-col bg-zinc-900">
+		<div class="wave-loader">
+			{#each Array(15) as _, i}
+				<div
+					class="person"
+					style="--delay: {i * 0.1}s; --height: {Math.random() * 50 + 30}px"
+				></div>
+			{/each}
 		</div>
+		<div class="mt-6 animate-pulse text-2xl text-stone-50">Loading...</div>
 	</div>
 {/if}
 
@@ -33,29 +38,70 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 100;
+		overflow: hidden;
 	}
 
-	.loader {
-		text-align: center;
+	.wave-loader {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		width: 100%;
+		height: 300px;
+		position: relative;
+	}
+
+	.person {
+		width: 20px;
+		height: var(--height);
+		background-color: #e74c3c;
+		margin: 0 5px;
+		transform-origin: bottom center;
+		opacity: 0;
+		transform: scale(0.5) translateY(50px);
+		animation:
+			smooth-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+			continuous-wave 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+		animation-delay: var(--delay), calc(0.8s + var(--delay));
+	}
+
+	.loading-text {
+		position: absolute;
+		bottom: -50px;
 		color: white;
+		font-size: 1.5rem;
+		opacity: 0;
+		transform: translateY(20px);
+		animation: pulse 1.5s infinite 1.5s;
 	}
 
-	.spinner {
-		width: 50px;
-		height: 50px;
-		border: 4px solid #f3f3f3;
-		border-top: 4px solid #3498db;
-		border-radius: 50%;
-		margin: 0 auto 1rem;
-		animation: spin 2s linear infinite;
+	@keyframes smooth-appear {
+		to {
+			opacity: 1;
+			transform: scale(1) translateY(0);
+		}
 	}
 
-	@keyframes spin {
+	@keyframes continuous-wave {
 		0% {
-			transform: rotate(0deg);
+			transform: translateY(0%) scale(1);
 		}
 		100% {
-			transform: rotate(360deg);
+			transform: translateY(25%) scale(1);
+		}
+		0% {
+			transform: translateY(0%) scale(1);
+		}
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 0.7;
+			transform: scale(0.95);
 		}
 	}
 </style>
