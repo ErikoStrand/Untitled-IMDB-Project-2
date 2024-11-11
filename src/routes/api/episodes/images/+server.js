@@ -105,6 +105,7 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 			const storedImages = await query(getStoredImages, [episode.ID]);
 
 			if (storedImages && storedImages.length > 0) {
+				console.log(storedImages);
 				yield {
 					id: episode.ID,
 					images: {
