@@ -48,7 +48,10 @@ export async function _loadImages(
 
 		while (true) {
 			const { done, value } = await reader.read();
-			if (done) break;
+			if (done) {
+				console.log('got all images');
+				break;
+			}
 
 			const result = JSON.parse(decoder.decode(value));
 			// Call callback with each result
