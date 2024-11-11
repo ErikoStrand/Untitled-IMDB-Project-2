@@ -1,0 +1,30 @@
+User-agent: *
+
+# Disallow API endpoints
+Disallow: /api/
+Disallow: /api/episodes/
+Disallow: /api/episodes/images/
+
+# Disallow database-related paths
+Disallow: /db/
+Disallow: /database/
+Disallow: /mysql/
+
+# Disallow admin and user-specific paths
+Disallow: /admin/
+Disallow: /user/
+Disallow: /profile/
+Disallow: /settings/
+
+# Allow static assets
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /static/
+
+# Disallow temp files
+Disallow: /*.tmp$
+Disallow: /*.sql$
+
+# Add crawl delay to prevent overloading
+Crawl-delay: 10
