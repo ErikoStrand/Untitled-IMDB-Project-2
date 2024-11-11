@@ -1,11 +1,17 @@
 import { error } from '@sveltejs/kit';
-import { readFile } from 'fs/promises';
 import { join } from 'path';
 
-export async function GET() {
+export async function GET({ url, fetch }) {
 	try {
-		const filePath = join(process.cwd(), 'static', 'data', 'ratings.csv');
-		const data = await readFile(filePath, 'utf8');
+		// Use the full URL from your domain
+		const baseUrl = url.origin;
+		const response = await fetch(`${baseUrl}/data/ratings.csv`);
+
+		if (!response.ok) {
+			throw error(404, 'File not found');
+		}
+
+		const data = await response.text();
 
 		return new Response(data, {
 			headers: {
@@ -13,7 +19,7 @@ export async function GET() {
 			}
 		});
 	} catch (err) {
-		console.error('Error reading file:', err);
-		throw error(500, 'Error reading file');
+		console.error('Error fetching file:', err);
+		throw error(500, 'Error fetching file');
 	}
 }
