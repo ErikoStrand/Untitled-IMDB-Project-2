@@ -64,7 +64,7 @@
 </script>
 
 <div
-	class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col gap-4 pl-4 pr-4 text-stone-50"
+	class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col px-4 text-stone-50"
 >
 	<div class="text-xl">
 		<h1 class="font-semibold">Episodes You havn't rated</h1>
@@ -72,7 +72,7 @@
 	</div>
 	{#if done}
 		<div
-			class="flex gap-4 overflow-auto rounded-xl pb-2 text-stone-50 [&::-webkit-scrollbar-thumb]:bg-gray-300
+			class="mt-4 flex gap-4 overflow-auto rounded-t-xl text-stone-50 [&::-webkit-scrollbar-thumb]:bg-gray-300
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
   [&::-webkit-scrollbar-track]:bg-gray-100
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
@@ -80,9 +80,10 @@
 		>
 			{#each seasons as season}
 				<button
-					class="whitespace-nowrap rounded-xl px-3 py-1 font-semibold {activeTab === season
-						? 'border-2 border-yellow-300  text-stone-50'
-						: 'bg-gradient-to-tr from-amber-400 to-yellow-300  text-zinc-800'}"
+					class="whitespace-nowrap rounded-t-xl px-3 py-1 font-semibold duration-100 ease-in-out hover:text-gray-400 {activeTab ===
+					season
+						? 'border-b-2 border-yellow-300 bg-gradient-to-t from-zinc-700 from-90% to-zinc-800  text-stone-50'
+						: 'bg-gradient-to-t from-zinc-800 from-90% to-zinc-900  text-stone-50'}"
 					onclick={() => setActiveTab(season)}
 				>
 					Season {season}

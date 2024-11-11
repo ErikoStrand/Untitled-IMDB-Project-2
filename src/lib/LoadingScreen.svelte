@@ -60,13 +60,13 @@
 		animation:
 			smooth-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
 			continuous-wave 1.6s ease-in-out infinite;
-		animation-delay: var(--delay), calc(0.8s + var(--delay));
+		animation-delay: var(--delay), calc(0s + var(--delay));
 	}
 
 	@keyframes smooth-appear {
 		to {
 			opacity: 1;
-			transform: scale(1) translateY(0);
+			transform: scale(1);
 		}
 	}
 
