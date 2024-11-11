@@ -16,9 +16,9 @@
 {#if showLoader}
 	<div class="loading-screen flex flex-col bg-zinc-900">
 		<div class="wave-loader">
-			{#each Array(15) as _, i}
+			{#each Array(10) as _, i}
 				<div
-					class="person"
+					class="person bg-red-500"
 					style="--delay: {i * 0.1}s; --height: {Math.random() * 50 + 30}px"
 				></div>
 			{/each}
@@ -53,7 +53,6 @@
 	.person {
 		width: 20px;
 		height: var(--height);
-		background-color: #e74c3c;
 		margin: 0 5px;
 		transform-origin: bottom center;
 		opacity: 0;
@@ -62,16 +61,6 @@
 			smooth-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
 			continuous-wave 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
 		animation-delay: var(--delay), calc(0.8s + var(--delay));
-	}
-
-	.loading-text {
-		position: absolute;
-		bottom: -50px;
-		color: white;
-		font-size: 1.5rem;
-		opacity: 0;
-		transform: translateY(20px);
-		animation: pulse 1.5s infinite 1.5s;
 	}
 
 	@keyframes smooth-appear {
