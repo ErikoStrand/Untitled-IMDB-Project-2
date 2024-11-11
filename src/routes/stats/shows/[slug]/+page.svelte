@@ -105,10 +105,18 @@
 									loading="lazy"
 								/>
 							{:else}
-								<div class="h-[124px] w-[184px] animate-pulse rounded-md bg-zinc-700"></div>
+								<div
+									class="flex h-[124px] w-[184px] animate-pulse items-center justify-center rounded-md bg-zinc-700"
+								>
+									Not Found
+								</div>
 							{/if}
 						{:else}
-							<div class="h-[124px] w-[184px] animate-pulse rounded-md bg-zinc-700"></div>
+							<div
+								class="flex h-[124px] w-[184px] animate-pulse items-center justify-center rounded-md bg-zinc-700"
+							>
+								Not Found
+							</div>
 						{/if}
 					</div>
 					<section class="mt-auto">
