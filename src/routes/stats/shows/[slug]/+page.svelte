@@ -10,7 +10,7 @@
 	let images = $state({});
 	let done = $state(false);
 	loading.set(true);
-	// Group episodes by season
+
 	let seasonMap = $derived(
 		Object.values(episodes).reduce((acc, episode) => {
 			const season = episode.season;
@@ -22,37 +22,44 @@
 		}, {})
 	);
 
-	// Get unique seasons sorted
 	let seasons = $derived(
 		Object.keys(seasonMap)
 			.map(Number)
 			.sort((a, b) => a - b)
 	);
 
-	// Set initial active tab to first available season (e.g., season 4)
 	let activeTab = $state();
 
-	function setActiveTab(season) {
-		activeTab = season;
+	// Function to load images for specific season
+	async function loadSeasonImages(season) {
+		if (!seasonMap[season]) return;
+
+		const seasonEpisodes = seasonMap[season].map((episode) => ({
+			title: episode.title,
+			ID: episode.ID
+		}));
+
+		await _loadImages(seasonEpisodes, 'w342', 'w780', true, (id, result) => {
+			images[id] = result;
+		});
 	}
+
+	async function setActiveTab(season) {
+		activeTab = season;
+		// Load images for the newly selected season
+		await loadSeasonImages(season);
+	}
+
 	onMount(async () => {
 		episodes = _loadData(data.showID);
 		episodes = await _getNotWatched(data.showID, Object.keys(episodes));
 		done = true;
 		loading.set(false);
-		setActiveTab(seasons[0]);
-		await _loadImages(
-			Object.values(episodes).map((episode) => ({
-				title: episode.title,
-				ID: episode.ID
-			})),
-			'w342',
-			'w780',
-			true,
-			(id, result) => {
-				images[id] = result;
-			}
-		);
+
+		// Set initial active tab and load its images
+		if (seasons.length > 0) {
+			await setActiveTab(seasons[0]);
+		}
 	});
 </script>
 
