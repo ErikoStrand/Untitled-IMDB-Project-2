@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { _loadData, _nFormatter } from '../../+page.js';
+	import { _loadData, _nFormatter, _goBack } from '../../+page.js';
 	import { _getNotWatched } from './+page.js';
 	import { _loadImages } from '../+page.js';
 	import { loading } from '$lib/stores.js';
@@ -67,7 +67,22 @@
 	class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col px-4 text-stone-50"
 >
 	<div class="text-xl">
-		<h1 class="font-semibold">Episodes You havn't rated</h1>
+		<nav class="flex flex-row gap-1">
+			<button
+				class=" self-center rounded-full fill-stone-50 px-2 py-1 font-archivo font-medium duration-200 ease-in-out hover:bg-zinc-600/50"
+				onclick={_goBack}
+				><svg
+					class="self-center"
+					xmlns="http://www.w3.org/2000/svg"
+					height="20px"
+					viewBox="0 0 320 512"
+					><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+						d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+					/></svg
+				>
+			</button>
+			<h1 class="self-center font-semibold">Episodes You havn't rated</h1>
+		</nav>
 		<p class="text-sm text-gray-400">Disclaimer: Any episode you've rated won't show up here.</p>
 	</div>
 	{#if done}
