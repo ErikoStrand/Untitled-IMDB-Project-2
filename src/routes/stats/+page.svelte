@@ -194,8 +194,8 @@
 					>
 				</div>
 				<div>
-					<h1 class="mb-2 font-heebo text-5xl font-bold tracking-wider text-zinc-700">Fact</h1>
-					<p class="font-archivo text-base font-semibold text-zinc-900">
+					<h1 class=" font-heebo text-4xl font-semibold tracking-wider text-zinc-700">Fact</h1>
+					<p class="font-archivo text-base font-medium text-zinc-900">
 						{fact.description}
 					</p>
 				</div>
