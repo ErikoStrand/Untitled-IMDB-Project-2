@@ -15,7 +15,6 @@ export async function GET() {
 			return json({ error: 'No facts found in database' }, { status: 404 });
 		}
 
-		console.log('Returning fact:', facts[0]); // Log the fact being returned
 		return json(facts[0]);
 	} catch (error) {
 		console.error('Server Error:', error);

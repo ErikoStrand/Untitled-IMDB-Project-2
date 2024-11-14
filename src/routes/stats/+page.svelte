@@ -69,6 +69,9 @@
 		_loadCharts();
 		fact = await _getFact();
 	});
+	async function newFact() {
+		fact = await _getFact();
+	}
 </script>
 
 <div class="relative mx-auto mb-32 max-w-screen-lg animate-slide-up pl-4 pr-4">
@@ -180,9 +183,15 @@
 				/>
 			</svg>
 			<div class="flex h-full flex-col justify-between">
-				<div class="z-20 font-mono text-zinc-800">
-					<div>{fact.category}</div>
-					<div>{fact.ID}/200</div>
+				<div class="z-20 flex flex-row justify-between font-mono text-zinc-800">
+					<div class="">
+						<div>{fact.category}</div>
+						<div>{fact.ID}/200</div>
+					</div>
+					<button
+						class="h-7 rounded-xl bg-gray-200 px-2 duration-150 ease-in-out hover:bg-gray-400"
+						onclick={newFact}>new</button
+					>
 				</div>
 				<div>
 					<h1 class="mb-2 font-heebo text-5xl font-bold tracking-wider text-zinc-700">Fact</h1>
