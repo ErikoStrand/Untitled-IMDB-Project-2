@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { _loadData, _nFormatter, _loadCharts } from './+page.js';
+	import { _loadData, _nFormatter, _loadCharts, _getFact } from './+page.js';
 	import { browser } from '$app/environment';
 
 	let movies = $state({
@@ -60,12 +60,14 @@
 		ratingsPerScore: {},
 		genres: {}
 	});
+	let fact = $state({});
 
-	onMount(() => {
+	onMount(async () => {
 		generalData = _loadData('generalData');
 		movies = _loadData('movies');
 		shows = _loadData('shows');
 		_loadCharts();
+		fact = await _getFact();
 	});
 </script>
 
@@ -177,11 +179,17 @@
 					d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.7 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"
 				/>
 			</svg>
-			<div class="flex h-full flex-col justify-end">
-				<h1 class="mb-2 font-heebo text-5xl font-bold tracking-wider text-zinc-700">Fact</h1>
-				<p class="font-archivo text-base font-semibold text-zinc-900">
-					Did you know that 83% of adults aged 16-54 globally agree that they love watching movies
-				</p>
+			<div class="flex h-full flex-col justify-between">
+				<div class="z-20 font-mono text-zinc-800">
+					<div>{fact.category}</div>
+					<div>{fact.ID}/200</div>
+				</div>
+				<div>
+					<h1 class="mb-2 font-heebo text-5xl font-bold tracking-wider text-zinc-700">Fact</h1>
+					<p class="font-archivo text-base font-semibold text-zinc-900">
+						{fact.description}
+					</p>
+				</div>
 			</div>
 		</div>
 		<div class="col-span-2 max-h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800">

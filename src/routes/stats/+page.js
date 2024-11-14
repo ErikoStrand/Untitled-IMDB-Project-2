@@ -33,6 +33,23 @@ export function _loadData(name) {
 	return data;
 }
 
+export async function _getFact() {
+	try {
+		const response = await fetch('/api/fact');
+
+		// Optional: Check if response is ok
+		if (!response.ok) {
+			throw new Error('Network response was not ok');
+		}
+		let fact = await response.json();
+		return fact;
+	} catch (error) {
+		console.error('Error fetching fact:', error);
+		// Optionally return a default fact or re-throw
+		throw error;
+	}
+}
+
 export function _loadCharts() {
 	if (browser) {
 		console.log('loaded +page.js');
