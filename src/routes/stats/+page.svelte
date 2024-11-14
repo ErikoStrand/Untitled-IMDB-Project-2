@@ -64,6 +64,7 @@
 
 	onMount(async () => {
 		generalData = _loadData('generalData');
+		$inspect(generalData);
 		movies = _loadData('movies');
 		shows = _loadData('shows');
 		_loadCharts();
@@ -233,23 +234,30 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-stone-800 md:col-span-2"
 		>
-			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
-				Longest Title
-				<div
-					id="longestTitle"
-					class="line-clamp-2 font-mono text-base font-bold text-stone-50 md:text-2xl"
-				>
-					{generalData.titleData.longest.title}
-				</div>
-			</h2>
-			<h3 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
+			<h2 class="font-archivo text-lg font-semibold tracking-wider text-gray-400">Longest Title</h2>
+			<a
+				href="https://www.imdb.com/title/{generalData.titleData.longest.ID}"
+				id="longestTitle"
+				class="line-clamp-2 font-mono text-base font-semibold text-stone-50"
+				target="_blank"
+				rel="noopener"
+			>
+				{generalData.titleData.longest.title}
+			</a>
+			<h2 class=" font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Shortest Title
-				<div id="shortestTitle" class="font-mono text-xl font-bold text-stone-50 md:text-3xl">
-					{generalData.titleData.shortest.title}
-				</div>
-			</h3>
+			</h2>
+			<a
+				href="https://www.imdb.com/title/{generalData.titleData.shortest.ID}"
+				id="shortestTitle"
+				class="font-mono text-xl font-semibold text-stone-50"
+				target="_blank"
+				rel="noopener"
+			>
+				{generalData.titleData.shortest.title}
+			</a>
 		</div>
 		<div
 			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800 md:col-span-2"

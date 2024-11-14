@@ -185,7 +185,7 @@ export default function handleCSV(file) {
 			generalData['totalMedia'] = data.length;
 			data.forEach(function (col) {
 				//general
-				getTitleData(col[3]);
+				getTitleData(col[3], col[0], col[5]);
 				getNumVotes(col[10], col[3]);
 				if (col[0] != 'Const') {
 					generalData['totalRating'] += parseInt(col[1]);
@@ -284,13 +284,17 @@ export default function handleCSV(file) {
 			return diffMonths;
 		}
 
-		function getTitleData(title) {
+		function getTitleData(title, id, type) {
 			if (title.length > generalData['titleData']['longest']['title'].length) {
+				generalData['titleData']['longest']['ID'] = id;
 				generalData['titleData']['longest']['title'] = title;
+				generalData['titleData']['longest']['type'] = type;
 				generalData['titleData']['longest']['char'] = title.length;
 			}
 			if (title.length < generalData['titleData']['shortest']['title'].length) {
+				generalData['titleData']['shortest']['ID'] = id;
 				generalData['titleData']['shortest']['title'] = title;
+				generalData['titleData']['shortest']['type'] = type;
 				generalData['titleData']['shortest']['char'] = title.length;
 			}
 		}
