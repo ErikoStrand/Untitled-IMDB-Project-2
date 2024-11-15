@@ -268,25 +268,36 @@
 			</div>
 		</div>
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-emerald-700 px-4 shadow-md shadow-stone-800 md:col-span-2"
 		>
-			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
-				Most Votes
-				<div class="flex flex-row items-center gap-1">
-					<i class="fa-solid fa-up-long md:fa-xl text-green-600"></i>
-					<div class="flex flex-row items-end">
-						<div id="mostVotes" class="font-mono text-2xl font-extrabold text-stone-50 md:text-4xl">
-							{_nFormatter(generalData.numVotes.highest.votes)}
-						</div>
-						<div
-							id="mostVotesTitle"
-							class="line-clamp-1 pl-1 font-mono text-base font-bold text-gray-400 md:text-xl"
-						>
-							{generalData.numVotes.highest.title}
-						</div>
+			<div id="most" class="flex flex-row items-center gap-1">
+				<h2 class="px-2 font-archivo text-sm font-normal tracking-wider text-emerald-500">
+					Most Votes
+				</h2>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 320 512"
+					width="15px"
+					class="fill-green-500"
+					><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+						d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+					/></svg
+				>
+				<div id="mostVotes" class="font-mono text-lg font-extrabold text-stone-50">
+					{_nFormatter(generalData.numVotes.highest.votes)}
+				</div>
+			</div>
+			<div class="flex flex-row items-center gap-1">
+				<i class="fa-solid fa-up-long md:fa-xl"></i>
+				<div class="flex flex-row items-end">
+					<div
+						id="mostVotesTitle"
+						class="line-clamp-1 pl-1 font-mono text-base font-bold text-gray-400 md:text-xl"
+					>
+						{generalData.numVotes.highest.title}
 					</div>
 				</div>
-			</h2>
+			</div>
 			<h3 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Least Votes
 				<div class="flex flex-row items-center gap-1">

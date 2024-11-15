@@ -186,7 +186,7 @@ export default function handleCSV(file) {
 			data.forEach(function (col) {
 				//general
 				getTitleData(col[3], col[0], col[5]);
-				getNumVotes(col[10], col[3]);
+				getNumVotes(col[10], col[3], col[0]);
 				if (col[0] != 'Const') {
 					generalData['totalRating'] += parseInt(col[1]);
 				}
@@ -298,12 +298,14 @@ export default function handleCSV(file) {
 				generalData['titleData']['shortest']['char'] = title.length;
 			}
 		}
-		function getNumVotes(votes, title) {
+		function getNumVotes(votes, title, ID) {
 			votes = parseInt(votes);
 			if (votes > generalData['numVotes']['highest']['votes']) {
+				generalData['numVotes']['highest']['ID'] = ID;
 				generalData['numVotes']['highest']['title'] = title;
 				generalData['numVotes']['highest']['votes'] = votes;
 			} else if (votes < generalData['numVotes']['lowest']['votes']) {
+				generalData['numVotes']['lowest']['ID'] = ID;
 				generalData['numVotes']['lowest']['title'] = title;
 				generalData['numVotes']['lowest']['votes'] = votes;
 			}
