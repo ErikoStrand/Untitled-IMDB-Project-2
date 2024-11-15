@@ -234,30 +234,38 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-stone-800 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-2 rounded-xl bg-zinc-800 p-4 px-6 shadow-md shadow-stone-800 md:col-span-2"
 		>
-			<h2 class="font-archivo text-lg font-semibold tracking-wider text-gray-400">Longest Title</h2>
-			<a
-				href="https://www.imdb.com/title/{generalData.titleData.longest.ID}"
-				id="longestTitle"
-				class="line-clamp-2 font-mono text-base font-semibold text-stone-50"
-				target="_blank"
-				rel="noopener"
-			>
-				{generalData.titleData.longest.title}
-			</a>
-			<h2 class=" font-archivo text-lg font-semibold tracking-wider text-gray-400">
-				Shortest Title
-			</h2>
-			<a
-				href="https://www.imdb.com/title/{generalData.titleData.shortest.ID}"
-				id="shortestTitle"
-				class="font-mono text-xl font-semibold text-stone-50"
-				target="_blank"
-				rel="noopener"
-			>
-				{generalData.titleData.shortest.title}
-			</a>
+			<div id="longest flex gap-1">
+				<h2 class="font-archivo text-sm font-normal tracking-wider text-gray-300">Longest Title</h2>
+				<a
+					href="https://www.imdb.com/title/{generalData.titleData.longest.ID}"
+					id="longestTitle"
+					class="line-clamp-2 font-mono text-base font-semibold text-stone-50"
+					target="_blank"
+					rel="noopener"
+				>
+					{generalData.titleData.longest.title}
+				</a>
+				<p class="font-archivo text-sm text-gray-400">
+					+{(generalData.titleData.longest.char / generalData.titleData.shortest.char) * 100}%
+					Longer
+				</p>
+			</div>
+			<div id="shortest">
+				<h2 class=" font-archivo text-sm font-normal tracking-wider text-gray-300">
+					Shortest Title
+				</h2>
+				<a
+					href="https://www.imdb.com/title/{generalData.titleData.shortest.ID}"
+					id="shortestTitle"
+					class="line-clamp-2 font-mono text-base font-semibold text-stone-50"
+					target="_blank"
+					rel="noopener"
+				>
+					{generalData.titleData.shortest.title}
+				</a>
+			</div>
 		</div>
 		<div
 			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800 md:col-span-2"
