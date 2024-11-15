@@ -107,7 +107,7 @@
 		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md md:grid-cols-4 md:gap-8"
 	>
 		<div
-			class="relative col-span-2 row-span-2 flex min-h-48 flex-col gap-1 overflow-hidden rounded-xl bg-zinc-800 p-4 shadow-md shadow-stone-800 md:min-h-96"
+			class="relative col-span-2 row-span-2 flex min-h-48 flex-col gap-1 overflow-hidden rounded-xl bg-zinc-800 p-4 shadow-md shadow-zinc-800 md:min-h-96"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="totalMedia" class="font-mono text-5xl font-extrabold text-stone-50">
@@ -202,7 +202,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-span-2 max-h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800">
+		<div class="col-span-2 max-h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Media Per Release Year
 			</h2>
@@ -211,7 +211,7 @@
 			</div>
 		</div>
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div class="flex flex-row items-center gap-1">
@@ -234,32 +234,32 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-2 rounded-xl bg-sky-600 p-4 px-6 shadow-md shadow-sky-600 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-2 rounded-xl bg-zinc-800 p-4 px-6 shadow-md shadow-zinc-800 md:col-span-2"
 		>
 			<div id="longest flex gap-1">
-				<h2 class="font-archivo text-sm font-normal tracking-wider text-blue-200">Longest Title</h2>
+				<h2 class="font-archivo text-sm font-normal tracking-wider text-gray-300">Longest Title</h2>
 				<a
 					href="https://www.imdb.com/title/{generalData.titleData.longest.ID}"
 					id="longestTitle"
-					class="line-clamp-2 font-mono text-base font-semibold text-blue-200"
+					class="line-clamp-2 font-mono text-base font-semibold text-gray-300"
 					target="_blank"
 					rel="noopener"
 				>
 					{generalData.titleData.longest.title}
 				</a>
-				<p class="font-archivo text-sm text-blue-300">
+				<p class="font-archivo text-sm text-gray-400">
 					+{(generalData.titleData.longest.char / generalData.titleData.shortest.char) * 100}%
 					Longer
 				</p>
 			</div>
 			<div id="shortest">
-				<h2 class=" font-archivo text-sm font-normal tracking-wider text-blue-200">
+				<h2 class=" font-archivo text-sm font-normal tracking-wider text-gray-300">
 					Shortest Title
 				</h2>
 				<a
 					href="https://www.imdb.com/title/{generalData.titleData.shortest.ID}"
 					id="shortestTitle"
-					class="line-clamp-2 font-mono text-base font-semibold text-blue-200"
+					class="line-clamp-2 font-mono text-base font-semibold text-gray-300"
 					target="_blank"
 					rel="noopener"
 				>
@@ -268,10 +268,10 @@
 			</div>
 		</div>
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-emerald-700 px-4 shadow-md shadow-stone-800 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800 md:col-span-2"
 		>
 			<div id="most" class="flex flex-row items-center gap-1">
-				<h2 class="px-2 font-archivo text-sm font-normal tracking-wider text-emerald-500">
+				<h2 class="px-2 font-archivo text-sm font-normal tracking-wider text-stone-50">
 					Most Votes
 				</h2>
 				<svg
@@ -320,7 +320,7 @@
 			</h3>
 		</div>
 		<div
-			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
@@ -336,7 +336,7 @@
 			</h2>
 		</div>
 		<div
-			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div
@@ -369,7 +369,7 @@
 		class="m-0 mb-3 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md md:grid-cols-4 md:gap-8"
 	>
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="movies" class="font-mono text-6xl font-extrabold text-stone-50">
@@ -380,7 +380,7 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
@@ -397,7 +397,7 @@
 		</div>
 
 		<div
-			class="> flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="> flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-sm font-semibold tracking-wider text-gray-400">
 				<div>
@@ -425,7 +425,7 @@
 			</h2>
 		</div>
 		<div
-			class="col-start-2 row-span-2 row-start-1 flex flex-col justify-between rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800 md:col-start-auto md:row-start-auto"
+			class="col-start-2 row-span-2 row-start-1 flex flex-col justify-between rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800 md:col-start-auto md:row-start-auto"
 		>
 			<h2
 				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-base font-semibold tracking-wider text-gray-400"
@@ -453,7 +453,7 @@
 			</h2>
 		</div>
 
-		<div class="col-span-2 rounded-xl bg-zinc-800 shadow-md shadow-stone-800">
+		<div class="col-span-2 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Top Genres
 			</h2>
@@ -462,7 +462,7 @@
 			</div>
 		</div>
 
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-2">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 md:col-span-2">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Movies Per Rating
 			</h2>
@@ -470,7 +470,7 @@
 				<canvas id="movieRatingsPerScore" class="p-1"></canvas>
 			</div>
 		</div>
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Movies Per Year
 			</h2>
@@ -489,7 +489,7 @@
 	<div
 		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md md:grid-cols-4 md:gap-8"
 	>
-		<div class="flex h-48 items-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800">
+		<div class="flex h-48 items-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800">
 			<h2 class="px-3 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				<div id="shows" class="font-mono text-6xl font-extrabold text-stone-50">
 					{shows.totalMedia}
@@ -499,12 +499,12 @@
 		</div>
 		<a
 			href="/stats/shows"
-			class="flex h-48 items-center rounded-xl bg-blue-400 px-4 font-archivo text-3xl font-semibold text-blue-900 shadow-md shadow-stone-800 duration-75 ease-in hover:scale-105"
+			class="flex h-48 items-center rounded-xl bg-blue-400 px-4 font-archivo text-3xl font-semibold text-blue-900 shadow-md shadow-zinc-800 duration-75 ease-in hover:scale-105"
 		>
 			Click me to get more information.
 		</a>
 		<div
-			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="showWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
@@ -520,7 +520,7 @@
 			</h2>
 		</div>
 		<div
-			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-stone-800"
+			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 pt-1 font-archivo text-sm font-semibold tracking-wider text-gray-400">
 				<div>
@@ -548,7 +548,7 @@
 			</h2>
 		</div>
 
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-2">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 md:col-span-2">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Shows Per Rating
 			</h2>
@@ -556,7 +556,7 @@
 				<canvas id="showsPerRating" class="p-1"></canvas>
 			</div>
 		</div>
-		<div class="col-span-2 h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800">
+		<div class="col-span-2 h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Top Genres
 			</h2>
@@ -564,7 +564,7 @@
 				<canvas id="showTopGenres" class="p-1"></canvas>
 			</div>
 		</div>
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-stone-800 md:col-span-1">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 md:col-span-1">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Shows Per Year
 			</h2>
