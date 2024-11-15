@@ -64,9 +64,10 @@
 
 	onMount(async () => {
 		generalData = _loadData('generalData');
-		$inspect(generalData);
 		movies = _loadData('movies');
 		shows = _loadData('shows');
+		$inspect(movies);
+
 		_loadCharts();
 		fact = await _getFact();
 	});
@@ -415,6 +416,46 @@
 		</div>
 
 		<div
+			class="relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 640 512"
+				class="absolute -right-20 -top-8 w-60 -rotate-[160deg] fill-zinc-900/40"
+				><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+					d="M0 336c0 79.5 64.5 144 144 144l368 0c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32C167.6 32 96 103.6 96 192c0 2.7 .1 5.4 .2 8.1C40.2 219.8 0 273.2 0 336z"
+				/></svg
+			>
+			<div
+				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-xl font-semibold tracking-wider text-gray-400"
+			>
+				<h2 id="directors" class="font-mono text-8xl font-extrabold text-stone-50">
+					{movies.totalDirectors}
+				</h2>
+				<div>Directors Watched.</div>
+			</div>
+			<span class="h-[1px] border-b-2 border-zinc-400"></span>
+			<h2
+				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-xl font-semibold tracking-wider text-gray-400"
+			>
+				Top Directors
+				<div
+					id="topDirectors"
+					class="mt-1 flex flex-col gap-1 font-archivo text-base font-normal text-stone-50"
+				>
+					{#if !Object.entries(movies.directors).length <= 0}
+						{#each Object.entries(movies.directors).slice(0, 5) as [director, count], i}
+							<div class="flex flex-row gap-1">
+								<span class="mr-1">{i + 1}.</span>
+								<p>{director}</p>
+								<span>({count}x)</span>
+							</div>
+						{/each}
+					{/if}
+				</div>
+			</h2>
+		</div>
+		<div
 			class="> flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
 		>
 			<h2 class="px-2 font-archivo text-sm font-semibold tracking-wider text-gray-400">
@@ -442,35 +483,6 @@
 				IMDb's Avg Rating
 			</h2>
 		</div>
-		<div
-			class="col-start-2 row-span-2 row-start-1 flex flex-col justify-between rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800 md:col-start-auto md:row-start-auto"
-		>
-			<h2
-				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-base font-semibold tracking-wider text-gray-400"
-			>
-				<div id="directors" class="font-mono text-6xl font-extrabold text-stone-50">
-					{movies.totalDirectors}
-				</div>
-				Directors Watched
-			</h2>
-			<span class="h-[1px] border-b-2 border-zinc-400"></span>
-			<h2
-				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-xl font-semibold tracking-wider text-gray-400"
-			>
-				Top Directors
-				<div
-					id="topDirectors"
-					class="mt-1 flex flex-col gap-1 font-archivo text-base font-normal text-stone-50 *:line-clamp-1"
-				>
-					{#if !Object.entries(movies.directors).length <= 0}
-						{#each Object.entries(movies.directors).slice(0, 5) as [director, count], i}
-							<p><span class="mr-1">{i + 1}.</span>{director}</p>
-						{/each}
-					{/if}
-				</div>
-			</h2>
-		</div>
-
 		<div class="col-span-2 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Top Genres
