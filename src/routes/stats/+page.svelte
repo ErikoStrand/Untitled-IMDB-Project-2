@@ -2,16 +2,17 @@
 	import { onMount } from 'svelte';
 	import { _loadData, _nFormatter, _loadCharts, _getFact } from './+page.js';
 	import { browser } from '$app/environment';
+	import NumberFlow from '@number-flow/svelte';
 
 	let movies = $state({
-		totalMedia: 10,
-		totalWatchtimeMinutes: 10,
-		totalWatchtimeHours: 10,
-		totalDirectors: 10,
-		totalRating: 10,
-		averageRating: 10,
-		totalRatingIMDB: 10,
-		averageRatingIMDB: 10,
+		totalMedia: 0,
+		totalWatchtimeMinutes: 0,
+		totalWatchtimeHours: 0,
+		totalDirectors: 0,
+		totalRating: 0,
+		averageRating: 0,
+		totalRatingIMDB: 0,
+		averageRatingIMDB: 0,
 		perYear: {}, // year: yyyy, count: int
 		perMonth: {}, // date: yyyy-mm, count: int
 		genres: {}, //genre: int
@@ -39,23 +40,23 @@
 			shortest: { title: 'placeholder', char: 0 }
 		},
 		mediaPerReleaseYear: {},
-		totalMedia: 10,
-		totalRating: 10,
-		totalAverageRating: 10,
-		averageMediaPerWeek: 10,
-		averageMediaPerMonth: 10,
-		monthsSinceStart: 10,
-		weeksSinceStart: 10
+		totalMedia: 0,
+		totalRating: 0,
+		totalAverageRating: 0,
+		averageMediaPerWeek: 0,
+		averageMediaPerMonth: 0,
+		monthsSinceStart: 0,
+		weeksSinceStart: 0
 	});
 
 	let shows = $state({
-		totalMedia: 10,
-		totalWatchtimeMinutes: 10,
-		totalWatchtimeHours: 10,
-		totalRating: 10,
-		totalRatingIMDB: 10,
-		averageRating: 10,
-		averageRatingIMDB: 10,
+		totalMedia: 0,
+		totalWatchtimeMinutes: 0,
+		totalWatchtimeHours: 0,
+		totalRating: 0,
+		totalRatingIMDB: 0,
+		averageRating: 0,
+		averageRatingIMDB: 0,
 		perYear: {},
 		ratingsPerScore: {},
 		genres: {}
@@ -76,7 +77,7 @@
 	}
 </script>
 
-<div class="relative mx-auto mb-32 max-w-screen-lg animate-slide-up pl-4 pr-4">
+<div class="relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
 	<header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">
 			<h1
@@ -121,7 +122,11 @@
 			</svg>
 			<div class="flex flex-col font-archivo text-xl font-semibold tracking-wider text-gray-400">
 				<div class="inline-block font-mono text-8xl font-extrabold text-stone-50">
-					{movies.totalWatchtimeHours + shows.totalWatchtimeHours}
+					<NumberFlow
+						class="h-8"
+						format={{ useGrouping: false }}
+						value={movies.totalWatchtimeHours + shows.totalWatchtimeHours}
+					/>
 				</div>
 				Hours watched in total.
 			</div>
@@ -343,15 +348,23 @@
 		>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
-					{_nFormatter(generalData.averageMediaPerWeek, 1)}
+					<NumberFlow
+						class="h-8"
+						format={{ notation: 'compact' }}
+						value={generalData.averageMediaPerWeek}
+					/>
 				</div>
-				~ media/ww
+				media/wk
 			</h2>
 			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
 				<div id="mediaPerMonth" class="font-mono text-5xl font-extrabold text-stone-50">
-					{_nFormatter(generalData.averageMediaPerMonth, 1)}
+					<NumberFlow
+						class="h-8"
+						format={{ notation: 'compact' }}
+						value={generalData.averageMediaPerMonth}
+					/>
 				</div>
-				~ media/mm
+				media/mo
 			</h2>
 		</div>
 		<div
