@@ -78,7 +78,7 @@
 	}
 </script>
 
-<div class="relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
+<div class="~text-sm/base relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
 	<header class="mb-2 flex flex-col items-end pt-4 lg:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">
 			<h1
@@ -101,12 +101,23 @@
 				View how you spend your time
 			</h2>
 		</div>
-		<h2 class="ml-auto inline-block font-archivo text-3xl font-bold tracking-wide text-stone-50">
-			<i class="fa-solid fa-globe mr-1"></i> General
-		</h2>
+		<div
+			class="ml-auto flex flex-row items-center gap-3 font-archivo text-3xl font-bold tracking-wide text-stone-50"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				height="40px"
+				class="fill-stone-50"
+				><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+					d="M352 256c0 22.2-1.2 43.6-3.3 64l-185.3 0c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64l185.3 0c2.2 20.4 3.3 41.8 3.3 64zm28.8-64l123.1 0c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64l-123.1 0c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32l-116.7 0c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0l-176.6 0c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0L18.6 160C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192l123.1 0c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64L8.1 320C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6l176.6 0c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352l116.7 0zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6l116.7 0z"
+				/></svg
+			>
+			<h2>General</h2>
+		</div>
 	</header>
 
-	<div
+	<section
 		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md lg:grid-cols-4 lg:gap-8"
 	>
 		<div
@@ -145,40 +156,27 @@
 						1
 					)}%
 				</span>
-				of a year
-				<svg
-					class="inline-block h-6 w-6 fill-stone-400"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 512 512"
-				>
-					<path
-						d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm176.4-80a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM256 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
-					/>
-				</svg>
+				of a year.
 			</div>
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="totalMedia" class="font-mono text-5xl font-extrabold text-stone-50">
-					{generalData.totalMedia}
+			<div id="totalMedia" class="font-mono text-5xl font-extrabold text-stone-50">
+				{generalData.totalMedia}
+			</div>
+			<h2 class=" font-archivo font-semibold tracking-wider text-gray-400">Media Watched</h2>
+			<div>
+				<div
+					id="totalAverageRating"
+					class="inline-block font-mono text-5xl font-extrabold text-stone-50"
+				>
+					{_nFormatter(generalData.totalAverageRating, 1)}
 				</div>
-				Media Watched
-			</h2>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div>
-					<div
-						id="totalAverageRating"
-						class="inline-block font-mono text-5xl font-extrabold text-stone-50"
-					>
-						{_nFormatter(generalData.totalAverageRating, 1)}
-					</div>
-					<div class="inline-block font-mono text-xl text-stone-50">/10</div>
-				</div>
-				Average Rating
-			</h2>
+				<div class="inline-block font-mono text-xl text-stone-50">/10</div>
+			</div>
+			<h2 class=" font-archivo font-semibold tracking-wider text-gray-400">Average Rating</h2>
 		</div>
 		<div class="relative row-span-2 min-h-48 overflow-hidden rounded-xl bg-zinc-300 p-4">
 			<svg
@@ -214,11 +212,45 @@
 							/></svg
 						>
 					</div>
-					<p class="font-archivo text-base font-medium text-zinc-900">
+					<p class="font-archivo font-medium text-zinc-900">
 						{fact.description}
 					</p>
 				</div>
 			</div>
+		</div>
+		<div
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
+		>
+			<div class="flex flex-row items-center gap-1">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 576 512"
+					height="32px"
+					class="fill-yellow-500"
+					><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+						d="M400 0L176 0c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8L24 64C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9L192 448c-17.7 0-32 14.3-32 32s14.3 32 32 32l192 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-26.1 0C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24L446.4 64c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112l84.4 0c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6l84.4 0c-5.1 66.3-31.1 111.2-63 142.3z"
+					/></svg
+				>
+				<div id="highestStreak" class="font-mono text-5xl font-extrabold text-stone-50">
+					{generalData.streak.highestStreak}
+				</div>
+			</div>
+			<h2 class=" font-archivo font-semibold tracking-wider text-gray-400">Highest Streak</h2>
+			<div class="ml-1 flex flex-row items-center gap-2">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 384 512"
+					height="36px"
+					class="fill-red-600"
+					><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+						d="M153.6 29.9l16-21.3C173.6 3.2 180 0 186.7 0C198.4 0 208 9.6 208 21.3V43.5c0 13.1 5.4 25.7 14.9 34.7L307.6 159C356.4 205.6 384 270.2 384 337.7C384 434 306 512 209.7 512H192C86 512 0 426 0 320v-3.8c0-48.8 19.4-95.6 53.9-130.1l3.5-3.5c4.2-4.2 10-6.6 16-6.6C85.9 176 96 186.1 96 198.6V288c0 35.3 28.7 64 64 64s64-28.7 64-64v-3.9c0-18-7.2-35.3-19.9-48l-38.6-38.6c-24-24-37.5-56.7-37.5-90.7c0-27.7 9-54.8 25.6-76.9z"
+					/></svg
+				>
+				<div id="currentStreak" class="font-mono text-5xl font-extrabold text-stone-50">
+					{generalData.streak.currentStreak}
+				</div>
+			</div>
+			<h2 class="font-archivo font-semibold tracking-wider text-gray-400">Current Streak</h2>
 		</div>
 		<div class="col-span-2 max-h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
@@ -227,28 +259,6 @@
 			<div class="max-h-48">
 				<canvas id="mediaPerReleaseYear" class="p-1"></canvas>
 			</div>
-		</div>
-		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
-		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div class="flex flex-row items-center gap-1">
-					<i class="fa-solid fa-trophy fa-2xl text-accent"></i>
-					<div id="highestStreak" class="font-mono text-5xl font-extrabold text-stone-50">
-						{generalData.streak.highestStreak}
-					</div>
-				</div>
-				Highest Streak
-			</h2>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div class="ml-1 flex flex-row items-center gap-2">
-					<i class="fa-solid fa-fire fa-2xl self-center text-red-600"></i>
-					<div id="currentStreak" class="font-mono text-5xl font-extrabold text-stone-50">
-						{generalData.streak.currentStreak}
-					</div>
-				</div>
-				Current Streak
-			</h2>
 		</div>
 
 		<div
@@ -259,7 +269,7 @@
 				<a
 					href="https://www.imdb.com/title/{generalData.titleData.longest.ID}"
 					id="longestTitle"
-					class="line-clamp-2 font-mono text-base font-semibold text-gray-300"
+					class="line-clamp-2 font-mono font-semibold text-gray-300"
 					target="_blank"
 					rel="noopener"
 				>
@@ -277,7 +287,7 @@
 				<a
 					href="https://www.imdb.com/title/{generalData.titleData.shortest.ID}"
 					id="shortestTitle"
-					class="line-clamp-2 font-mono text-base font-semibold text-gray-300"
+					class="line-clamp-2 font-mono font-semibold text-gray-300"
 					target="_blank"
 					rel="noopener"
 				>
@@ -309,7 +319,7 @@
 				<a
 					href="https://www.imdb.com/title/{generalData.numVotes.highest.ID}"
 					id="mostVotesTitle"
-					class="line-clamp-1 font-mono text-base font-semibold text-gray-300"
+					class="line-clamp-1 font-mono font-semibold text-gray-300"
 				>
 					{generalData.numVotes.highest.title}
 				</a>
@@ -338,26 +348,24 @@
 				<a
 					href="https://www.imdb.com/title/{generalData.numVotes.lowest.ID}"
 					id="mostVotesTitle"
-					class="line-clamp-1 font-mono text-base font-semibold text-gray-300"
+					class="line-clamp-1 font-mono font-semibold text-gray-300"
 				>
 					{generalData.numVotes.lowest.title}
 				</a>
 			</div>
 		</div>
 		<div
-			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
-					<NumberFlow
-						class="h-8"
-						format={{ notation: 'compact' }}
-						value={generalData.averageMediaPerWeek}
-					/>
-				</div>
-				media/wk
-			</h2>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
+			<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
+				<NumberFlow
+					class="h-8"
+					format={{ notation: 'compact' }}
+					value={generalData.averageMediaPerWeek}
+				/>
+			</div>
+			<h2 class="font-archivo font-semibold tracking-wider text-gray-400">media/wk</h2>
+			<h2 class="font-archivo font-semibold tracking-wider text-gray-400">
 				<div id="mediaPerMonth" class="font-mono text-5xl font-extrabold text-stone-50">
 					<NumberFlow
 						class="h-8"
@@ -369,47 +377,53 @@
 			</h2>
 		</div>
 		<div
-			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="col-span-1 flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div
-					id="accountAge"
-					class="flex flex-col flex-wrap gap-1 font-mono text-2xl font-extrabold text-stone-50"
-				>
-					<div class="flex gap-1">
-						<span id="accountAgeYears"
-							>{(generalData.weeksSinceStart / 52.177457).toString().split('.')[0]}</span
-						><span class="self-end font-archivo text-xl text-stone-50"> years </span>
-					</div>
-					<div class="flex gap-1">
-						<span id="accountAgeMonths"
-							>{generalData.monthsSinceStart -
-								(generalData.weeksSinceStart / 52.177457).toString().split('.')[0] * 12}</span
-						><span class="self-end font-archivo text-xl text-stone-50"> months</span>
-					</div>
+			<h2 class=" font-archivo font-semibold tracking-wider text-gray-400">
+				You've been a critic for
+			</h2>
+			<div
+				id="accountAge"
+				class="flex flex-col flex-wrap gap-1 text-2xl font-extrabold text-stone-50"
+			>
+				<div class="flex flex-row gap-1">
+					<div id="accountAgeYears">{Math.floor(generalData.monthsSinceStart / 12)}</div>
+					<div class="mt-auto text-xl font-medium">years</div>
 				</div>
-				Account Age
+				<div class="flex flex-row gap-1">
+					<div id="accountAgeMonths">{generalData.monthsSinceStart % 12}</div>
+					<div class="mt-auto text-xl font-medium">months</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<header class="mb-2 mt-14 flex">
+		<div class="ml-auto flex flex-row items-center gap-3">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				height="40px"
+				class=" fill-stone-50"
+				><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+					d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM48 368l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm368-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM48 240l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm368-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM48 112l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16L64 96c-8.8 0-16 7.2-16 16zM416 96c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM160 128l0 64c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32L192 96c-17.7 0-32 14.3-32 32zm32 160c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-128 0z"
+				/></svg
+			>
+			<h2 class=" inline-block font-archivo text-3xl font-bold tracking-wide text-stone-50">
+				Movies
 			</h2>
 		</div>
-	</div>
-
-	<header class="mb-2 mt-14 flex flex-row">
-		<h2 class="ml-auto inline-block font-archivo text-3xl font-bold tracking-wide text-stone-50">
-			<i class="fa-solid fa-film mr-1"></i> Movies
-		</h2>
 	</header>
-	<div
+	<section
 		class="m-0 mb-3 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md lg:grid-cols-4 lg:gap-8"
 	>
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="movies" class="font-mono text-6xl font-extrabold text-stone-50">
-					{movies.totalMedia}
-				</div>
-				Movies Watched
-			</h2>
+			<div id="movies" class="font-mono text-6xl font-extrabold text-stone-50">
+				{movies.totalMedia}
+			</div>
+			<h2 class=" font-archivo font-semibold tracking-wider text-gray-400">Movies Watched</h2>
 		</div>
 
 		<div
@@ -426,7 +440,7 @@
 		</div>
 
 		<div
-			class="relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -437,7 +451,7 @@
 				/></svg
 			>
 			<div
-				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-xl font-semibold tracking-wider text-gray-400"
+				class="flex min-h-48 flex-col justify-center font-archivo text-xl font-semibold tracking-wider text-gray-400"
 			>
 				<h2 id="directors" class="font-mono text-8xl font-extrabold text-stone-50">
 					{movies.totalDirectors}
@@ -445,10 +459,8 @@
 				<div>Directors Watched.</div>
 			</div>
 			<span class="h-[1px] border-b-2 border-zinc-400"></span>
-			<h2
-				class="flex min-h-48 flex-col justify-center px-2 font-archivo text-xl font-semibold tracking-wider text-gray-400"
-			>
-				Top Directors
+			<div class="flex min-h-48 flex-col justify-center font-archivo tracking-wider text-gray-400">
+				<h2 class="text-xl font-semibold">Top Directors</h2>
 				<div
 					id="topDirectors"
 					class="mt-1 flex flex-col gap-1 font-archivo text-base font-normal text-stone-50"
@@ -463,12 +475,12 @@
 						{/each}
 					{/if}
 				</div>
-			</h2>
+			</div>
 		</div>
 		<div
-			class="> flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-sm font-semibold tracking-wider text-gray-400">
+			<div>
 				<div>
 					<div
 						id="movieAverageRating"
@@ -478,9 +490,11 @@
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
-				Your Avg Rating
-			</h2>
-			<h2 class="px-2 font-archivo text-sm font-semibold tracking-wider text-gray-400">
+				<h2 class="font-archivo text-sm font-semibold tracking-wider text-gray-400">
+					Your Avg Rating
+				</h2>
+			</div>
+			<div>
 				<div class="">
 					<div
 						id="movieAverageRatingIMDB"
@@ -490,8 +504,10 @@
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
-				IMDb's Avg Rating
-			</h2>
+				<h2 class=" font-archivo text-sm font-semibold tracking-wider text-gray-400">
+					IMDb's Avg Rating
+				</h2>
+			</div>
 		</div>
 		<div class="col-span-2 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
@@ -518,15 +534,26 @@
 				<canvas id="moviesPerYear" class="p-1"></canvas>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<header class="mb-2 mt-14 flex flex-row">
-		<h2 class="ml-auto inline-block font-archivo text-3xl font-bold tracking-wide text-stone-50">
-			<i class="fa-solid fa-display mr-1"></i> Shows
-		</h2>
+	<header class="mb-2 mt-14 flex">
+		<div class="ml-auto flex flex-row items-center gap-3">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 640 512"
+				height="40px"
+				class=" fill-stone-50"
+				><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+					d="M64 64l0 288 512 0 0-288L64 64zM0 64C0 28.7 28.7 0 64 0L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 416c-35.3 0-64-28.7-64-64L0 64zM128 448l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-384 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
+				/></svg
+			>
+			<h2 class=" inline-block font-archivo text-3xl font-bold tracking-wide text-stone-50">
+				Shows
+			</h2>
+		</div>
 	</header>
 
-	<div
+	<section
 		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md lg:grid-cols-4 lg:gap-8"
 	>
 		<div
@@ -570,9 +597,9 @@
 			<h2 class="tracking-wider text-gray-400">Minutes Watched</h2>
 		</div>
 		<div
-			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 pt-1 font-archivo text-sm font-semibold tracking-wider text-gray-400">
+			<div>
 				<div>
 					<div
 						id="showAverageRating"
@@ -582,9 +609,11 @@
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
-				Your Avg Rating
-			</h2>
-			<h2 class="px-2 pb-1 font-archivo text-sm font-semibold tracking-wider text-gray-400">
+				<h2 class=" font-archivo text-sm font-semibold tracking-wider text-gray-400">
+					Your Avg Rating
+				</h2>
+			</div>
+			<div>
 				<div class="">
 					<div
 						id="showAverageRatingIMDB"
@@ -594,8 +623,10 @@
 					</div>
 					<div class="inline-block font-mono text-2xl text-stone-50">/10</div>
 				</div>
-				IMDb's Avg Rating
-			</h2>
+				<h2 class=" font-archivo text-sm font-semibold tracking-wider text-gray-400">
+					IMDb's Avg Rating
+				</h2>
+			</div>
 		</div>
 
 		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 lg:col-span-2">
@@ -622,5 +653,5 @@
 				<canvas id="showsPerYear" class="p-1"></canvas>
 			</div>
 		</div>
-	</div>
+	</section>
 </div>
