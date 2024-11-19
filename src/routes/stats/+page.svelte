@@ -62,15 +62,16 @@
 		genres: {}
 	});
 	let fact = $state({});
-
+	let done = $state(false);
 	onMount(async () => {
 		generalData = _loadData('generalData');
 		movies = _loadData('movies');
 		shows = _loadData('shows');
-		$inspect(movies);
+		$inspect(shows);
 
 		_loadCharts();
 		fact = await _getFact();
+		done = true;
 	});
 	async function newFact() {
 		fact = await _getFact();
@@ -78,7 +79,7 @@
 </script>
 
 <div class="relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
-	<header class="mb-2 flex flex-col items-end pt-4 md:flex-row">
+	<header class="mb-2 flex flex-col items-end pt-4 lg:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">
 			<h1
 				class="text-left font-quicksand text-4xl font-extrabold leading-tight tracking-wider text-stone-50"
@@ -106,14 +107,14 @@
 	</header>
 
 	<div
-		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md md:grid-cols-4 md:gap-8"
+		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md lg:grid-cols-4 lg:gap-8"
 	>
 		<div
-			class="relative col-span-2 row-span-2 flex min-h-48 flex-col gap-1 overflow-hidden rounded-xl bg-zinc-800 p-4 shadow-md shadow-zinc-800 md:min-h-96"
+			class="relative col-span-2 row-span-2 flex min-h-48 flex-col gap-1 overflow-hidden rounded-xl bg-zinc-800 p-4 shadow-md shadow-zinc-800 lg:min-h-96"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				class="absolute -bottom-28 -right-28 w-72 fill-zinc-900 opacity-40 md:-left-28"
+				class="absolute -bottom-28 -right-28 w-72 fill-zinc-900 opacity-40 lg:-left-28"
 				viewBox="0 0 512 512"
 			>
 				<path
@@ -251,7 +252,7 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-4 rounded-xl bg-zinc-800 p-4 px-6 shadow-md shadow-zinc-800 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-4 rounded-xl bg-zinc-800 p-4 px-6 shadow-md shadow-zinc-800 lg:col-span-2"
 		>
 			<div id="longest flex gap-1">
 				<h2 class="font-archivo text-sm font-normal tracking-wider text-gray-300">Longest Title</h2>
@@ -285,7 +286,7 @@
 			</div>
 		</div>
 		<div
-			class="flex h-48 flex-col justify-center gap-4 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800 md:col-span-2"
+			class="flex h-48 flex-col justify-center gap-4 rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800 lg:col-span-2"
 		>
 			<div id="most" class="">
 				<div class="flex flex-row items-center gap-2">
@@ -398,7 +399,7 @@
 		</h2>
 	</header>
 	<div
-		class="m-0 mb-3 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md md:grid-cols-4 md:gap-8"
+		class="m-0 mb-3 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md lg:grid-cols-4 lg:gap-8"
 	>
 		<div
 			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
@@ -412,20 +413,16 @@
 		</div>
 
 		<div
-			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="~text-sm/base flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo font-medium shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
-					{movies.totalWatchtimeHours}
-				</div>
-				Hours Watched
-			</h2>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="movieWatchtimeMinutes" class="font-mono text-5xl font-extrabold text-stone-50">
-					{_nFormatter(movies.totalWatchtimeMinutes, 0)}
-				</div>
-				Minutes Watched
-			</h2>
+			<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
+				{movies.totalWatchtimeHours}
+			</div>
+			<h2 class="tracking-wider text-gray-400">Hours Watched</h2>
+			<div id="movieWatchtimeMinutes" class="font-mono text-5xl font-extrabold text-stone-50">
+				{_nFormatter(movies.totalWatchtimeMinutes, 0)}
+			</div>
+			<h2 class="tracking-wider text-gray-400">Minutes Watched</h2>
 		</div>
 
 		<div
@@ -505,7 +502,7 @@
 			</div>
 		</div>
 
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 md:col-span-2">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 lg:col-span-2">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Movies Per Rating
 			</h2>
@@ -530,14 +527,28 @@
 	</header>
 
 	<div
-		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md md:grid-cols-4 md:gap-8"
+		class="m-0 mb-4 grid grid-flow-dense grid-cols-2 gap-4 drop-shadow-md lg:grid-cols-4 lg:gap-8"
 	>
-		<div class="flex h-48 items-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800">
-			<h2 class="px-3 font-archivo text-lg font-semibold tracking-wider text-gray-400">
-				<div id="shows" class="font-mono text-6xl font-extrabold text-stone-50">
-					{shows.totalMedia}
-				</div>
+		<div
+			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
+		>
+			<div id="shows" class="font-mono text-6xl font-extrabold text-stone-50">
+				{shows.totalMedia}
+			</div>
+			<h2 class=" font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Shows Watched
+			</h2>
+		</div>
+		<div
+			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-6 shadow-md shadow-zinc-800"
+		>
+			{#if done}
+				<div id="shows" class="font-mono text-6xl font-extrabold text-stone-50">
+					{Object.keys(shows.episodes).length}
+				</div>
+			{/if}
+			<h2 class=" font-archivo text-lg font-semibold tracking-wider text-gray-400">
+				Episodes Watched
 			</h2>
 		</div>
 		<a
@@ -547,20 +558,16 @@
 			Click me to get more information.
 		</a>
 		<div
-			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
+			class="~text-sm/base flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo font-medium shadow-md shadow-zinc-800"
 		>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="showWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
-					{shows.totalWatchtimeHours}
-				</div>
-				Hours Watched
-			</h2>
-			<h2 class="px-2 font-archivo text-base font-semibold tracking-wider text-gray-400">
-				<div id="showWatchtimeMinutes" class="font-mono text-5xl font-extrabold text-stone-50">
-					{_nFormatter(shows.totalWatchtimeMinutes)}
-				</div>
-				Minutes Watched
-			</h2>
+			<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
+				{shows.totalWatchtimeHours}
+			</div>
+			<h2 class="tracking-wider text-gray-400">Hours Watched</h2>
+			<div id="movieWatchtimeMinutes" class="font-mono text-5xl font-extrabold text-stone-50">
+				{_nFormatter(shows.totalWatchtimeMinutes, 0)}
+			</div>
+			<h2 class="tracking-wider text-gray-400">Minutes Watched</h2>
 		</div>
 		<div
 			class="flex h-48 flex-col justify-center rounded-xl bg-zinc-800 px-4 shadow-md shadow-zinc-800"
@@ -591,7 +598,7 @@
 			</h2>
 		</div>
 
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 md:col-span-2">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 lg:col-span-2">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Shows Per Rating
 			</h2>
@@ -607,7 +614,7 @@
 				<canvas id="showTopGenres" class="p-1"></canvas>
 			</div>
 		</div>
-		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 md:col-span-1">
+		<div class="h-48 rounded-xl bg-zinc-800 shadow-md shadow-zinc-800 lg:col-span-1">
 			<h2 class="px-2 font-archivo text-lg font-semibold tracking-wider text-gray-400">
 				Shows Per Year
 			</h2>
