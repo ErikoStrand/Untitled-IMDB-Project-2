@@ -78,7 +78,7 @@
 	}
 </script>
 
-<div class="~text-sm/base relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4">
+<div class="relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4 ~text-sm/base">
 	<header class="mb-2 flex flex-col items-end pt-4 lg:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">
 			<h1
@@ -370,6 +370,7 @@
 					<NumberFlow
 						class="h-8"
 						format={{ notation: 'compact' }}
+						locales="en-US"
 						value={generalData.averageMediaPerMonth}
 					/>
 				</div>
@@ -427,7 +428,7 @@
 		</div>
 
 		<div
-			class="~text-sm/base flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo font-medium shadow-md shadow-zinc-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo font-medium shadow-md shadow-zinc-800 ~text-sm/base"
 		>
 			<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
 				{movies.totalWatchtimeHours}
@@ -585,7 +586,7 @@
 			Click me to get more information.
 		</a>
 		<div
-			class="~text-sm/base flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo font-medium shadow-md shadow-zinc-800"
+			class="flex h-48 flex-col justify-center gap-1 rounded-xl bg-zinc-800 px-6 font-archivo font-medium shadow-md shadow-zinc-800 ~text-sm/base"
 		>
 			<div id="movieWatchtimeHours" class="font-mono text-5xl font-extrabold text-stone-50">
 				{shows.totalWatchtimeHours}
