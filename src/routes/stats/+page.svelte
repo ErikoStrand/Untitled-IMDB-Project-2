@@ -360,6 +360,7 @@
 			<div id="mediaPerWeek" class="font-mono text-5xl font-extrabold text-stone-50">
 				<NumberFlow
 					class="h-8"
+					locales="en-US"
 					format={{ notation: 'compact' }}
 					value={generalData.averageMediaPerWeek}
 				/>
