@@ -63,6 +63,9 @@
 	});
 </script>
 
+<svelte:head>
+	<title>{data.showID}</title>
+</svelte:head>
 <div
 	class="relative mx-auto mb-32 flex max-w-screen-lg animate-slide-up flex-col px-4 text-stone-50"
 >

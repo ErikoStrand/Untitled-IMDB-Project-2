@@ -6,6 +6,9 @@
 	let showModal = $state(false);
 </script>
 
+<svelte:head>
+	<title>IMDb Stats - Your one stop shop to get all* the data</title>
+</svelte:head>
 <div id="flying-notes-container"></div>
 <div class="mx-auto mt-28 flex max-w-screen-md flex-col justify-center pb-48 pl-6 pr-6 sm:pb-0">
 	<h1

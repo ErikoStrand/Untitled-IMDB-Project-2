@@ -37,6 +37,9 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Shows</title>
+</svelte:head>
 <!-- ID, ended, genres, isAdult, rating, release, runtime, title, titleType, votes, watched, episodeCount -->
 
 <div

@@ -1,3 +1,6 @@
+<svelte:head>
+	<title>FAQ & Help</title>
+</svelte:head>
 <div
 	class="mx-auto flex max-w-[500px] flex-col justify-center gap-6 font-heebo font-light tracking-wide text-stone-50"
 >

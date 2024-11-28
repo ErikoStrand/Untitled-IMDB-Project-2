@@ -78,6 +78,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Stats</title>
+</svelte:head>
+
 <div class="relative mx-auto mb-32 max-w-screen-lg pl-4 pr-4 ~text-sm/base">
 	<header class="mb-2 flex flex-col items-end pt-4 lg:flex-row">
 		<div id="slogan" class="relative mb-4 flex flex-col">

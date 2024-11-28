@@ -31,6 +31,9 @@
 			</a>
 		</li>
 		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
+			<a href="/feedback" class="block leading-10" title="Feedback">Feedback</a>
+		</li>
+		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 			<a href="/" class="block leading-10" title="Home">Home</a>
 		</li>
 		{#if $uploaded}
