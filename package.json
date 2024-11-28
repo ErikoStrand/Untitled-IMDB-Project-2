@@ -16,6 +16,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"autoprefixer": "^10.4.20",
+		"fluid-tailwind": "^1.0.4",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.7",
 		"prettier-plugin-tailwindcss": "^0.6.8",
@@ -27,7 +28,10 @@
 	},
 	"dependencies": {
 		"@macfja/svelte-persistent-store": "^2.4.2",
+		"@number-flow/svelte": "^0.1.6",
+		"esm-env": "^1.1.4",
 		"mysql2": "^3.11.4",
+		"number-flow": "^0.3.9",
 		"tmdb-js-wrapper": "^1.0.4"
 	}
 }

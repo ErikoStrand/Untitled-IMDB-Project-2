@@ -1,7 +1,8 @@
 import type { Config } from 'tailwindcss';
+import fluid, { extract, screens, fontSize } from 'fluid-tailwind';
 
 export default {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: { files: ['./src/**/*.{html,js,svelte,ts}'], extract },
 
 	theme: {
 		extend: {
@@ -49,8 +50,10 @@ export default {
 				'accent-dark': '#d0a508',
 				'bg-normal': '#ebebeb'
 			}
-		}
+		},
+		screens,
+		fontSize
 	},
 
-	plugins: []
+	plugins: [fluid]
 } as Config;
