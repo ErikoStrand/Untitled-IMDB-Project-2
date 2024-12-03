@@ -18,7 +18,7 @@
 		class="flex flex-row gap-4 px-6 font-heebo text-base font-semibold tracking-wide text-stone-50"
 	>
 		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-			<a href="/feedback" class="block leading-10" title="Feedback">Login</a>
+			<a href="/api/discord/auth" class="block leading-10" title="Login">Login</a>
 		</li>
 	</ul>
 </nav>
