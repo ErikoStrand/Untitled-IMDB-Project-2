@@ -1,6 +1,7 @@
 <script lang="ts">
-	import '../app.css';
+	import PartyNavbar from '$lib/PartyNavbar.svelte';
 	let { children } = $props();
 </script>
 
+<PartyNavbar />
 {@render children()}
