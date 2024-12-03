@@ -5,7 +5,10 @@
 	onMount(() => {
 		if (data.user == null) {
 			invalidateAll();
-			console.log(data);
 		}
 	});
 </script>
+
+{#if data.user != null}
+	<h1 class="text-stone-50">{data.user.username}</h1>
+{/if}

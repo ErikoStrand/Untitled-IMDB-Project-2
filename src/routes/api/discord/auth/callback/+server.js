@@ -55,7 +55,6 @@ export async function GET({ url, cookies }) {
 		return redirect(302, '/party');
 	} catch (err) {
 		// Only log real errors
-		console.log(err instanceof redirect);
 		if (err instanceof redirect) {
 			console.error('Error during Discord authentication:', err);
 			throw err;
