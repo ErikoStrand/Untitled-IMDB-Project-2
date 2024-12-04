@@ -16,7 +16,7 @@
 		>
 	</div>
 	<ul
-		class="flex flex-row gap-4 px-6 font-heebo text-base font-semibold tracking-wide text-stone-50"
+		class="flex flex-row gap-4 px-4 font-heebo text-base font-semibold tracking-wide text-stone-50"
 	>
 		{#if !person?.id}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
@@ -31,10 +31,19 @@
 			<li
 				class="group relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"
 			>
-				<h2 class="block leading-10">{person.username}</h2>
+				<div class="flex flex-row gap-2">
+					<h2 class="block leading-10">
+						{person.username}
+					</h2>
+					<img
+						class="h-8 self-center rounded-md"
+						src="https://cdn.discordapp.com/avatars/{person.id}/{person.avatar}.png"
+						alt="{person.usernames}s picture"
+					/>
+				</div>
 				<a
 					href="/api/discord/auth/signout"
-					class="absolute right-[1px] rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+					class="absolute right-[1px] rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
 				>
 					Leave
 				</a>
