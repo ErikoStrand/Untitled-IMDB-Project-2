@@ -4,7 +4,7 @@
 </script>
 
 <nav
-	class="sticky top-0 z-50 mb-10 flex h-12 w-full flex-row items-center justify-between bg-gradient-to-r from-sky-400 via-sky-500 to-blue-500 drop-shadow-lg"
+	class="fixed left-0 right-0 top-0 z-50 mb-10 flex h-12 w-full flex-row items-center justify-between bg-gradient-to-r from-sky-400 via-sky-500 to-blue-500 drop-shadow-lg"
 >
 	<div>
 		<a
@@ -16,7 +16,7 @@
 		>
 	</div>
 	<ul
-		class="flex flex-row gap-4 px-4 font-heebo text-base font-semibold tracking-wide text-stone-50"
+		class="flex flex-row gap-2 px-4 font-heebo text-base font-semibold tracking-wide text-stone-50"
 	>
 		{#if !person?.id}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
@@ -28,6 +28,14 @@
 				>
 			</li>
 		{:else}
+			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
+				<a
+					href="/watchlists"
+					data-sveltekit-preload-data="off"
+					class="block leading-10"
+					title="Watchlists">Watchlists</a
+				>
+			</li>
 			<li
 				class="group relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"
 			>
