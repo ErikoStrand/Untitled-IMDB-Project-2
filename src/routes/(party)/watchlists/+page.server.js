@@ -1,4 +1,4 @@
-const createWatchlist = 'INSERT INTO watchlist (name, ownerID) VALUES (?, ?)';
+const createWatchlist = 'INSERT INTO watchlist (name, ownerID, addedBy) VALUES (?, ?, ?)';
 const getWatchlists = 'SELECT * FROM watchlist where ownerID = (?)';
 import { query } from '$lib/server/db/mysql.js';
 import { json } from '@sveltejs/kit';
@@ -8,9 +8,10 @@ export const actions = {
 		const data = await request.formData();
 		const name = sanitizeInput(data.get('name')?.toString() || '');
 		const ownerID = sanitizeInput(data.get('ownerID')?.toString() || '');
+		const username = sanitizeInput(data.get('username')?.toString() || '');
 
 		try {
-			await query(createWatchlist, [name, ownerID]);
+			await query(createWatchlist, [name, ownerID, username]);
 		} catch (error) {
 			return json({ error: error.message }, { status: 500 });
 		}

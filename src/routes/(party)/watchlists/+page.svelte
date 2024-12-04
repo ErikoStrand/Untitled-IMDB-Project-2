@@ -1,5 +1,4 @@
 <script>
-	import Modal from '$lib/Modal.svelte';
 	import { user } from '$lib/stores';
 	import { _deleteWatchlist } from './+page.js';
 	const person = $derived($user);
@@ -38,6 +37,8 @@
 				class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
 			/>
 			<input type="hidden" name="ownerID" value={person?.id} />
+			<input type="hidden" name="username" value={person?.global_name} />
+
 			<button
 				class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
 			>
@@ -53,7 +54,10 @@
 		<h1 class="~text-3xl/5xl">Your Watchlists</h1>
 		{#each watchlists as watchlist}
 			<div class="flex items-center gap-2 bg-zinc-800 shadow-md shadow-zinc-800">
-				<a href="/watchlists/{watchlist.name}" class="h-32 flex-grow p-2 font-medium">
+				<a
+					href="/watchlists/{watchlist.ID}/{watchlist.name}"
+					class="h-32 flex-grow p-2 font-medium"
+				>
 					<h1>{watchlist.name}</h1>
 				</a>
 				<button
