@@ -1,5 +1,6 @@
 <script>
-	import { uploaded } from '$lib/stores';
+	import { user } from '$lib/stores';
+	const person = $derived($user);
 </script>
 
 <nav
@@ -17,8 +18,22 @@
 	<ul
 		class="flex flex-row gap-4 px-6 font-heebo text-base font-semibold tracking-wide text-stone-50"
 	>
-		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-			<a href="/api/discord/auth" class="block leading-10" title="Login">Login</a>
-		</li>
+		{#if !person?.id}
+			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
+				<a href="/api/discord/auth" class="block leading-10" title="Login">Login</a>
+			</li>
+		{:else}
+			<li
+				class="group relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"
+			>
+				<h2 class="block leading-10">{person.username}</h2>
+				<a
+					href="/api/discord/auth/signout"
+					class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-red-500 px-3 py-1 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+				>
+					Sign Out
+				</a>
+			</li>
+		{/if}
 	</ul>
 </nav>
