@@ -1,8 +1,8 @@
 // db.js
 import mysql from 'mysql2/promise';
 import { env } from '$env/dynamic/private';
-
 // Create a single pool instance that's reused
+console.log(env);
 const pool = mysql.createPool({
 	host: env.DB_HOST,
 	user: env.DB_USER,
