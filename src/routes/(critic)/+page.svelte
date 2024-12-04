@@ -10,7 +10,7 @@
 	<title>IMDb Stats - Your one stop shop to get all* the data</title>
 </svelte:head>
 <div id="flying-notes-container"></div>
-<div class="mx-auto mt-28 flex max-w-screen-md flex-col justify-center pb-48 pl-6 pr-6 sm:pb-0">
+<div class="-m-12 mx-auto flex h-full max-w-screen-md flex-col justify-center pl-6 pr-6 sm:pb-0">
 	<h1
 		class="animate-slide-up text-center font-archivo text-7xl font-extrabold leading-tight tracking-tight text-stone-100 md:text-8xl"
 	>

@@ -4,4 +4,4 @@
 </script>
 
 <PartyNavbar />
-{@render children()}
+<main class="h-dvh pt-20">{@render children()}</main>
