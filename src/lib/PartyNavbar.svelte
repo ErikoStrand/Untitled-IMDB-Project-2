@@ -33,7 +33,7 @@
 			>
 				<div class="flex flex-row gap-2">
 					<h2 class="block leading-10">
-						{person.username}
+						{person.global_name}
 					</h2>
 					<img
 						class="h-8 self-center rounded-md"
