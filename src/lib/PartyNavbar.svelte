@@ -34,12 +34,7 @@
 			</li>
 		{:else}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-				<a
-					href="/watchlists"
-					data-sveltekit-preload-data="off"
-					class="block leading-10"
-					title="Watchlists">Watchlists</a
-				>
+				<a href="/watchlists" class="block leading-10" title="Watchlists">Watchlists</a>
 			</li>
 			<li
 				class="group relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"

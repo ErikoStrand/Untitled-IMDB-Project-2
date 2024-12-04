@@ -13,6 +13,7 @@
 			placeholder="Watchlist Name"
 			class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
 		/>
+		<input type="hidden" name="ownerID" value={person?.id} />
 		<button
 			class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
 		>
