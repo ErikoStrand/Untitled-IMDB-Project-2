@@ -20,7 +20,12 @@
 	>
 		{#if !person?.id}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-				<a href="/api/discord/auth" class="block leading-10" title="Login">Login</a>
+				<a
+					href="/api/discord/auth"
+					data-sveltekit-preload-data="off"
+					class="block leading-10"
+					title="Login">Login</a
+				>
 			</li>
 		{:else}
 			<li
@@ -29,9 +34,9 @@
 				<h2 class="block leading-10">{person.username}</h2>
 				<a
 					href="/api/discord/auth/signout"
-					class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-red-500 px-3 py-1 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+					class="absolute right-[1px] rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
 				>
-					Sign Out
+					Leave
 				</a>
 			</li>
 		{/if}
