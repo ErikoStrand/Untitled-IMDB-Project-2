@@ -6,7 +6,17 @@ const loadSQL =
 	'SELECT b.*, r.rating, r.votes FROM basic b LEFT JOIN rating r ON b.ID = r.ID WHERE b.ID = ?';
 const addSQL =
 	'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID, addedBy) VALUES (?, ?, ?, ?)';
-const existSQL = 'SELECT basic.title FROM basic WHERE ID = (?)';
+const existSQL = `
+	SELECT b.title 
+	FROM basic b 
+	WHERE b.ID = ? 
+	AND NOT EXISTS (
+			SELECT 1 
+			FROM mediaInWatchlist m 
+			WHERE m.watchlistID = ? 
+			AND m.IMDbID = ?
+	)
+`;
 
 export const actions = {
 	default: async ({ request, params }) => {
@@ -18,7 +28,7 @@ export const actions = {
 		const username = sanitizeInput(data.get('username')?.toString() || '');
 
 		try {
-			if (checkExist(id)) {
+			if (await checkExist(id, watchlistId)) {
 				await query(addSQL, [watchlistId, ownerID, id, username]);
 				return {
 					success: true,
@@ -46,10 +56,11 @@ function sanitizeInput(input) {
 		.slice(0, 500);
 }
 
-async function checkExist(id) {
-	const exist = await query(existSQL, [id]);
+async function checkExist(id, watchlistID) {
+	const exist = await query(existSQL, [id, watchlistID, id]);
+	console.log(exist);
 	const hasRows = exist && exist.length > 0;
 	// needs to be nested array but it works yippie
-	console.log('Exist: ', hasRows);
-	return json(hasRows);
+	console.log('Can Insert: ', hasRows);
+	return hasRows;
 }

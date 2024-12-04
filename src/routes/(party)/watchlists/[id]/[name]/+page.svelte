@@ -2,7 +2,7 @@
 	import { user } from '$lib/stores';
 	const person = $derived($user);
 	let showModal = $state(true);
-	let../../[slug]/$types.js { data } = $props();
+	let { data } = $props();
 	let watchlists = $state(data.watchlists);
 </script>
 
