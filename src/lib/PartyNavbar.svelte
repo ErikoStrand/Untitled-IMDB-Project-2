@@ -1,6 +1,25 @@
 <script>
 	import { user } from '$lib/stores';
 	const person = $derived($user);
+	let showSignout = $state(false);
+
+	function handleClick(event) {
+		if (!event.target.closest('.profile-area')) {
+			showSignout = false;
+		}
+	}
+
+	$effect(() => {
+		document.addEventListener('click', handleClick);
+		return () => {
+			document.removeEventListener('click', handleClick);
+		};
+	});
+
+	function toggleSignout(event) {
+		event.stopPropagation(); // Prevent document click from immediately closing
+		showSignout = !showSignout;
+	}
 </script>
 
 <nav
@@ -37,9 +56,9 @@
 				<a href="/watchlists" class="block leading-10" title="Watchlists">Watchlists</a>
 			</li>
 			<li
-				class="group relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"
+				class="profile-area relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"
 			>
-				<div class="flex flex-row gap-2">
+				<button class="flex cursor-pointer flex-row gap-2" onclick={toggleSignout}>
 					<h2 class="block leading-10">
 						{person.global_name}
 					</h2>
@@ -48,13 +67,15 @@
 						src="https://cdn.discordapp.com/avatars/{person.id}/{person.avatar}.png"
 						alt="{person.usernames}s picture"
 					/>
-				</div>
-				<a
-					href="/api/discord/auth/signout"
-					class="absolute right-[1px] rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-				>
-					Leave
-				</a>
+				</button>
+				{#if showSignout}
+					<a
+						href="/api/discord/auth/signout"
+						class="absolute right-[1px] rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50"
+					>
+						Leave
+					</a>
+				{/if}
 			</li>
 		{/if}
 	</ul>
