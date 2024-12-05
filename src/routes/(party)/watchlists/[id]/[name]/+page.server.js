@@ -3,7 +3,7 @@ import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes FROM basic b LEFT JOIN rating r ON b.ID = r.ID WHERE b.ID = ?';
+	'SELECT b.*, r.rating, r.votes FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID WHERE m.watchlistID = ?';
 const addSQL =
 	'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID, addedBy) VALUES (?, ?, ?, ?)';
 const existSQL = `
@@ -63,4 +63,17 @@ async function checkExist(id, watchlistID) {
 	// needs to be nested array but it works yippie
 	console.log('Can Insert: ', hasRows);
 	return hasRows;
+}
+
+export async function load({ params }) {
+	try {
+		const media = await query(loadSQL, [params.id]);
+		return {
+			media
+		};
+	} catch (error) {
+		return {
+			error: error.message
+		};
+	}
 }

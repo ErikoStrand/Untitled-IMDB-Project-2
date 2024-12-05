@@ -19,7 +19,7 @@ export async function POST({ request }) {
 		}
 
 		const { episodes, posterSize, backdropSize, post } = await request.json();
-
+		console.log(episodes);
 		if (!episodes || !Array.isArray(episodes)) {
 			throw error(400, 'Episodes must be an array');
 		}
@@ -30,6 +30,7 @@ export async function POST({ request }) {
 		if (!post) {
 			try {
 				episodesData = await querymany(parentSQL, [episodes]);
+				console.log(episodesData);
 			} catch (dbError) {
 				console.error('Database error:', dbError);
 				throw error(500, 'Database query failed');
@@ -128,18 +129,20 @@ async function* getShowImages(episodes, posterSize, backdropSize = 'original') {
 			const findData = await findResponse.json();
 			let result;
 
-			if (findData.tv_results?.length > 0 || findData.tv_episode_results?.length > 0) {
-				const show = findData.tv_results?.[0] || findData.tv_episode_results?.[0];
-				const posterUrl = show.poster_path
-					? `https://image.tmdb.org/t/p/${posterSize}${show.poster_path}`
-					: show.still_path
-						? `https://image.tmdb.org/t/p/${posterSize}${show.still_path}`
+			// Check for TV shows, episodes, or movies
+			const mediaItem =
+				findData.tv_results?.[0] || findData.tv_episode_results?.[0] || findData.movie_results?.[0];
+
+			if (mediaItem) {
+				const posterUrl = mediaItem.poster_path
+					? `https://image.tmdb.org/t/p/${posterSize}${mediaItem.poster_path}`
+					: mediaItem.still_path
+						? `https://image.tmdb.org/t/p/${posterSize}${mediaItem.still_path}`
 						: null;
-				const backdropUrl = show.backdrop_path
-					? `https://image.tmdb.org/t/p/${backdropSize}${show.backdrop_path}`
+				const backdropUrl = mediaItem.backdrop_path
+					? `https://image.tmdb.org/t/p/${backdropSize}${mediaItem.backdrop_path}`
 					: null;
 
-				// Only create result if we have at least one image
 				if (posterUrl || backdropUrl) {
 					result = {
 						id: episode.ID,
