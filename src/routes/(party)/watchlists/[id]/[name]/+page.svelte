@@ -5,6 +5,7 @@
 	import { _nFormatter } from '../../../../(critic)/stats/+page.js';
 	import { _loadDescriptions, _formatRuntime, _deleteMedia } from './+page.js';
 	import { deserialize } from '$app/forms';
+	import { fly } from 'svelte/transition';
 	const person = $derived($user);
 	let showModal = $state(true);
 	let { data } = $props();
@@ -65,8 +66,10 @@
 	</section>
 
 	<section class="flex flex-col gap-4">
-		{#each medias as media}
+		{#each medias as media (media.mediaID)}
 			<div
+				in:fly={{ x: 50, duration: 300 }}
+				out:fly={{ x: -50, duration: 200 }}
 				class="flex flex-col gap-3 rounded-md border-2 border-dashed border-transparent bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800 duration-300 ease-linear hover:border-dashed hover:border-blue-500"
 			>
 				<section class="flex flex-row gap-3">
