@@ -88,7 +88,7 @@
 						<div>
 							Once you've done that click
 							<span class="font-bold underline underline-offset-1">export</span>
-							and save the file as "ratings.cvs".
+							and save the file as "ratings.csv".
 						</div>
 					</div>
 					<div class="mt-2 text-sm text-neutral-400 opacity-80">
