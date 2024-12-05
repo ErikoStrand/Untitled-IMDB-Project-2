@@ -3,7 +3,7 @@ import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID WHERE m.watchlistID = ?';
+	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID WHERE m.watchlistID = ?';
 const addSQL =
 	'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID, addedBy) VALUES (?, ?, ?, ?)';
 const existSQL = `

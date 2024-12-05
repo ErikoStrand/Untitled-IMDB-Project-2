@@ -3,23 +3,45 @@
 	import { onMount } from 'svelte';
 	import { _loadImages } from '../../../../(critic)/stats/shows/+page.js';
 	import { _nFormatter } from '../../../../(critic)/stats/+page.js';
-	import { _loadDescriptions, _formatRuntime } from './+page.js';
+	import { _loadDescriptions, _formatRuntime, _deleteMedia } from './+page.js';
 	import { deserialize } from '$app/forms';
 	const person = $derived($user);
 	let showModal = $state(true);
 	let { data } = $props();
-	let watchlists = $state(data.watchlists);
+	let medias = $state(data.media);
 	let images = $state({});
 	let descriptions = $state({});
 
 	onMount(async () => {
-		await _loadImages(data.media, 'w92', 'w780', true, (id, result) => {
+		await _loadImages(medias, 'w92', 'w780', true, (id, result) => {
 			images[id] = result;
 		});
-		await _loadDescriptions(data.media, (id, description) => {
+		await _loadDescriptions(medias, (id, description) => {
 			descriptions[id] = description;
 		});
 	});
+
+	let confirmDelete = $state(null);
+
+	async function handleDelete(ID) {
+		if (confirmDelete === ID) {
+			try {
+				await _deleteMedia(ID);
+				// Create a new array reference to trigger reactivity
+				medias = [...medias.filter((media) => media.mediaID !== ID)];
+			} catch (error) {
+				console.error('Failed to delete media:', error);
+			}
+			confirmDelete = null; // Reset confirmation state after deletion
+		} else {
+			confirmDelete = ID;
+			setTimeout(() => {
+				if (confirmDelete === ID) {
+					confirmDelete = null;
+				}
+			}, 3000);
+		}
+	}
 </script>
 
 <div class="flex flex-col gap-8 text-stone-50 ~px-2/6">
@@ -43,7 +65,7 @@
 	</section>
 
 	<section class="flex flex-col gap-4">
-		{#each data.media as media}
+		{#each medias as media}
 			<div
 				class="flex flex-col gap-3 rounded-md border-2 border-dashed border-transparent bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800 duration-300 ease-linear hover:border-dashed hover:border-blue-500"
 			>
@@ -64,7 +86,7 @@
 							<div class="h-[138px] w-[92px] animate-pulse rounded-md bg-zinc-700"></div>
 						{/if}
 					</div>
-					<section class="mt-auto">
+					<section class="mt-auto flex flex-1 flex-col">
 						<!-- svelte-ignore a11y_no_static_element_interactions -->
 						<!-- svelte-ignore a11y_click_events_have_key_events -->
 						<div class="flex flex-row gap-2" onclick={(e) => e.stopPropagation()}>
@@ -104,14 +126,22 @@
 								<span class="text-gray-400">({_nFormatter(media.votes, 1)})</span>
 							</div>
 						</div>
-						<div class="flex gap-2">
-							{#each media.genres.split(',') as genre, i}
-								{#if i < media.genres.split(',').length - 1}
-									<span>{genre},</span>
-								{:else}
-									<span>{genre}</span>
-								{/if}
-							{/each}
+						<div class="flex justify-between gap-2">
+							<div>
+								{#each media.genres.split(',') as genre, i}
+									{#if i < media.genres.split(',').length - 1}
+										<span>{genre},</span>
+									{:else}
+										<span>{genre}</span>
+									{/if}
+								{/each}
+							</div>
+							<button
+								class=" self-end rounded-md bg-red-500 px-4 font-medium transition-colors duration-200 hover:bg-red-600"
+								onclick={() => handleDelete(media.mediaID)}
+							>
+								{confirmDelete === media.mediaID ? 'Sure?' : 'Delete'}
+							</button>
 						</div>
 					</section>
 				</section>
