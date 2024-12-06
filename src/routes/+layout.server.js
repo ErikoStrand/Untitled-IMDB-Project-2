@@ -8,7 +8,7 @@ const upsertUserSQL = `
 `;
 
 export async function load({ locals }) {
-	if (locals.user.id != null) {
+	if (locals?.user?.id != null) {
 		try {
 			await query(upsertUserSQL, [
 				locals.user.id,
