@@ -12,6 +12,7 @@
 	let medias = $state(data.media);
 	let images = $state({});
 	let descriptions = $state({});
+	$inspect(person);
 
 	onMount(async () => {
 		await _loadImages(medias, 'w92', 'w780', true, (id, result) => {
@@ -60,7 +61,7 @@
 			<button
 				class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
 			>
-				Add Movie
+				Add Media
 			</button>
 		</form>
 	</section>
