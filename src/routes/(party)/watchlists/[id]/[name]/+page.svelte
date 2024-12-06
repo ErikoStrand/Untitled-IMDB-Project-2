@@ -19,16 +19,23 @@
 	let medias = $state(data.media);
 	let images = $state({});
 	let descriptions = $state({});
-	$inspect(person);
 
-	onMount(async () => {
-		await _loadImages(medias, 'w92', 'w780', true, (id, result) => {
+	$effect(() => {
+		if (medias) {
+			loadMediaData(medias);
+		}
+	});
+
+	async function loadMediaData(mediaList) {
+		const newMedias = mediaList.filter((media) => !images[media.ID]);
+
+		await _loadImages(newMedias, 'w92', 'w780', true, (id, result) => {
 			images[id] = result;
 		});
-		await _loadDescriptions(medias, (id, description) => {
+		await _loadDescriptions(newMedias, (id, description) => {
 			descriptions[id] = description;
 		});
-	});
+	}
 
 	let confirmDelete = $state(null);
 
