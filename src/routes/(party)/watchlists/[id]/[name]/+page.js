@@ -15,12 +15,7 @@ export async function _handleVote(isUpvote, mediaID) {
 			throw new Error('Vote request failed');
 		}
 
-		const data = await response.json();
-		return {
-			mediaID: data.mediaID,
-			userVote: data.userVote,
-			voteCount: data.voteCount
-		};
+		return await response.json();
 	} catch (error) {
 		console.error('Failed to vote:', error);
 		return null;

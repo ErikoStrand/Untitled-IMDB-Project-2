@@ -3,7 +3,7 @@ import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,d.global_name, d.avatar FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ?';
+	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,d.global_name, d.avatar,(SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount, (SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ?';
 const addSQL = 'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID) VALUES (?, ?, ?)';
 const existSQL = `
 	SELECT b.title 
@@ -62,9 +62,10 @@ async function checkExist(id, watchlistID) {
 	return hasRows;
 }
 
-export async function load({ params }) {
+export async function load({ params, locals }) {
 	try {
-		const media = await query(loadSQL, [params.id]);
+		const media = await query(loadSQL, [locals.user.id, params.id]);
+		console.log(media);
 		return {
 			media
 		};
