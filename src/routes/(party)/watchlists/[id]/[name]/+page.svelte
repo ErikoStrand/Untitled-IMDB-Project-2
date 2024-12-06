@@ -3,7 +3,13 @@
 	import { onMount } from 'svelte';
 	import { _loadImages } from '../../../../(critic)/stats/shows/+page.js';
 	import { _nFormatter } from '../../../../(critic)/stats/+page.js';
-	import { _loadDescriptions, _formatRuntime, _deleteMedia } from './+page.js';
+	import {
+		_loadDescriptions,
+		_formatRuntime,
+		_deleteMedia,
+		_getTimeAgo,
+		_handleVote
+	} from './+page.js';
 	import { deserialize } from '$app/forms';
 	import { fly } from 'svelte/transition';
 	const person = $derived($user);
@@ -56,7 +62,6 @@
 				class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
 			/>
 			<input type="hidden" name="ownerID" value={person?.id} />
-			<input type="hidden" name="username" value={person?.global_name} />
 
 			<button
 				class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
@@ -140,16 +145,48 @@
 									{/if}
 								{/each}
 							</div>
-							<button
-								class=" self-end rounded-md bg-red-500 px-4 font-medium transition-colors duration-200 hover:bg-red-600"
-								onclick={() => handleDelete(media.mediaID)}
-							>
-								{confirmDelete === media.mediaID ? 'Sure?' : 'Delete'}
-							</button>
 						</div>
 					</section>
+					<button
+						class="self-start rounded-md bg-red-500 px-4 font-medium transition-colors duration-200 hover:bg-red-600"
+						onclick={() => handleDelete(media.mediaID)}
+					>
+						{confirmDelete === media.mediaID ? 'Sure?' : 'Delete'}
+					</button>
 				</section>
 				<p>{descriptions[media.ID]}</p>
+				<nav class="flex flex-row items-center gap-2">
+					<div class="flex items-center gap-2 text-stone-200">
+						<button
+							class="rounded-full p-1.5 transition-colors hover:bg-zinc-700/50 {true
+								? 'text-green-400'
+								: ''}"
+							onclick={() => _handleVote(true, media.mediaID)}
+						>
+							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M12 4l8 8h-6v8h-4v-8H4z" />
+							</svg>
+						</button>
+
+						<span class="min-w-[2rem] text-center font-medium"></span>
+
+						<button
+							class="rounded-full p-1.5 transition-colors hover:bg-zinc-700/50 {false
+								? 'text-red-400'
+								: ''}"
+							onclick={() => _handleVote(false, media.mediaID)}
+						>
+							<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M12 20l-8-8h6V4h4v8h6z" />
+							</svg>
+						</button>
+					</div>
+					<p class="space-x-1">
+						added by <span class="font-heebo text-lg text-blue-600">{media.global_name}</span><span
+							>{_getTimeAgo(media.addedAt)}</span
+						>
+					</p>
+				</nav>
 			</div>
 		{/each}
 	</section>

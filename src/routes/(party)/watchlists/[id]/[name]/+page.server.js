@@ -3,9 +3,8 @@ import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID WHERE m.watchlistID = ?';
-const addSQL =
-	'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID, addedBy) VALUES (?, ?, ?, ?)';
+	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,d.global_name, d.avatar FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ?';
+const addSQL = 'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID) VALUES (?, ?, ?)';
 const existSQL = `
 	SELECT b.title 
 	FROM basic b 
@@ -25,11 +24,10 @@ export const actions = {
 		const data = await request.formData();
 		const id = sanitizeInput(data.get('IMDbID')?.toString() || '');
 		const ownerID = sanitizeInput(data.get('ownerID')?.toString() || '');
-		const username = sanitizeInput(data.get('username')?.toString() || '');
 
 		try {
 			if (await checkExist(id, watchlistId)) {
-				await query(addSQL, [watchlistId, ownerID, id, username]);
+				await query(addSQL, [watchlistId, ownerID, id]);
 				return {
 					success: true,
 					message: 'Movie added successfully'
@@ -58,7 +56,6 @@ function sanitizeInput(input) {
 
 async function checkExist(id, watchlistID) {
 	const exist = await query(existSQL, [id, watchlistID, id]);
-	console.log(exist);
 	const hasRows = exist && exist.length > 0;
 	// needs to be nested array but it works yippie
 	console.log('Can Insert: ', hasRows);

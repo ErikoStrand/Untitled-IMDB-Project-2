@@ -19,7 +19,6 @@ export async function POST({ request }) {
 		}
 
 		const { episodes, posterSize, backdropSize, post } = await request.json();
-		console.log(episodes);
 		if (!episodes || !Array.isArray(episodes)) {
 			throw error(400, 'Episodes must be an array');
 		}
@@ -30,7 +29,6 @@ export async function POST({ request }) {
 		if (!post) {
 			try {
 				episodesData = await querymany(parentSQL, [episodes]);
-				console.log(episodesData);
 			} catch (dbError) {
 				console.error('Database error:', dbError);
 				throw error(500, 'Database query failed');

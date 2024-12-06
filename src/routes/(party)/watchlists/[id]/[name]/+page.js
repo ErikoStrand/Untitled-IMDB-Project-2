@@ -1,3 +1,64 @@
+export async function _handleVote(isUpvote, mediaID) {
+	try {
+		const response = await fetch('/api/party/votes', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				mediaID: mediaID,
+				vote: isUpvote
+			})
+		});
+
+		if (!response.ok) {
+			throw new Error('Vote request failed');
+		}
+
+		const data = await response.json();
+		return {
+			mediaID: data.mediaID,
+			userVote: data.userVote,
+			voteCount: data.voteCount
+		};
+	} catch (error) {
+		console.error('Failed to vote:', error);
+		return null;
+	}
+}
+
+export function _getTimeAgo(unixTimestamp) {
+	const now = Math.floor(Date.now() / 1000);
+	const diff = now - unixTimestamp;
+
+	if (diff < 60) {
+		return 'just now';
+	}
+
+	if (diff < 3600) {
+		const minutes = Math.floor(diff / 60);
+		return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+	}
+
+	if (diff < 86400) {
+		const hours = Math.floor(diff / 3600);
+		return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+	}
+
+	if (diff < 2592000) {
+		const days = Math.floor(diff / 86400);
+		return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+	}
+
+	if (diff < 31536000) {
+		const months = Math.floor(diff / 2592000);
+		return `${months} ${months === 1 ? 'month' : 'months'} ago`;
+	}
+
+	const years = Math.floor(diff / 31536000);
+	return `${years} ${years === 1 ? 'year' : 'years'} ago`;
+}
+
 export async function _deleteMedia(id) {
 	try {
 		const response = await fetch('/api/party/deleteMedia', {
