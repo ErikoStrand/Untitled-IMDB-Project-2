@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { _loadImages } from '../../../../(critic)/stats/shows/+page.js';
 	import { _nFormatter } from '../../../../(critic)/stats/+page.js';
+	import { page } from '$app/stores';
 	import {
 		_loadDescriptions,
 		_formatRuntime,
@@ -46,6 +47,38 @@
 			});
 		}
 	}
+
+	async function handleSubmit(event) {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		const watchlistId = $page.params.id;
+
+		try {
+			const response = await fetch('/api/party/addMovie', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					watchlistId,
+					IMDbID: formData.get('IMDbID'),
+					ownerID: formData.get('ownerID')
+				})
+			});
+
+			const result = await response.json();
+
+			if (result.success) {
+				medias = result.media;
+				event.target.reset();
+			} else {
+				console.error('Failed:', result.message);
+			}
+		} catch (error) {
+			console.error('Failed to add media:', error);
+		}
+	}
+
 	async function handleDelete(ID) {
 		if (confirmDelete === ID) {
 			try {
@@ -69,7 +102,7 @@
 
 <div class="flex flex-col gap-8 text-stone-50 ~px-2/6">
 	<section id="add" class="text-stone-50">
-		<form method="POST" class="flex flex-row gap-2 font-archivo">
+		<form onsubmit={handleSubmit} class="flex flex-row gap-2 font-archivo">
 			<input
 				type="text"
 				name="IMDbID"
