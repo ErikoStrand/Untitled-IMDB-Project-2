@@ -19,8 +19,6 @@ const existSQL = `
 async function checkExist(id, watchlistID) {
 	const exist = await query(existSQL, [id, watchlistID, id]);
 	const hasRows = exist && exist.length > 0;
-	// needs to be nested array but it works yippie
-	console.log('Can Insert: ', hasRows);
 	return hasRows;
 }
 export async function POST({ request }) {

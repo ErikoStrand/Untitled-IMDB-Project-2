@@ -21,8 +21,20 @@
 	let images = $state({});
 	let descriptions = $state({});
 	let debugStatus = $state('');
+	let loadingDots = $state('');
 	let currentProgress = $state({ current: 0, total: 0 });
 
+	$effect(() => {
+		if (debugStatus == 'Retrieving list') {
+			const interval = setInterval(() => {
+				loadingDots = loadingDots.length >= 3 ? '' : loadingDots + '.';
+			}, 500);
+
+			return () => clearInterval(interval);
+		} else {
+			loadingDots = '';
+		}
+	});
 	$effect(() => {
 		if (medias) {
 			loadMediaData(medias);
@@ -85,7 +97,7 @@
 
 		try {
 			if (input.includes('imdb.com/list/')) {
-				debugStatus = 'Retrieving list...';
+				debugStatus = 'Retrieving list';
 				const response = await _getIDsFromList(input);
 				const { IMDb_IDS } = response;
 
@@ -187,7 +199,7 @@
 			</div>
 			{#if debugStatus}
 				<div class="font-mono text-sm text-green-400">
-					{debugStatus}
+					{debugStatus}{#if debugStatus == 'Retrieving list'}{loadingDots}{/if}
 					{#if currentProgress.total > 0}
 						({currentProgress.current}/{currentProgress.total})
 					{/if}

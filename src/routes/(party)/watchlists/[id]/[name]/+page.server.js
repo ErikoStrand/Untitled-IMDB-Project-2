@@ -65,7 +65,6 @@ async function checkExist(id, watchlistID) {
 export async function load({ params, locals }) {
 	try {
 		const media = await query(loadSQL, [locals.user.id, params.id]);
-		console.log(media);
 		return {
 			media
 		};
