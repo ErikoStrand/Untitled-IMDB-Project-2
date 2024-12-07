@@ -9,7 +9,8 @@
 		_formatRuntime,
 		_deleteMedia,
 		_getTimeAgo,
-		_handleVote
+		_handleVote,
+		_getIDsFromList
 	} from './+page.js';
 	import { deserialize } from '$app/forms';
 	import { fly } from 'svelte/transition';
@@ -19,6 +20,8 @@
 	let medias = $state(data.media);
 	let images = $state({});
 	let descriptions = $state({});
+	let debugStatus = $state('');
+	let currentProgress = $state({ current: 0, total: 0 });
 
 	$effect(() => {
 		if (medias) {
@@ -27,12 +30,11 @@
 	});
 
 	async function loadMediaData(mediaList) {
-		const newMedias = mediaList.filter((media) => !images[media.ID]);
-
-		await _loadImages(newMedias, 'w92', 'w780', true, (id, result) => {
+		await _loadImages(mediaList, 'w92', 'w780', true, (id, result) => {
 			images[id] = result;
 		});
-		await _loadDescriptions(newMedias, (id, description) => {
+
+		await _loadDescriptions(mediaList, (id, description) => {
 			descriptions[id] = description;
 		});
 	}
@@ -55,31 +57,78 @@
 		}
 	}
 
+	async function addMovie(watchlistId, IMDbID, ownerID) {
+		const response = await fetch('/api/party/addMovie', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				watchlistId,
+				IMDbID,
+				ownerID
+			})
+		});
+		const result = await response.json();
+		if (result.success) {
+			medias = result.media;
+			event.target.reset();
+		}
+	}
+
 	async function handleSubmit(event) {
 		event.preventDefault();
 		const formData = new FormData(event.target);
+		const input = formData.get('IMDbID');
+		const ownerID = formData.get('ownerID');
 		const watchlistId = $page.params.id;
 
 		try {
-			const response = await fetch('/api/party/addMovie', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					watchlistId,
-					IMDbID: formData.get('IMDbID'),
-					ownerID: formData.get('ownerID')
-				})
-			});
+			if (input.includes('imdb.com/list/')) {
+				const response = await _getIDsFromList(input);
+				const { IMDb_IDS } = response;
 
-			const result = await response.json();
+				// Add all movies first
+				for (const IMDbID of IMDb_IDS) {
+					const response = await fetch('/api/party/addMovie', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							watchlistId,
+							IMDbID,
+							ownerID
+						})
+					});
+					const result = await response.json();
+					if (result.success) {
+						medias = result.media;
+					}
+				}
 
-			if (result.success) {
-				medias = result.media;
+				// Load media data once after all movies are added
+				await loadMediaData(medias);
 				event.target.reset();
 			} else {
-				console.error('Failed:', result.message);
+				// Handle single IMDb ID
+				const response = await fetch('/api/party/addMovie', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						watchlistId,
+						IMDbID: input,
+						ownerID
+					})
+				});
+				const result = await response.json();
+				if (result.success) {
+					medias = result.media;
+					await loadMediaData(medias);
+					event.target.reset();
+				}
 			}
 		} catch (error) {
 			console.error('Failed to add media:', error);
@@ -113,7 +162,7 @@
 			<input
 				type="text"
 				name="IMDbID"
-				placeholder="IMDb ID"
+				placeholder="IMDb ID or List Link"
 				class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
 			/>
 			<input type="hidden" name="ownerID" value={person?.id} />
@@ -255,7 +304,6 @@
 								viewBox="0 0 512 512"
 								><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
 								{#if !media.userVote && media.userVote != null}
-									{console.log(media.userVote)}
 									<path
 										d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2l144 0c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48l-97.5 0c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3l0-38.3 0-48 0-24.9c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192l64 0c17.7 0 32 14.3 32 32l0 224c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32L0 224c0-17.7 14.3-32 32-32z"
 									/>

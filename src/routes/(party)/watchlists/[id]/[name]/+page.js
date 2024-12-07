@@ -21,7 +21,28 @@ export async function _handleVote(isUpvote, mediaID) {
 		return null;
 	}
 }
+export async function _getIDsFromList(listURL) {
+	try {
+		const response = await fetch('/api/party/getIDSFromList', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				webpage_url: listURL
+			})
+		});
 
+		if (!response.ok) {
+			throw new Error('Failed to fetch IMDb IDs');
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error('Failed to fetch IMDb IDs:', error);
+		return null;
+	}
+}
 export function _getTimeAgo(unixTimestamp) {
 	const now = Math.floor(Date.now() / 1000);
 	const diff = now - unixTimestamp;
