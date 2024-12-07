@@ -85,11 +85,18 @@
 
 		try {
 			if (input.includes('imdb.com/list/')) {
+				debugStatus = 'Retrieving list...';
 				const response = await _getIDsFromList(input);
 				const { IMDb_IDS } = response;
 
-				// Add all movies first
-				for (const IMDbID of IMDb_IDS) {
+				debugStatus = `Found ${IMDb_IDS.length} items`;
+				currentProgress = { current: 0, total: IMDb_IDS.length };
+
+				// Add each movie from the list
+				for (const [index, IMDbID] of IMDb_IDS.entries()) {
+					debugStatus = `Adding ${index + 1}/${IMDb_IDS.length}: ${IMDbID}`;
+					currentProgress.current = index + 1;
+
 					const response = await fetch('/api/party/addMovie', {
 						method: 'POST',
 						headers: {
@@ -107,8 +114,12 @@
 					}
 				}
 
-				// Load media data once after all movies are added
+				debugStatus = 'Loading media data...';
 				await loadMediaData(medias);
+				debugStatus = 'Complete!';
+				setTimeout(() => {
+					debugStatus = '';
+				}, 2000);
 				event.target.reset();
 			} else {
 				// Handle single IMDb ID
@@ -131,6 +142,7 @@
 				}
 			}
 		} catch (error) {
+			debugStatus = `Error: ${error.message}`;
 			console.error('Failed to add media:', error);
 		}
 	}
@@ -158,20 +170,29 @@
 
 <div class="flex flex-col gap-8 text-stone-50 ~px-2/6">
 	<section id="add" class="text-stone-50">
-		<form onsubmit={handleSubmit} class="flex flex-row gap-2 font-archivo">
-			<input
-				type="text"
-				name="IMDbID"
-				placeholder="IMDb ID or List Link"
-				class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
-			/>
-			<input type="hidden" name="ownerID" value={person?.id} />
-
-			<button
-				class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
-			>
-				Add Media
-			</button>
+		<form onsubmit={handleSubmit} class="flex flex-col gap-2 font-archivo">
+			<div class="flex flex-row gap-2">
+				<input
+					type="text"
+					name="IMDbID"
+					placeholder="IMDb ID or List Link"
+					class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
+				/>
+				<input type="hidden" name="ownerID" value={person?.id} />
+				<button
+					class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
+				>
+					Add Media
+				</button>
+			</div>
+			{#if debugStatus}
+				<div class="font-mono text-sm text-green-400">
+					{debugStatus}
+					{#if currentProgress.total > 0}
+						({currentProgress.current}/{currentProgress.total})
+					{/if}
+				</div>
+			{/if}
 		</form>
 	</section>
 
