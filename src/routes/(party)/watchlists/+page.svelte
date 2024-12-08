@@ -84,7 +84,9 @@
 					<div
 						in:fly={{ x: 50, duration: 300 }}
 						out:fly={{ x: -50, duration: 200 }}
-						class="flex items-center gap-2 border-l-4 border-{color}-500 bg-zinc-800 shadow-md shadow-zinc-800"
+						class={`flex items-center gap-2 border-l-4 ${
+							color === 'blue' ? 'border-blue-500' : 'border-green-500'
+						} bg-zinc-800 shadow-md shadow-zinc-800`}
 					>
 						<a
 							href="/watchlists/{watchlist.ID}/{watchlist.name}"
