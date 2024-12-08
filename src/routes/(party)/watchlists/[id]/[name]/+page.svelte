@@ -19,7 +19,6 @@
 	let showModal = $state(true);
 	let { data } = $props();
 	let { permissions } = $state(data);
-	console.log(permissions);
 	let medias = $state(data.media);
 	let images = $state({});
 	let descriptions = $state({});
@@ -196,37 +195,43 @@
 
 <div class="flex flex-col gap-8 text-stone-50 ~px-2/6">
 	<section id="add" class="text-stone-50">
-		<form onsubmit={handleSubmit} class="flex flex-col gap-2 font-archivo">
-			<div class="flex flex-row gap-2">
-				<input
-					type="text"
-					name="IMDbID"
-					placeholder="IMDb ID or List Link"
-					class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
-				/>
-				<input type="hidden" name="ownerID" value={person?.id} />
-				<button
-					class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
-				>
-					Add Media
-				</button>
-			</div>
-		</form>
-		<form onsubmit={handleInvite} class="flex flex-col gap-2 font-archivo">
-			<div class="flex flex-row gap-2">
-				<input
-					type="text"
-					name="userId"
-					placeholder="Enter Discord User ID"
-					class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
-				/>
-				<button
-					class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
-				>
-					Invite User
-				</button>
-			</div>
-		</form>
+		<section class="flex flex-wrap justify-between gap-3">
+			<form onsubmit={handleSubmit} class="min-w-[320px] max-w-[360px] flex-1 font-archivo">
+				<div class="flex flex-row gap-2">
+					<input
+						type="text"
+						name="IMDbID"
+						placeholder="IMDb ID or List Link"
+						class="w-full rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
+					/>
+					<input type="hidden" name="ownerID" value={person?.id} />
+					<button
+						class="whitespace-nowrap rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
+					>
+						Add Media
+					</button>
+				</div>
+			</form>
+
+			{#if permissions.didCreate}
+				<form onsubmit={handleInvite} class="min-w-[320px] max-w-[360px] flex-1 font-archivo">
+					<div class="flex flex-row gap-2">
+						<input
+							type="text"
+							name="userId"
+							placeholder="Enter Discord User ID"
+							class="w-full rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
+						/>
+						<button
+							class="whitespace-nowrap rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
+						>
+							Invite User
+						</button>
+					</div>
+				</form>
+			{/if}
+		</section>
+
 		{#if debugStatus}
 			<div class="font-mono text-sm text-green-400">
 				{debugStatus}{#if debugStatus == 'Retrieving list'}{loadingDots}{/if}
