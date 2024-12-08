@@ -10,13 +10,16 @@
 		_deleteMedia,
 		_getTimeAgo,
 		_handleVote,
-		_getIDsFromList
+		_getIDsFromList,
+		_inviteUser
 	} from './+page.js';
 	import { deserialize } from '$app/forms';
 	import { fly } from 'svelte/transition';
 	const person = $derived($user);
 	let showModal = $state(true);
 	let { data } = $props();
+	let { permissions } = $state(data);
+	console.log(permissions);
 	let medias = $state(data.media);
 	let images = $state({});
 	let descriptions = $state({});
@@ -158,7 +161,18 @@
 			console.error('Failed to add media:', error);
 		}
 	}
+	async function handleInvite(event) {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		const userId = formData.get('userId');
+		const watchlistId = $page.params.id;
 
+		const success = await _inviteUser(userId, watchlistId);
+		if (success) {
+			event.target.reset();
+			// Optional: Show success toast
+		}
+	}
 	async function handleDelete(ID) {
 		if (confirmDelete === ID) {
 			try {
@@ -197,15 +211,30 @@
 					Add Media
 				</button>
 			</div>
-			{#if debugStatus}
-				<div class="font-mono text-sm text-green-400">
-					{debugStatus}{#if debugStatus == 'Retrieving list'}{loadingDots}{/if}
-					{#if currentProgress.total > 0}
-						({currentProgress.current}/{currentProgress.total})
-					{/if}
-				</div>
-			{/if}
 		</form>
+		<form onsubmit={handleInvite} class="flex flex-col gap-2 font-archivo">
+			<div class="flex flex-row gap-2">
+				<input
+					type="text"
+					name="userId"
+					placeholder="Enter Discord User ID"
+					class="rounded-lg bg-zinc-800 p-3 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
+				/>
+				<button
+					class="rounded-lg bg-gradient-to-r from-blue-500 via-sky-500 to-sky-400 px-4 py-3 font-bold transition-opacity duration-300 hover:opacity-90"
+				>
+					Invite User
+				</button>
+			</div>
+		</form>
+		{#if debugStatus}
+			<div class="font-mono text-sm text-green-400">
+				{debugStatus}{#if debugStatus == 'Retrieving list'}{loadingDots}{/if}
+				{#if currentProgress.total > 0}
+					({currentProgress.current}/{currentProgress.total})
+				{/if}
+			</div>
+		{/if}
 	</section>
 
 	<section class="flex flex-col gap-4">
@@ -284,12 +313,14 @@
 							</div>
 						</div>
 					</section>
-					<button
-						class="self-start rounded-md bg-red-500 px-4 font-medium transition-colors duration-200 hover:bg-red-600"
-						onclick={() => handleDelete(media.mediaID)}
-					>
-						{confirmDelete === media.mediaID ? 'Sure?' : 'Delete'}
-					</button>
+					{#if media.canDelete}
+						<button
+							class="self-start rounded-md bg-red-500 px-4 font-medium transition-colors duration-200 hover:bg-red-600"
+							onclick={() => handleDelete(media.mediaID)}
+						>
+							{confirmDelete === media.mediaID ? 'Sure?' : 'Delete'}
+						</button>
+					{/if}
 				</section>
 				<p>{descriptions[media.ID]}</p>
 				<nav class="flex flex-row items-center justify-between gap-2">

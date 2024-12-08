@@ -21,6 +21,29 @@ export async function _handleVote(isUpvote, mediaID) {
 		return null;
 	}
 }
+export async function _inviteUser(userId, watchlistId) {
+	try {
+		const response = await fetch('/api/party/invite', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				userId,
+				watchlistId
+			})
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to invite user');
+		}
+
+		return true;
+	} catch (error) {
+		console.error('Failed to invite user:', error);
+		return false;
+	}
+}
 export async function _getIDsFromList(listURL) {
 	try {
 		const response = await fetch('/api/party/getIDSFromList', {

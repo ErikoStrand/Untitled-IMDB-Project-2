@@ -1,9 +1,10 @@
 import { query } from '$lib/server/db/mysql.js';
 import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,d.discordName, d.avatar,(SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount, (SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ? ORDER BY m.addedAt DESC';
+	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,m.ownerID,d.discordName, d.avatar,(SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount,(SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote,CASE WHEN m.ownerID = ? THEN true WHEN w.ownerID = ? THEN true ELSE false END as canDelete FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID JOIN watchlist w ON m.watchlistID = w.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ? ORDER BY m.addedAt DESC';
 const addSQL = 'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID) VALUES (?, ?, ?)';
 const existSQL = `
 	SELECT b.title 
@@ -16,7 +17,76 @@ const existSQL = `
 			AND m.IMDbID = ?
 	)
 `;
+const checkPermissions = async (userId, watchlistId, mediaId = null) => {
+	// Check if user created the watchlist
+	const creatorSQL = `
+			SELECT ownerID 
+			FROM watchlist 
+			WHERE ID = ? AND ownerID = ?
+	`;
 
+	// Check if user is invited
+	const invitedSQL = `
+			SELECT discordID 
+			FROM invites 
+			WHERE discordID = ? AND watchlistID = ?
+	`;
+
+	try {
+		const [creator] = await query(creatorSQL, [watchlistId, userId]);
+		const isCreator = Boolean(creator);
+
+		// Only check for invite if user is not the creator
+		let isInvited = false;
+		if (!isCreator) {
+			const [invited] = await query(invitedSQL, [userId, watchlistId]);
+			isInvited = Boolean(invited);
+		}
+
+		return {
+			didCreate: isCreator,
+			isInvited: isCreator || isInvited // Creator is automatically considered invited
+		};
+	} catch (error) {
+		console.error('Permission check failed:', error);
+		return {
+			didCreate: false,
+			isInvited: false
+		};
+	}
+};
+
+export async function load({ params, locals }) {
+	const watchlistId = params.id;
+	const userId = locals.user?.id;
+
+	// Check if user is logged in
+	if (!userId) {
+		throw redirect(303, '/party');
+	}
+
+	try {
+		// Check permissions
+		const permissions = await checkPermissions(userId, watchlistId);
+		console.log(permissions);
+
+		// If user is neither creator nor invited, redirect
+		if (!permissions.didCreate && !permissions.isInvited) {
+			console.log('is this wrong?');
+			throw redirect(303, '/watchlists');
+		}
+
+		// Load media data if authorized
+		const media = await query(loadSQL, [userId, userId, userId, watchlistId]);
+		return {
+			media,
+			permissions
+		};
+	} catch (error) {
+		console.error('Load error:', error);
+		throw redirect(303, '/watchlists');
+	}
+}
 export const actions = {
 	default: async ({ request, params }) => {
 		const watchlistId = params.id;
@@ -60,17 +130,4 @@ async function checkExist(id, watchlistID) {
 	// needs to be nested array but it works yippie
 	console.log('Can Insert: ', hasRows);
 	return hasRows;
-}
-
-export async function load({ params, locals }) {
-	try {
-		const media = await query(loadSQL, [locals.user.id, params.id]);
-		return {
-			media
-		};
-	} catch (error) {
-		return {
-			error: error.message
-		};
-	}
 }
