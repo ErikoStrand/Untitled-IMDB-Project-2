@@ -1,6 +1,8 @@
 <script>
 	import { user } from '$lib/stores';
 	import { _deleteWatchlist, _leaveWatchlist, _createWatchlist } from './+page.js';
+	import { _formatRuntime, _getTimeAgo } from './[id]/[name]/+page.js';
+	import { fly } from 'svelte/transition';
 	const person = $derived($user);
 	let showModal = $state(true);
 	let { data } = $props();
@@ -75,41 +77,75 @@
 	</section>
 
 	<section class="flex flex-col gap-4 font-archivo text-stone-50">
-		<h2 class="text-3xl font-bold">Your Watchlists</h2>
-		{#each watchlists as watchlist}
-			{#if watchlist.isOwner}
-				<div
-					class="flex items-center gap-2 border-l-4 border-blue-500 bg-zinc-800 shadow-md shadow-zinc-800"
-				>
-					<a href="/watchlists/{watchlist.ID}/{watchlist.name}" class="h-32 flex-grow p-4">
-						<h3 class="text-xl font-medium">{watchlist.name}</h3>
-					</a>
-					<button
-						class="m-2 self-end rounded-md bg-red-500 px-4 py-2"
-						onclick={() => handleDelete(watchlist.ID)}
+		{#each [{ title: 'Your Watchlists', items: watchlists.filter((w) => w.isOwner), color: 'blue', action: 'Delete', handler: handleDelete }, { title: 'Invited Watchlists', items: watchlists.filter((w) => !w.isOwner), color: 'green', action: 'Leave', handler: handleLeave }] as { title, items, color, action, handler }}
+			{#if items.length > 0}
+				<h2 class="text-3xl font-bold {title === 'Invited Watchlists' ? 'mt-8' : ''}">{title}</h2>
+				{#each items as watchlist}
+					<div
+						in:fly={{ x: 50, duration: 300 }}
+						out:fly={{ x: -50, duration: 200 }}
+						class="flex items-center gap-2 border-l-4 border-{color}-500 bg-zinc-800 shadow-md shadow-zinc-800"
 					>
-						{confirmDelete === watchlist.ID ? 'Sure?' : 'Delete'}
-					</button>
-				</div>
-			{/if}
-		{/each}
+						<a
+							href="/watchlists/{watchlist.ID}/{watchlist.name}"
+							class="flex min-h-32 flex-grow flex-col justify-between gap-4 p-4"
+						>
+							<div class="flex flex-col gap-2">
+								<header>
+									<h3 class="text-xl font-medium">{watchlist.name}</h3>
+									<p class="space-x-1 text-sm text-gray-300">
+										made by <span class="font-heebo text-blue-600">{watchlist.ownerName}</span>
+										{_getTimeAgo(watchlist.createdAt)}
+									</p>
+								</header>
+								<section class="flex flex-row items-center gap-2 text-sm text-gray-400">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 448 512"
+										class="w-3 fill-gray-400"
+										><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+											d="M192 64l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zM82.7 207c-15.3 8.8-20.5 28.4-11.7 43.7l32 55.4c8.8 15.3 28.4 20.5 43.7 11.7l55.4-32c15.3-8.8 20.5-28.4 11.7-43.7l-32-55.4c-8.8-15.3-28.4-20.5-43.7-11.7L82.7 207zM288 192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0zm64 160c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0zM160 384l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zM32 352c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0z"
+										/></svg
+									>
+									<p>{watchlist.mediaCount || 0} Things</p>
+									<div class="flex items-center">
+										{_formatRuntime(watchlist.totalRuntime)}
+									</div>
+								</section>
+							</div>
 
-		<h2 class="mt-8 text-3xl font-bold">Invited Watchlists</h2>
-		{#each watchlists as watchlist}
-			{#if !watchlist.isOwner}
-				<div
-					class="flex items-center gap-2 border-l-4 border-green-500 bg-zinc-800 shadow-md shadow-zinc-800"
-				>
-					<a href="/watchlists/{watchlist.ID}/{watchlist.name}" class="h-32 flex-grow p-4">
-						<h3 class="text-xl font-medium">{watchlist.name}</h3>
-					</a>
-					<button
-						class="m-2 self-end rounded-md bg-zinc-600 px-4 py-2"
-						onclick={() => handleLeave(watchlist.ID)}
-					>
-						{confirmDelete === watchlist.ID ? 'Sure?' : 'Leave'}
-					</button>
-				</div>
+							{#if watchlist.invitedUsers}
+								<div class="flex items-center">
+									<div class="flex -space-x-3">
+										{#each watchlist.invitedUsers?.slice(0, 6) || [] as user}
+											<img
+												src="https://cdn.discordapp.com/avatars/{user.discordID}/{user.avatar}.png"
+												alt={user.discordName}
+												class="h-8 w-8 rounded-full border-2 border-zinc-800"
+												title={user.discordName}
+											/>
+										{/each}
+										{#if watchlist.invitedUsers.length > 6}
+											<div
+												class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-zinc-800 bg-zinc-700 text-xs"
+											>
+												+{watchlist.invitedUsers.length - 6}
+											</div>
+										{/if}
+									</div>
+								</div>
+							{/if}
+						</a>
+						<button
+							class="m-2 self-end rounded-md {color === 'blue'
+								? 'bg-red-500'
+								: 'bg-zinc-600'} px-4 py-2"
+							onclick={() => handler(watchlist.ID)}
+						>
+							{confirmDelete === watchlist.ID ? 'Sure?' : action}
+						</button>
+					</div>
+				{/each}
 			{/if}
 		{/each}
 	</section>
