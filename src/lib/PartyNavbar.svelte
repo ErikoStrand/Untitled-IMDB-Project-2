@@ -1,14 +1,21 @@
 <script>
+	import { fly } from 'svelte/transition';
 	import { user } from '$lib/stores';
 	const person = $derived($user);
-	let showSignout = $state(false);
+	let userMenu = $state(false);
 
 	function handleClick(event) {
 		if (!event.target.closest('.profile-area')) {
-			showSignout = false;
+			userMenu = false;
 		}
 	}
+	let showToast = $state(false);
 
+	function copyId() {
+		navigator.clipboard.writeText(person.id);
+		showToast = true;
+		setTimeout(() => (showToast = false), 2000);
+	}
 	$effect(() => {
 		document.addEventListener('click', handleClick);
 		return () => {
@@ -16,9 +23,9 @@
 		};
 	});
 
-	function toggleSignout(event) {
+	function toggleUserMenu(event) {
 		event.stopPropagation(); // Prevent document click from immediately closing
-		showSignout = !showSignout;
+		userMenu = !userMenu;
 	}
 </script>
 
@@ -55,26 +62,55 @@
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 				<a href="/watchlists" class="block leading-10" title="Watchlists">Watchlists</a>
 			</li>
-			<li
-				class="profile-area relative self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50"
-			>
-				<button class="flex cursor-pointer flex-row gap-2" onclick={toggleSignout}>
+			<li class="profile-area relative self-center rounded-md px-2">
+				<button class="flex cursor-pointer flex-row gap-2" onclick={toggleUserMenu}>
 					<h2 class="block leading-10">
-						{person.global_name}
+						{person.username}
 					</h2>
 					<img
 						class="h-8 self-center rounded-md"
 						src="https://cdn.discordapp.com/avatars/{person.id}/{person.avatar}.png"
-						alt="{person.usernames}s picture"
+						alt="{person.username}s picture"
 					/>
 				</button>
-				{#if showSignout}
-					<a
-						href="/api/discord/auth/signout"
-						class="absolute right-[1px] rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50"
+				{#if userMenu}
+					<div
+						class="absolute right-[1px] top-11 flex flex-col items-end gap-2 rounded-xl bg-zinc-800"
 					>
-						Leave
-					</a>
+						<button
+							class="flex items-center gap-2 rounded-lg p-2 transition-colors hover:bg-zinc-700"
+							onclick={copyId}
+						>
+							<span class="whitespace-nowrap text-sm text-gray-400">Your ID:</span>
+							<code class="rounded bg-zinc-900 px-2 py-1 font-mono text-blue-400">
+								{person.id}
+							</code>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-4 w-4 text-gray-400"
+								viewBox="0 0 24 24"
+							>
+								<path
+									fill="currentColor"
+									d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+								/>
+							</svg>
+						</button>
+						{#if showToast}
+							<div
+								class="fixed bottom-1 right-4 rounded-lg bg-zinc-800 px-4 py-2 text-white shadow-lg"
+								transition:fly={{ y: 10, duration: 300 }}
+							>
+								ID copied to clipboard!
+							</div>
+						{/if}
+						<a
+							href="/api/discord/auth/signout"
+							class="rounded bg-red-500 px-3 py-1 text-base font-normal text-stone-50 transition-colors hover:bg-red-600"
+						>
+							Leave
+						</a>
+					</div>
 				{/if}
 			</li>
 		{/if}

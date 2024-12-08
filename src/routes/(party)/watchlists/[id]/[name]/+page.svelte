@@ -349,7 +349,7 @@
 						</button>
 					</div>
 					<p class="space-x-1">
-						added by <span class="font-heebo text-lg text-blue-600">{media.global_name}</span><span
+						added by <span class="font-heebo text-lg text-blue-600">{media.discordName}</span><span
 							>{_getTimeAgo(media.addedAt)}</span
 						>
 					</p>

@@ -3,7 +3,7 @@ import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,d.global_name, d.avatar,(SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount, (SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ? ORDER BY m.addedAt DESC';
+	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,d.discordName, d.avatar,(SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount, (SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ? ORDER BY m.addedAt DESC';
 const addSQL = 'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID) VALUES (?, ?, ?)';
 const existSQL = `
 	SELECT b.title 
