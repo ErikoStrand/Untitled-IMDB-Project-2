@@ -12,9 +12,10 @@ export async function POST({ request }) {
 			},
 			body: JSON.stringify({
 				webpage_url,
-				api_method_name: 'getAllIMDbIDS',
+				api_method_name: 'getAllIMDbIDSfromList',
+				api_parameters: "{['tt23030', 'tt23030']}",
 				api_response_structure: JSON.stringify({
-					IMDb_IDS: ['<the imdb id of all the media in the list>']
+					IMDb_IDS: ['<the imdb id of all the movie in the ul list']
 				}),
 				api_key: env.INSTANT_API_KEY
 			})
@@ -25,6 +26,7 @@ export async function POST({ request }) {
 		}
 
 		const data = await response.json();
+		console.log(data);
 		return json(data);
 	} catch (error) {
 		return json({ error: error.message }, { status: 500 });
