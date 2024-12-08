@@ -40,6 +40,11 @@
 		<section id="description" class="font-archivo text-base font-medium tracking-wide md:text-lg">
 			<p>Create your own watchlists, Add media.</p>
 			<p>Vote on what you want to watch, or randomize if you are feeling lucky</p>
+			<p class="text-sm text-gray-400">
+				Critic Party is currently under development and it saves some of your discord information
+				(ID, name, and avatar) Logging in with discord you agree that these are saved without a end
+				in sight (There will be a button to delete your data but there isnt any yet!)
+			</p>
 		</section>
 		<a
 			href="api/discord/auth"

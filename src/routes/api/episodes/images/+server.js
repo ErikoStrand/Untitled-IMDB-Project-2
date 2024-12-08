@@ -10,7 +10,7 @@ const parentSQL =
 	'SELECT DISTINCT b.title, b.ID FROM basic b INNER JOIN episode e ON b.ID = e.parentID LEFT JOIN rating r ON b.ID = r.ID WHERE e.ID IN (?)';
 const getStoredImages = 'SELECT ID, poster, backdrop FROM images WHERE ID = ?';
 const insertImages =
-	'INSERT INTO images (ID, poster, backdrop) SELECT ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM images WHERE ID = ?)';
+	'REPLACE INTO images (ID, poster, backdrop) SELECT ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM images WHERE ID = ?)';
 export async function POST({ request }) {
 	try {
 		// Validate request body
@@ -19,7 +19,6 @@ export async function POST({ request }) {
 		}
 
 		const { episodes, posterSize, backdropSize, post } = await request.json();
-		console.log(episodes);
 		if (!episodes || !Array.isArray(episodes)) {
 			throw error(400, 'Episodes must be an array');
 		}
@@ -30,7 +29,6 @@ export async function POST({ request }) {
 		if (!post) {
 			try {
 				episodesData = await querymany(parentSQL, [episodes]);
-				console.log(episodesData);
 			} catch (dbError) {
 				console.error('Database error:', dbError);
 				throw error(500, 'Database query failed');
