@@ -12,7 +12,6 @@ export async function POST({ request }) {
 		}
 
 		const standardizedUrl = `https://www.imdb.com/list/${listId}/?view=compact&user_rating=1,10`;
-		console.log(standardizedUrl);
 		const response = await fetch('https://instantapi.ai/api/retrieve/', {
 			method: 'POST',
 			headers: {
@@ -28,7 +27,6 @@ export async function POST({ request }) {
 				api_key: env.INSTANT_API_KEY
 			})
 		});
-
 		if (!response.ok) {
 			throw new Error('Failed to fetch IMDb IDs');
 		}

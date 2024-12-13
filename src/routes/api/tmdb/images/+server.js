@@ -1,6 +1,7 @@
 import { json } from '@sveltejs/kit';
 import { querymany, query } from '$lib/server/db/mysql.js';
 import { env } from '$env/dynamic/private';
+import { error } from '@sveltejs/kit';
 
 const TMDB_API_KEY = env.TMDB_API;
 const BASE_URL = 'https://api.themoviedb.org/3';

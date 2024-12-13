@@ -1,6 +1,7 @@
 import { query } from '$lib/server/db/mysql.js';
 import { json } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { error } from '@sveltejs/kit';
 
 const TMDB_API_KEY = env.TMDB_API;
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -8,7 +9,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getStoredDescription = 'SELECT ID, description FROM TMDBBasic WHERE ID = ?';
 const insertDescription =
-	'INSERT INTO TMDBBasic (ID, description) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM TMDBBasic WHERE ID = ?)';
+	'REPLACE INTO TMDBBasic (ID, description) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM TMDBBasic WHERE ID = ?)';
 
 export async function POST({ request }) {
 	try {

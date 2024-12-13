@@ -2,7 +2,7 @@ import { json } from '@sveltejs/kit';
 import { query } from '$lib/server/db/mysql.js';
 
 const loadSQL =
-	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID,m.addedAt,m.ownerID,d.discordName, d.avatar,(SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount,(SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote,CASE WHEN m.ownerID = ? THEN true WHEN w.ownerID = ? THEN true ELSE false END as canDelete FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID JOIN watchlist w ON m.watchlistID = w.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID WHERE m.watchlistID = ? ORDER BY m.addedAt DESC';
+	'SELECT b.*, r.rating, r.votes, m.ID AS mediaID, m.addedAt, m.ownerID, d.discordName, d.avatar, i.poster as image, t.description, (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 1) - (SELECT COUNT(*) FROM upvotes WHERE mediaID = m.ID AND vote = 0) as voteCount, (SELECT vote FROM upvotes WHERE mediaID = m.ID AND addedBy = ?) as userVote, CASE WHEN m.ownerID = ? THEN true WHEN w.ownerID = ? THEN true ELSE false END as canDelete FROM mediaInWatchlist m JOIN basic b ON m.IMDbID = b.ID JOIN watchlist w ON m.watchlistID = w.ID LEFT JOIN rating r ON b.ID = r.ID LEFT JOIN discordBasics d ON m.ownerID = d.discordID LEFT JOIN images i ON b.ID = i.id LEFT JOIN TMDBBasic t ON b.ID = t.ID WHERE m.watchlistID = ? ORDER BY m.addedAt DESC';
 const addSQL = 'INSERT INTO mediaInWatchlist (watchlistID, ownerID, IMDbID) VALUES (?, ?, ?)';
 const existSQL = `
 	SELECT b.title 

@@ -24,7 +24,7 @@ export async function _sendEpisodes(episodes) {
 
 export async function _loadImages(episodes, posterSize, backdropSize, post = false, callback) {
 	try {
-		const response = await fetch('/api/episodes/images', {
+		const response = await fetch('/api/tmdb/images', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
