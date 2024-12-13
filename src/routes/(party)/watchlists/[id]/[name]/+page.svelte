@@ -45,10 +45,16 @@
 			loadMediaData(medias);
 		}
 	});
-
+	const topVotedMedia = $derived(
+		medias?.length
+			? medias.reduce(
+					(max, current) => (current.voteCount > max.voteCount ? current : max),
+					medias[0]
+				)
+			: null
+	);
+	$inspect(topVotedMedia);
 	setContext('media', {
-		images,
-		descriptions,
 		handlers: {
 			handleDelete,
 			handleVote
@@ -62,11 +68,17 @@
 
 	async function loadMediaData(mediaList) {
 		await _loadImages(mediaList, 'w92', 'w780', true, (id, result) => {
-			images[id] = result;
+			const media = medias.find((m) => m.ID === id);
+			if (media) {
+				media.image = result?.poster || null;
+			}
 		});
 
 		await _loadDescriptions(mediaList, (id, description) => {
-			descriptions[id] = description;
+			const media = medias.find((m) => m.ID === id);
+			if (media) {
+				media.description = description;
+			}
 		});
 	}
 

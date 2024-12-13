@@ -4,7 +4,7 @@
 
 	let { media } = $props();
 	let confirmDelete = $state(null);
-	const { images, descriptions, handlers, utils } = getContext('media');
+	const { handlers, utils } = getContext('media');
 	const { handleDelete, handleVote } = handlers;
 	const { formatRuntime, getTimeAgo, nFormatter } = utils;
 	function doubleClickDelete(ID) {
@@ -29,11 +29,11 @@
 >
 	<section class="flex flex-row gap-3">
 		<div id="image">
-			{#if images[media.ID]}
-				{#if images[media.ID]['poster'] !== null}
+			{#if media.image}
+				{#if media.image !== null}
 					<img
 						class="h-[138px] w-[92px] rounded-md object-cover"
-						src={images[media.ID].poster}
+						src={media.image}
 						alt="{media.title} poster"
 						loading="lazy"
 					/>
@@ -105,7 +105,7 @@
 			</button>
 		{/if}
 	</section>
-	<p>{descriptions[media.ID]}</p>
+	<p>{media.description}</p>
 	<nav class="flex flex-row items-center justify-between gap-2">
 		<div
 			class="flex items-center rounded-lg text-stone-200 {media.userVote === null
