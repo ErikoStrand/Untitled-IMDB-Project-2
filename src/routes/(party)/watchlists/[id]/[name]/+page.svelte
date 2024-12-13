@@ -45,15 +45,7 @@
 			loadMediaData(medias);
 		}
 	});
-	const topVotedMedia = $derived(
-		medias?.length
-			? medias.reduce(
-					(max, current) => (current.voteCount > max.voteCount ? current : max),
-					medias[0]
-				)
-			: null
-	);
-	$inspect(topVotedMedia);
+
 	setContext('media', {
 		handlers: {
 			handleDelete,
