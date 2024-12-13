@@ -188,22 +188,12 @@
 		}
 	}
 	async function handleDelete(ID) {
-		if (confirmDelete === ID) {
-			try {
-				await _deleteMedia(ID);
-				// Create a new array reference to trigger reactivity
-				medias = [...medias.filter((media) => media.mediaID !== ID)];
-			} catch (error) {
-				console.error('Failed to delete media:', error);
-			}
-			confirmDelete = null; // Reset confirmation state after deletion
-		} else {
-			confirmDelete = ID;
-			setTimeout(() => {
-				if (confirmDelete === ID) {
-					confirmDelete = null;
-				}
-			}, 3000);
+		try {
+			await _deleteMedia(ID);
+			// Create a new array reference to trigger reactivity
+			medias = [...medias.filter((media) => media.mediaID !== ID)];
+		} catch (error) {
+			console.error('Failed to delete media:', error);
 		}
 	}
 </script>

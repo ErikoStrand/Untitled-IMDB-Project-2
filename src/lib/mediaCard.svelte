@@ -7,6 +7,19 @@
 	const { images, descriptions, handlers, utils } = getContext('media');
 	const { handleDelete, handleVote } = handlers;
 	const { formatRuntime, getTimeAgo, nFormatter } = utils;
+	function doubleClickDelete(ID) {
+		if (confirmDelete === ID) {
+			handleDelete(ID);
+			confirmDelete = null;
+		} else {
+			confirmDelete = ID;
+			setTimeout(() => {
+				if (confirmDelete === ID) {
+					confirmDelete = null;
+				}
+			}, 1500);
+		}
+	}
 </script>
 
 <div
@@ -86,7 +99,7 @@
 		{#if media.canDelete}
 			<button
 				class="self-start rounded-md bg-red-500 px-4 font-medium transition-colors duration-200 hover:bg-red-600"
-				onclick={() => handleDelete(media.mediaID)}
+				onclick={() => doubleClickDelete(media.mediaID)}
 			>
 				{confirmDelete === media.mediaID ? 'Sure?' : 'Delete'}
 			</button>
