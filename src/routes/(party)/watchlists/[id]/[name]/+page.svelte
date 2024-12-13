@@ -41,7 +41,7 @@
 		}
 	});
 	$effect(() => {
-		if (medias) {
+		if (medias != null) {
 			loadMediaData(medias);
 		}
 	});
