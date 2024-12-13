@@ -133,8 +133,8 @@
 				debugStatus = `Found ${IMDb_IDS.length} items`;
 				currentProgress = { current: 0, total: IMDb_IDS.length };
 
-				// Add each movie from the list
-				for (const [index, IMDbID] of IMDb_IDS.entries()) {
+				// Collect all promises
+				const promises = IMDb_IDS.map(async (IMDbID, index) => {
 					debugStatus = `Adding ${index + 1}/${IMDb_IDS.length}: ${IMDbID}`;
 					currentProgress.current = index + 1;
 
@@ -149,18 +149,21 @@
 							ownerID
 						})
 					});
-					const result = await response.json();
-					if (result.success) {
-						medias = result.media;
-					}
-				}
+					return response.json();
+				});
 
-				debugStatus = 'Loading media data...';
-				await loadMediaData(medias);
-				debugStatus = 'Complete!';
-				setTimeout(() => {
-					debugStatus = '';
-				}, 2000);
+				// Wait for all movies to be added
+				const results = await Promise.all(promises);
+				const lastResult = results[results.length - 1];
+
+				if (lastResult.success) {
+					medias = lastResult.media;
+					debugStatus = 'Loading media data...';
+					debugStatus = 'Complete!';
+					setTimeout(() => {
+						debugStatus = '';
+					}, 2000);
+				}
 				event.target.reset();
 			} else {
 				// Handle single IMDb ID
