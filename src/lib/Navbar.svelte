@@ -33,9 +33,6 @@
 		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 			<a href="/feedback" class="block leading-10" title="Feedback">Feedback</a>
 		</li>
-		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
-			<a href="/" class="block leading-10" title="Home">Home</a>
-		</li>
 		{#if $uploaded}
 			<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
 				<a href="/stats" class="block leading-10" title="Stats" data-sveltekit-preload-data="off"
@@ -43,5 +40,8 @@
 				>
 			</li>
 		{/if}
+		<li class="self-center rounded-md px-2 duration-200 ease-in-out hover:bg-zinc-700/50">
+			<a href="/" class="block leading-10" title="Home">Home</a>
+		</li>
 	</ul>
 </nav>

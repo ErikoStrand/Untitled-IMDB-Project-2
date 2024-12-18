@@ -13,7 +13,8 @@
 		_getTimeAgo,
 		_handleVote,
 		_getIDsFromList,
-		_inviteUser
+		_inviteUser,
+		_getMostVoted
 	} from './+page.js';
 	import { deserialize } from '$app/forms';
 	import { fly } from 'svelte/transition';
@@ -57,6 +58,7 @@
 			nFormatter: _nFormatter
 		}
 	});
+	let mostVoted = $derived(medias ? _getMostVoted(medias) : null);
 	//maaan
 	async function loadMediaData(mediaList) {
 		await _loadImages(mediaList, 'w92', 'w780', true, (id, result) => {
@@ -254,9 +256,31 @@
 		{/if}
 	</section>
 
+	{#if mostVoted}
+		<div
+			class="animate-border relative rounded-md border-2 border-transparent [background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.amber.500)_86%,_theme(colors.amber.300)_90%,_theme(colors.amber.500)_94%,_theme(colors.slate.600/.48))_border-box]"
+		>
+			<svg
+				class="absolute -left-5 -top-5 h-8 -rotate-45 fill-amber-500"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 576 512"
+			>
+				<path
+					d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6l277.2 0c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"
+				/>
+			</svg>
+			<div class="rounded-md bg-zinc-800 p-4">
+				<MediaCard media={mostVoted} />
+			</div>
+		</div>
+	{/if}
 	<section class="flex flex-col gap-4">
 		{#each medias as media (media.mediaID)}
-			<MediaCard {media} />
+			<div
+				class="rounded-md border-2 border-transparent bg-zinc-800 p-4 shadow-md shadow-stone-800 duration-500 ease-in-out hover:border-r-2 hover:[border-image:linear-gradient(to_bottom,transparent,theme(colors.blue.400),transparent)_1_100%_0_0]"
+			>
+				<MediaCard {media} />
+			</div>
 		{/each}
 	</section>
 </div>

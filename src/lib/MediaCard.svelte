@@ -25,7 +25,7 @@
 <div
 	in:fly={{ x: 50, duration: 300 }}
 	out:fly={{ x: -50, duration: 200 }}
-	class="flex flex-col gap-3 rounded-md border-2 border-dashed border-transparent bg-zinc-800 p-4 font-archivo shadow-md shadow-stone-800 duration-300 ease-linear hover:border-dashed hover:border-blue-500"
+	class="flex flex-col gap-3 font-archivo"
 >
 	<section class="flex flex-row gap-3">
 		<div id="image">

@@ -9,9 +9,13 @@ export default {
 			animation: {
 				'slide-up': 'slide-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
 				'slide-left': 'slide-left 0.6s ease-in-out forwards',
-				'slide-right': 'slide-right 0.6s ease-in-out forwards'
+				'slide-right': 'slide-right 0.6s ease-in-out forwards',
+				border: 'border 4s linear infinite'
 			},
 			keyframes: {
+				border: {
+					to: { '--border-angle': '360deg' }
+				},
 				'slide-up': {
 					'0%': {
 						transform: 'translateY(70px)',

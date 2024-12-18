@@ -21,6 +21,16 @@ export async function _handleVote(isUpvote, mediaID) {
 		return null;
 	}
 }
+export function _getMostVoted(medias) {
+	let longest = { voteCount: -1 };
+	for (let media of medias) {
+		if (media.voteCount >= longest.voteCount) {
+			longest = media;
+		}
+	}
+	return longest;
+}
+
 export async function _inviteUser(userId, watchlistId) {
 	try {
 		const response = await fetch('/api/party/invite', {
